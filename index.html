@@ -8,24 +8,24 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
-    /* 糖果色 (参考配色示例图) */
-    --candy-blue:#5B8FF9; --candy-blue-bg:#EAF2FF;
-    --candy-green:#3FC79A; --candy-green-bg:#E6FBF3;
-    --candy-yellow:#F6BD16; --candy-yellow-bg:#FFF7E0;
-    --candy-pink:#F08BB4; --candy-pink-bg:#FFEAF2;
-    --candy-purple:#9270CA; --candy-purple-bg:#F1ECFB;
-    /* 平台主色 */
-    --xhs:#FF2E4D; --xhs-soft:#FFEAEE;
-    --dy:#4E7CFF;  --dy-soft:#EAF0FF;
-    /* 涨跌 (跟截图一致: 涨=红, 跌=绿) */
-    --up:#FF4D4F; --down:#16B777;
-    --ink:#1f2329; --ink-2:#646a73; --ink-3:#8f959e;
-    --line:#eef0f3; --bg:#f5f6f8; --card:#ffffff;
-    --radius:16px; --shadow:0 2px 12px rgba(31,35,41,.05);
+    /* 明亮清爽配色 */
+    --candy-blue:#5B9BFF; --candy-blue-bg:#EAF3FF;
+    --candy-green:#22C9A0; --candy-green-bg:#E2FBF3;
+    --candy-yellow:#FFC83C; --candy-yellow-bg:#FFF6DA;
+    --candy-pink:#FF8FB3; --candy-pink-bg:#FFEAF1;
+    --candy-purple:#A98BF0; --candy-purple-bg:#F0E9FF;
+    /* 平台主色 (明亮红 / 明亮蓝) */
+    --xhs:#FF4D6D; --xhs-soft:#FFE7EC;
+    --dy:#4C8DFF;  --dy-soft:#E6F0FF;
+    /* 涨跌 (涨=红, 跌=绿) */
+    --up:#FF5A5A; --down:#1FC08A;
+    --ink:#1d2128; --ink-2:#5b626b; --ink-3:#949aa3;
+    --line:#edeff2; --bg:#f6f8fb; --card:#ffffff;
+    --radius:16px; --shadow:0 2px 14px rgba(31,35,41,.05);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-       background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+       background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:15px}
   .app{display:flex;min-height:100vh}
 
   /* ---------------- 左栏 ---------------- */
@@ -50,11 +50,12 @@
   /* ---------------- 右侧主区 ---------------- */
   .main{flex:1;padding:24px 28px 60px;min-width:0}
   .page-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-  .page-head h1{font-size:22px;font-weight:700}
-  .page-head .upd{font-size:12px;color:var(--ink-3)}
+  .page-head h1{font-size:25px;font-weight:700}
+  .page-head .upd{font-size:13px;color:var(--ink-3)}
 
-  .section-label{font-size:13px;font-weight:600;color:var(--ink-2);margin:6px 0 12px;display:flex;align-items:center;gap:8px}
+  .section-label{font-size:15px;font-weight:600;color:var(--ink-2);margin:6px 0 12px;display:flex;align-items:center;gap:8px}
   .est-tag{font-size:10px;color:#b06a00;background:#FFF3DB;padding:1px 7px;border-radius:6px;font-weight:500}
+  .stale-tag{font-size:10px;color:#8f959e;background:#f0f1f3;padding:1px 7px;border-radius:6px;font-weight:500;margin-left:6px}
 
   /* 诊断雷达 并排 */
   .diagnosis{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px}
@@ -80,9 +81,17 @@
        color:var(--ink-2);cursor:pointer;font-weight:500}
   .period-toggle button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08);font-weight:600}
 
+  /* 平台点选切换 */
+  .platform-toggle{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:22px;box-shadow:var(--shadow)}
+  .platform-toggle .pt-btn{display:flex;align-items:center;gap:7px;border:0;background:transparent;padding:9px 24px;border-radius:9px;font-size:15px;font-weight:600;color:var(--ink-2);cursor:pointer;transition:background .15s,color .15s}
+  .platform-toggle .pt-btn .dot{width:9px;height:9px;border-radius:50%}
+  .platform-toggle .pt-btn:hover{background:var(--bg)}
+  .platform-toggle .pt-btn.xhs.active{background:var(--xhs-soft);color:var(--xhs)}
+  .platform-toggle .pt-btn.dy.active{background:var(--dy-soft);color:var(--dy)}
+
   /* 平台子板块 */
   .platform-block{margin-bottom:14px}
-  .pf-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;margin-bottom:12px}
+  .pf-title{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;margin-bottom:12px}
   .pf-title .chip{font-size:10px;color:#fff;padding:2px 8px;border-radius:6px}
   .pf-title.xhs .chip{background:var(--xhs)} .pf-title.dy .chip{background:var(--dy)}
 
@@ -97,10 +106,10 @@
   .kpi:nth-child(6n+4){background:var(--candy-pink-bg)}
   .kpi:nth-child(6n+5){background:var(--candy-purple-bg)}
   .kpi:nth-child(6n+6){background:var(--candy-blue-bg)}
-  .kpi .k-label{font-size:12px;color:var(--ink-2);margin-bottom:8px}
-  .kpi .k-value{font-size:24px;font-weight:700;line-height:1.1}
-  .kpi .k-value .u{font-size:13px;font-weight:500;color:var(--ink-2);margin-left:2px}
-  .kpi .k-delta{font-size:12px;margin-top:6px;font-weight:600}
+  .kpi .k-label{font-size:13.5px;color:var(--ink-2);margin-bottom:8px}
+  .kpi .k-value{font-size:30px;font-weight:700;line-height:1.1}
+  .kpi .k-value .u{font-size:14px;font-weight:500;color:var(--ink-2);margin-left:2px}
+  .kpi .k-delta{font-size:13px;margin-top:6px;font-weight:600}
   .k-delta.up{color:var(--up)} .k-delta.down{color:var(--down)} .k-delta.flat{color:var(--ink-3)}
 
   .trend-wrap{position:relative;height:220px;margin-top:16px}
@@ -160,9 +169,9 @@
   .card > .sub-title:first-child{margin-top:0}
   .base-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .base-card{background:var(--dy-soft);border-radius:12px;padding:14px 16px}
-  .base-card .bc-label{font-size:12px;color:var(--ink-2)}
-  .base-card .bc-value{font-size:22px;font-weight:700;margin:6px 0 4px}
-  .base-card .bc-sub{font-size:11px;color:var(--ink-3)}
+  .base-card .bc-label{font-size:13px;color:var(--ink-2)}
+  .base-card .bc-value{font-size:26px;font-weight:700;margin:6px 0 4px}
+  .base-card .bc-sub{font-size:12px;color:var(--ink-3)}
   .growth-wrap{position:relative;height:200px;margin-top:4px}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .conclusion{background:var(--dy-soft);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;color:var(--dy);margin-bottom:16px}
@@ -177,6 +186,39 @@
   .word-chips{display:flex;flex-wrap:wrap;gap:8px}
   .word-chip{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
   .word-chip b{color:var(--dy);margin-left:6px}
+
+  /* 北极星指标 */
+  .northstar{background:linear-gradient(135deg,#ffffff,#fff7ef);border:1px solid #ffe3c2;border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:18px 20px;margin-bottom:24px}
+  .northstar .ns-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .northstar .ns-star{font-size:18px}
+  .northstar .ns-ttl{font-size:16px;font-weight:700}
+  .northstar .ns-sub{font-size:11px;color:var(--ink-3)}
+  .ns-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .ns-card{border-radius:12px;padding:14px 16px;background:var(--bg);border-left:4px solid var(--ink-3)}
+  .ns-card.bad{border-left-color:var(--up);background:#fff1f0}
+  .ns-card.good{border-left-color:var(--down);background:#e9f9f1}
+  .ns-card.neutral{border-left-color:var(--candy-blue);background:var(--candy-blue-bg)}
+  .ns-card .nc-label{font-size:12px;color:var(--ink-2);margin-bottom:6px}
+  .ns-card .nc-value{font-size:28px;font-weight:800;line-height:1}
+  .ns-card .nc-value .u{font-size:14px;font-weight:600;margin-left:2px}
+  .ns-card .nc-cmp{font-size:12px;margin-top:8px;font-weight:700}
+  .ns-card.bad .nc-cmp{color:var(--up)} .ns-card.good .nc-cmp{color:var(--down)}
+  .ns-card .nc-peer{font-size:11px;color:var(--ink-3);font-weight:400;margin-top:4px}
+
+  /* 复盘洞察: 关联探索 + 动作建议 */
+  .scatter-wrap{position:relative;height:300px;margin-top:6px}
+  .insight-note{font-size:12px;color:var(--ink-3);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);line-height:1.7}
+  .act-list{display:flex;flex-direction:column;gap:12px}
+  .act-item{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;background:var(--bg)}
+  .act-badge{flex-shrink:0;font-size:13px;font-weight:700;color:#fff;padding:6px 12px;border-radius:8px;min-width:52px;text-align:center}
+  .act-badge.keep{background:var(--down)} .act-badge.tune{background:#E89C00}
+  .act-badge.cut{background:var(--up)} .act-badge.watch{background:var(--ink-3)}
+  .act-main{flex:1;min-width:0}
+  .act-title{font-size:14px;font-weight:600}
+  .act-reason{font-size:12px;color:var(--ink-2);margin-top:5px;line-height:1.55}
+  .act-stats{font-size:11px;color:var(--ink-3);margin-top:7px;display:flex;gap:14px;flex-wrap:wrap}
+  .act-stats b{color:var(--ink);font-weight:600}
 
   @media(max-width:900px){
     .app{flex-direction:column}
@@ -213,9 +255,11 @@
 <script>
 /* ===================== 状态 ===================== */
 const D = DASHBOARD_DATA;
+const STALE = '<span class="stale-tag">未更新最新数据</span>';
 let curAccount = D.defaultAccount;
 let curTab = "overview";          // overview | works | audience | revenue
 let curPeriod = "d30";            // d7 | d30
+let curPlatform = "xhs";          // xhs | dy  (点选式平台切换)
 let charts = [];                  // Chart 实例, 切换时销毁
 
 function destroyCharts(){ charts.forEach(c=>c.destroy()); charts=[]; }
@@ -254,7 +298,8 @@ function renderContent(){
   const acc = D.data[curAccount];
   document.getElementById("pageTitle").textContent =
     (D.accounts.find(a=>a.id===curAccount)?.name || "") + " · 数据复盘";
-  document.getElementById("pageUpd").textContent = "数据更新至 " + D.updatedAt;
+  document.getElementById("pageUpd").textContent =
+    `数据统计截至 ${D.updatedAt}（平台延迟约1天）　·　看板最后更新 ${D.lastUpdate || "—"}`;
   const c = document.getElementById("content");
   c.innerHTML = "";
 
@@ -263,6 +308,13 @@ function renderContent(){
     return;
   }
 
+  // 平台点选切换 (小红书 / 抖音, 一次只看一个)
+  c.appendChild(renderPlatformToggle());
+
+  // 北极星指标 (影视飓风: 平均观看百分比为算法决定性指标)
+  const nsNode = renderNorthStar();
+  if(nsNode) c.appendChild(nsNode);
+
   // 诊断雷达
   c.appendChild(renderDiagnosis(acc.diagnosis));
 
@@ -270,6 +322,7 @@ function renderContent(){
   const tabs = [
     {id:"overview",name:"账号概览"},
     {id:"works",name:"作品分析"},
+    {id:"insight",name:"复盘洞察"},
     {id:"audience",name:"观众数据"},
     {id:"revenue",name:"收入数据"},
   ];
@@ -284,6 +337,7 @@ function renderContent(){
   // tab 内容
   if(curTab==="overview") c.appendChild(renderOverview(acc));
   else if(curTab==="works") c.appendChild(renderWorks(acc));
+  else if(curTab==="insight") c.appendChild(renderInsight(acc));
   else if(curTab==="audience") c.appendChild(renderAudience(acc));
   else if(curTab==="revenue") c.appendChild(renderRevenue(acc));
   else c.appendChild(renderPlaceholder());
@@ -292,36 +346,40 @@ function renderContent(){
   requestAnimationFrame(()=>drawDiagnosisCharts(acc.diagnosis));
 }
 
-/* ---------- 诊断 ---------- */
+/* ---------- 诊断 (只显示当前平台) ---------- */
 function renderDiagnosis(diag){
-  const wrap = el(`<div class="diagnosis"></div>`);
-  // 小红书
-  wrap.appendChild(el(`<div class="diag-card xhs">
-    <div class="dc-head"><div class="ttl"><span class="dot xhs"></span>小红书 · 账号诊断</div>
-      <div class="period">${diag.xhs.period}</div></div>
-    <div class="note">红线=你的数据，半径为「超过同类百分位」，标签为真实值</div>
-    <div class="radar-wrap"><canvas id="radarXhs"></canvas></div>
-  </div>`));
-  // 抖音
-  wrap.appendChild(el(`<div class="diag-card dy">
-    <div class="dc-head"><div class="ttl"><span class="dot dy"></span>抖音 · 账号诊断</div>
-      <div class="period">${diag.dy.period}</div></div>
-    <div class="note">蓝=你的帐号，橙=同类作者，标签为真实值${diag.dy.note?'（'+diag.dy.note+'）':''}</div>
-    <div class="radar-wrap"><canvas id="radarDy"></canvas></div>
-  </div>`));
+  const wrap = el(`<div class="diagnosis" style="grid-template-columns:1fr"></div>`);
+  if(curPlatform==="xhs"){
+    wrap.appendChild(el(`<div class="diag-card xhs">
+      <div class="dc-head"><div class="ttl"><span class="dot xhs"></span>小红书 · 账号诊断</div>
+        <div class="period">${diag.xhs.period}</div></div>
+      <div class="note">红线=你的数据，半径为「超过同类百分位」，标签为真实值${diag.xhs.percentileStale?'<span class="stale-tag">百分位未更新最新数据</span>':''}</div>
+      <div class="radar-wrap"><canvas id="radarXhs"></canvas></div>
+    </div>`));
+  } else {
+    wrap.appendChild(el(`<div class="diag-card dy">
+      <div class="dc-head"><div class="ttl"><span class="dot dy"></span>抖音 · 账号诊断</div>
+        <div class="period">${diag.dy.period}</div></div>
+      <div class="note">蓝=你的帐号，橙=同类作者，标签为真实值${diag.dy.note?'（'+diag.dy.note+'）':''}</div>
+      <div class="radar-wrap"><canvas id="radarDy"></canvas></div>
+    </div>`));
+  }
   return wrap;
 }
 function drawDiagnosisCharts(diag){
-  // 小红书: 单线, 半径=百分位
-  const xa = diag.xhs.axes;
-  charts.push(new Chart(document.getElementById("radarXhs"),{
-    type:"radar",
-    data:{ labels:xa.map(a=>`${a.label} ${a.value}`),
-      datasets:[{ label:"你的数据", data:xa.map(a=>a.percentile),
-        borderColor:"#FF2E4D", backgroundColor:"rgba(255,46,77,.15)",
-        borderWidth:2, pointBackgroundColor:"#FF2E4D", pointRadius:3 }]},
-    options:radarOpts(100, v=>`超过 ${v}% 同类`)
-  }));
+  if(curPlatform==="xhs"){
+    // 小红书: 单线, 半径=百分位
+    const xa = diag.xhs.axes;
+    charts.push(new Chart(document.getElementById("radarXhs"),{
+      type:"radar",
+      data:{ labels:xa.map(a=>`${a.label} ${a.value}`),
+        datasets:[{ label:"你的数据", data:xa.map(a=>a.percentile),
+          borderColor:"#FF4D6D", backgroundColor:"rgba(255,77,109,.15)",
+          borderWidth:2, pointBackgroundColor:"#FF4D6D", pointRadius:3 }]},
+      options:radarOpts(100, v=>`超过 ${v}% 同类`)
+    }));
+    return;
+  }
   // 抖音: 双线, 各维度归一化到该维度最大值
   const da = diag.dy.axes;
   const norm = (v,a)=> a.peer===0&&a.mine===0 ? 0 : (v/Math.max(a.mine,a.peer)*100);
@@ -330,11 +388,11 @@ function drawDiagnosisCharts(diag){
     data:{ labels:da.map(a=>a.label),
       datasets:[
         { label:"你的帐号", data:da.map(a=>norm(a.mine,a)),
-          borderColor:"#4E7CFF", backgroundColor:"rgba(78,124,255,.15)",
-          borderWidth:2, pointBackgroundColor:"#4E7CFF", pointRadius:3 },
+          borderColor:"#4C8DFF", backgroundColor:"rgba(76,141,255,.15)",
+          borderWidth:2, pointBackgroundColor:"#4C8DFF", pointRadius:3 },
         { label:"同类作者", data:da.map(a=>norm(a.peer,a)),
-          borderColor:"#FF9845", backgroundColor:"rgba(255,152,69,.12)",
-          borderWidth:2, pointBackgroundColor:"#FF9845", pointRadius:3 },
+          borderColor:"#FFAE4D", backgroundColor:"rgba(255,174,77,.12)",
+          borderWidth:2, pointBackgroundColor:"#FFAE4D", pointRadius:3 },
       ]},
     options:radarOpts(100, null, da)
   }));
@@ -369,25 +427,21 @@ function renderOverview(acc){
   }));
   wrap.appendChild(tog);
 
-  // 板块1 指标卡 + 趋势 (小红书上, 抖音下)
+  // 板块1 指标卡 + 趋势
   wrap.appendChild(sectionLabel("① 账号概览"));
-  wrap.appendChild(overviewBlock("xhs", acc.overview.xhs[curPeriod]));
-  wrap.appendChild(overviewBlock("dy",  acc.overview.dy[curPeriod]));
+  wrap.appendChild(overviewBlock(curPlatform, acc.overview[curPlatform][curPeriod]));
 
   // 板块2 观看来源
   wrap.appendChild(sectionLabel("② 观看来源"));
-  wrap.appendChild(sourceBlock("xhs", acc.source.xhs[curPeriod]));
-  wrap.appendChild(sourceBlock("dy",  acc.source.dy[curPeriod]));
+  wrap.appendChild(sourceBlock(curPlatform, acc.source[curPlatform][curPeriod]));
 
   // 板块3 观看时段
   wrap.appendChild(sectionLabel("③ 观看时段"));
-  wrap.appendChild(slotBlock("xhs", acc.timeslot.xhs[curPeriod]));
-  wrap.appendChild(slotBlock("dy",  acc.timeslot.dy[curPeriod]));
+  wrap.appendChild(slotBlock(curPlatform, acc.timeslot[curPlatform][curPeriod]));
 
   // 板块4 作品排行榜
   wrap.appendChild(sectionLabel("④ 作品排行榜 · 新增观看最多"));
-  wrap.appendChild(rankBlock("xhs", acc.ranking.xhs[curPeriod]));
-  wrap.appendChild(rankBlock("dy",  acc.ranking.dy[curPeriod]));
+  wrap.appendChild(rankBlock(curPlatform, acc.ranking[curPlatform][curPeriod]));
 
   return wrap;
 }
@@ -398,7 +452,7 @@ function pfTitle(pf, extraHtml=""){
 }
 function emptyCard(pf){
   return el(`<div class="platform-block">${pfTitle(pf)}
-    <div class="card"><div class="empty"><div class="ei">📭</div>该周期暂无数据</div></div></div>`);
+    <div class="card"><div class="empty"><div class="ei">📭</div>未更新最新数据</div></div></div>`);
 }
 
 function overviewBlock(pf, d){
@@ -416,20 +470,25 @@ function overviewBlock(pf, d){
   card.appendChild(grid);
   if(d.trend){
     const id = "trend_"+pf;
+    const trendTag = d.trend.real
+      ? `<span class="est-tag" style="color:#0a7d54;background:#e3f8ef">✓ 真实后台数据</span>`
+      : `<span class="est-tag">形态依据截图估算</span>`;
     card.appendChild(el(`<div class="section-label" style="margin-top:18px">趋势 · ${d.trend.unitText}
-      <span class="est-tag">形态依据截图估算</span></div>`));
+      ${trendTag}</div>`));
     card.appendChild(el(`<div class="trend-wrap"><canvas id="${id}"></canvas></div>`));
     requestAnimationFrame(()=>drawTrend(id, d.trend, pf));
+  } else if(d.trendStale){
+    card.appendChild(el(`<div class="section-label" style="margin-top:18px">浏览趋势 ${STALE}</div>`));
   }
   block.appendChild(card);
   return block;
 }
 function drawTrend(id, t, pf){
-  const color = pf==="xhs" ? "#FF2E4D" : "#4E7CFF";
+  const color = pf==="xhs" ? "#FF4D6D" : "#4C8DFF";
   charts.push(new Chart(document.getElementById(id),{
     type:"line",
     data:{ labels:t.labels, datasets:[{ data:t.values, borderColor:color,
-      backgroundColor:(pf==="xhs"?"rgba(255,46,77,.08)":"rgba(78,124,255,.08)"),
+      backgroundColor:(pf==="xhs"?"rgba(255,77,109,.08)":"rgba(76,141,255,.08)"),
       borderWidth:2, fill:true, tension:.4, pointRadius:0, pointHoverRadius:4 }]},
     options:{ responsive:true, maintainAspectRatio:false,
       plugins:{legend:{display:false}},
@@ -440,12 +499,13 @@ function drawTrend(id, t, pf){
 
 function sourceBlock(pf, d){
   if(!d) return emptyCard(pf);
+  const staleHtml = d.stale ? STALE : "";
   const periodTxt = d.period ? `<span style="font-size:11px;color:var(--ink-3);margin-left:auto">${d.period}</span>` : "";
-  const block = el(`<div class="platform-block">${pfTitle(pf, periodTxt)}</div>`);
+  const block = el(`<div class="platform-block">${pfTitle(pf, staleHtml+periodTxt)}</div>`);
   const card = el(`<div class="card"></div>`);
   const bars = el(`<div class="bars"></div>`);
   const max = Math.max(...d.items.map(i=>i.pct));
-  const colors = ["#5B8FF9","#3FC79A","#F6BD16","#F08BB4"];
+  const colors = ["#5B9BFF","#22C9A0","#FFC83C","#FF8FB3"];
   d.items.forEach((it,i)=>{
     const w = (it.pct/max*100).toFixed(1);
     let dh = "";
@@ -460,7 +520,6 @@ function sourceBlock(pf, d){
     </div>`));
   });
   card.appendChild(bars);
-  if(d.extra) card.appendChild(el(`<div class="extra-note">额外流量 · ${d.extra}</div>`));
   block.appendChild(card);
   return block;
 }
@@ -468,22 +527,31 @@ function sourceBlock(pf, d){
 function slotBlock(pf, d){
   if(!d) return emptyCard(pf);
   const est = d.estimated ? `<span class="est-tag">形态依据截图估算</span>` : "";
+  const staleHtml = d.stale ? STALE : "";
   const periodTxt = d.period ? `<span style="font-size:11px;color:var(--ink-3);margin-left:auto">${d.period}</span>` : "";
-  const block = el(`<div class="platform-block">${pfTitle(pf, est+periodTxt)}</div>`);
+  const block = el(`<div class="platform-block">${pfTitle(pf, est+staleHtml+periodTxt)}</div>`);
   const card = el(`<div class="card"></div>`);
   const id = "slot_"+pf;
   card.appendChild(el(`<div class="slot-wrap"><canvas id="${id}"></canvas></div>`));
   block.appendChild(card);
   requestAnimationFrame(()=>{
-    const color = pf==="xhs" ? "#FF2E4D" : "#4E7CFF";
+    const color = pf==="xhs" ? "#FF4D6D" : "#4C8DFF";
+    const fill = pf==="xhs" ? "rgba(255,77,109,.10)" : "rgba(76,141,255,.10)";
     charts.push(new Chart(document.getElementById(id),{
-      type:"bar",
-      data:{ labels:d.labels, datasets:[{ data:d.values, backgroundColor:color, borderRadius:4,
-        barPercentage:.8, categoryPercentage:.8 }]},
+      type:"line",
+      data:{ labels:d.labels, datasets:[{ data:d.values, borderColor:color, backgroundColor:fill,
+        borderWidth:2, fill:true, tension:.45, pointRadius:0, pointHoverRadius:4 }]},
       options:{ responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{ x:{grid:{display:false},ticks:{font:{size:9},color:"#8f959e",maxRotation:0,autoSkip:true,maxTicksLimit:12}},
-                 y:{grid:{color:"#f2f3f5"},ticks:{font:{size:10},color:"#8f959e"},beginAtZero:true} } }
+        interaction:{ mode:"index", intersect:false },
+        plugins:{ legend:{display:false},
+          tooltip:{ backgroundColor:"rgba(29,33,40,.92)", padding:10, displayColors:false,
+            titleFont:{size:13,weight:"600"}, bodyFont:{size:13},
+            callbacks:{
+              title:(items)=>{ const l=items[0].label; return /^\d+$/.test(l)?`${l}:00 – ${l}:59`:l; },
+              label:(ctx)=>`观看 ${Number(ctx.parsed.y).toLocaleString()}` } } },
+        scales:{ x:{grid:{display:false},ticks:{font:{size:11},color:"#949aa3",maxRotation:0,autoSkip:false,
+                   callback:function(v,i){ if(i%2!==0)return ""; const l=this.getLabelForValue(v); return /^\d+$/.test(l)?l+"时":l; }}},
+                 y:{grid:{color:"#f2f3f5"},ticks:{font:{size:11},color:"#949aa3"},beginAtZero:true} } }
     }));
   });
   return block;
@@ -531,8 +599,7 @@ function emptyPlatform(pf, txt){
 function renderWorks(acc){
   const wrap = el(`<div></div>`);
   wrap.appendChild(sectionLabel("作品分析 · 投稿列表"));
-  wrap.appendChild(worksBlock("xhs", acc.works.xhs));
-  wrap.appendChild(worksBlock("dy",  acc.works.dy));
+  wrap.appendChild(worksBlock(curPlatform, acc.works[curPlatform]));
   return wrap;
 }
 function worksBlock(pf, d){
@@ -550,7 +617,7 @@ function worksBlock(pf, d){
       <div class="w-stats">
         <div class="ws"><div class="v" style="color:${C}">${it.plays}</div><div class="l">播放</div></div>
         <div class="ws"><div class="v">${it.avgDur}</div><div class="l">平均播放时长</div></div>
-        <div class="ws"><div class="v">${it.ctr}</div><div class="l">封面点击率</div></div>
+        <div class="ws"><div class="v">${it.ctr||it.finishRate||"—"}</div><div class="l">${it.ctr?"封面点击率":"5秒完播率"}</div></div>
         <div class="ws"><div class="v">${it.likes}</div><div class="l">点赞</div></div>
       </div>
       ${it.reward?`<div class="w-reward">🎁 ${it.reward}</div>`:""}
@@ -563,14 +630,13 @@ function worksBlock(pf, d){
 /* ---------- 观众数据(粉丝分析) ---------- */
 function renderAudience(acc){
   const wrap = el(`<div></div>`);
-  wrap.appendChild(audienceBlock("xhs", acc.audience.xhs));
-  wrap.appendChild(audienceBlock("dy",  acc.audience.dy));
+  wrap.appendChild(audienceBlock(curPlatform, acc.audience[curPlatform]));
   return wrap;
 }
 function audienceBlock(pf, d){
   if(!d) return emptyPlatform(pf, "该平台本次暂无观众数据");
   const C = pf==="xhs" ? "var(--xhs)" : "var(--dy)";
-  const fillRgba = pf==="xhs" ? "rgba(255,46,77,.08)" : "rgba(78,124,255,.08)";
+  const fillRgba = pf==="xhs" ? "rgba(255,77,109,.08)" : "rgba(76,141,255,.08)";
   const block = el(`<div class="platform-block">${pfTitle(pf)}</div>`);
 
   // 基础数据 + 粉丝增长
@@ -626,10 +692,10 @@ function audienceBlock(pf, d){
         <div class="female" style="width:${p.gender.female}%">女 ${p.gender.female}%</div></div>`));
     }
     const parts = [];
-    if(p.age)    parts.push(`<div><div class="sub-title">年龄 <span class="est-tag">估算</span></div>${barListHtml(p.age.items, C)}</div>`);
+    if(p.age)    parts.push(`<div><div class="sub-title">年龄 ${p.age.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.age.items, C)}</div>`);
     if(p.active) parts.push(`<div><div class="sub-title">活跃度</div>${barListHtml(p.active.items, C)}</div>`);
-    if(p.city)   parts.push(`<div><div class="sub-title">城市 <span class="est-tag">估算</span></div>${barListHtml(p.city.items, C)}</div>`);
-    if(p.device) parts.push(`<div><div class="sub-title">设备 <span class="est-tag">估算</span></div>${barListHtml(p.device.items, C)}</div>`);
+    if(p.city)   parts.push(`<div><div class="sub-title">城市 ${p.city.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.city.items, C)}</div>`);
+    if(p.device) parts.push(`<div><div class="sub-title">设备 ${p.device.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.device.items, C)}</div>`);
     if(parts.length){
       const grid = el(`<div class="grid-2" style="margin-top:6px"></div>`);
       parts.forEach(h=>grid.appendChild(el(h)));
@@ -660,8 +726,7 @@ function audienceBlock(pf, d){
 function renderRevenue(acc){
   const wrap = el(`<div></div>`);
   wrap.appendChild(sectionLabel("收入数据"));
-  wrap.appendChild(revenueBlock("xhs", acc.revenue.xhs));
-  wrap.appendChild(revenueBlock("dy",  acc.revenue.dy));
+  wrap.appendChild(revenueBlock(curPlatform, acc.revenue[curPlatform]));
   return wrap;
 }
 function revenueBlock(pf, d){
@@ -684,6 +749,165 @@ function renderPlaceholder(){
     <div class="pt">待补充</div>
     <div class="ps">这个板块的具体内容你稍后补充需求，我再做进来。</div>
   </div>`);
+}
+
+/* ===================== 复盘方法层 (影视飓风四原则) ===================== */
+/* 把 "74.2万" / "1.2万" / "32.06%" / "35秒" 等字符串解析成纯数字 */
+function parseNum(v){
+  if(typeof v==="number") return v;
+  if(v==null) return NaN;
+  let s = String(v).replace(/[,，%＋+\s]/g,"");
+  let mult = 1;
+  if(s.includes("亿")){ mult=1e8; s=s.replace("亿",""); }
+  else if(s.includes("万")){ mult=1e4; s=s.replace("万",""); }
+  const n = parseFloat(s);
+  return isNaN(n) ? NaN : n*mult;
+}
+
+/* 平台点选切换 */
+function renderPlatformToggle(){
+  const wrap = el(`<div class="platform-toggle"></div>`);
+  D.platformOrder.forEach(pf=>{
+    const btn = el(`<button class="pt-btn ${pf} ${pf===curPlatform?'active':''}">
+      <span class="dot ${pf}"></span>${D.platformLabels[pf]}</button>`);
+    btn.addEventListener("click",()=>{ curPlatform=pf; renderContent(); });
+    wrap.appendChild(btn);
+  });
+  return wrap;
+}
+
+/* ① 北极星指标卡 (只显示当前平台) */
+function renderNorthStar(){
+  const ns = D.playbook && D.playbook.northStar;
+  if(!ns || !ns.items || !ns.items.length) return null;
+  const items = ns.items.filter(it=>it.pf===curPlatform);
+  if(!items.length) return null;
+  const wrap = el(`<div class="northstar">
+    <div class="ns-head"><span class="ns-star">⭐</span>
+      <span class="ns-ttl">北极星指标 · ${ns.title}</span>
+      <span class="ns-sub">${ns.sub}</span></div>
+  </div>`);
+  const grid = el(`<div class="ns-grid"></div>`);
+  items.forEach(it=>{
+    let cls="neutral", cmp="", peer="";
+    if(it.peer!==null && it.peer!==undefined){
+      const gap = +(it.value - it.peer).toFixed(1);
+      cls = gap<0 ? "bad" : "good";
+      cmp = gap<0 ? `↓ 低于同类 ${Math.abs(gap)} pt · 最该补`
+                  : `↑ 高于同类 ${gap} pt`;
+      peer = `${it.peerLabel}：${it.peer}${it.unit}`;
+    }
+    grid.appendChild(el(`<div class="ns-card ${cls}">
+      <div class="nc-label">${it.label}</div>
+      <div class="nc-value">${it.value}<span class="u">${it.unit}</span></div>
+      ${cmp?`<div class="nc-cmp">${cmp}</div>`:""}
+      ${peer?`<div class="nc-peer">${peer}</div>`:""}
+    </div>`));
+  });
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+/* 根据阈值给单条作品判定动作 (数据接动作) */
+function computeVerdict(plays, finish){
+  const b = D.playbook.benchmarks;
+  if(plays>=b.hitPlays)
+    return {v:"保留", c:"keep", r:`爆款，播放破 ${b.hitPlays/10000} 万——复制这个选题方向，加大同类产出`};
+  if(finish>=b.goodFinish)
+    return {v:"优化", c:"tune", r:"5秒完播不错、但播放没跑量——内容留得住人，瓶颈在曝光/封面/标题，值得加推或复制选题"};
+  if(finish<b.lowFinish)
+    return {v:"砍", c:"cut", r:"5秒完播偏低——开头没留住人，优化前 3 秒钩子，或换选题方向"};
+  return {v:"观察", c:"watch", r:"数据居中，再观察一轮或做小步优化（封面 / 标题 A/B）"};
+}
+
+/* ② 复盘洞察 tab: 关联探索散点 + 动作建议 */
+function renderInsight(acc){
+  const wrap = el(`<div></div>`);
+  if(curPlatform!=="dy"){
+    wrap.appendChild(el(`<div class="empty big"><div class="ei">💡</div>「复盘洞察」当前为<b>抖音</b>口径（5秒完播率）。<br>点上方「抖音」查看；小红书笔记数据见「作品分析」tab。</div>`));
+    return wrap;
+  }
+  wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。小红书笔记数据（含封面点击率）见「作品分析」tab。</div>`));
+
+  // 关联探索
+  wrap.appendChild(sectionLabel("① 抖音作品关联探索 · 5秒完播率 × 播放量"));
+  let anyWorks = false;
+  ["dy"].forEach(pf=>{
+    const w = acc.works[pf];
+    if(!w || !w.items || !w.items.length){ wrap.appendChild(emptyPlatform(pf,"该平台暂无作品数据，无法做关联")); return; }
+    anyWorks = true;
+    const block = el(`<div class="platform-block">${pfTitle(pf)}</div>`);
+    const card = el(`<div class="card"></div>`);
+    const id = "scatter_"+pf;
+    card.appendChild(el(`<div class="scatter-wrap"><canvas id="${id}"></canvas></div>`));
+    card.appendChild(el(`<div class="insight-note">每个气泡是一条作品：横轴=5秒完播率（留存），纵轴=播放量，气泡越大=平均播放时长越长。<b>右上角</b>=既留得住人又跑得动量的好选题；<b>右下角</b>=留存好但没跑量（曝光/封面待优化）。</div>`));
+    block.appendChild(card);
+    wrap.appendChild(block);
+    requestAnimationFrame(()=>drawScatter(id, w.items, pf));
+  });
+
+  // 动作建议
+  wrap.appendChild(sectionLabel("② 抖音复盘动作建议 · 数据直接接动作（保留 / 优化 / 砍）"));
+  ["dy"].forEach(pf=>{
+    const w = acc.works[pf];
+    if(!w || !w.items || !w.items.length) return;
+    const block = el(`<div class="platform-block">${pfTitle(pf)}</div>`);
+    const card = el(`<div class="card"></div>`);
+    const list = el(`<div class="act-list"></div>`);
+    w.items.forEach(it=>{
+      const plays = parseNum(it.plays), finish = parseNum(it.finishRate||it.ctr);
+      const v = computeVerdict(plays, finish);
+      list.appendChild(el(`<div class="act-item">
+        <div class="act-badge ${v.c}">${v.v}</div>
+        <div class="act-main">
+          <div class="act-title">${it.title}</div>
+          <div class="act-reason">${v.r}</div>
+          <div class="act-stats">
+            <span>播放 <b>${it.plays}</b></span>
+            <span>5秒完播率 <b>${it.finishRate||it.ctr||"—"}</b></span>
+            <span>平均时长 <b>${it.avgDur||"—"}</b></span>
+          </div>
+        </div>
+      </div>`));
+    });
+    card.appendChild(list);
+    block.appendChild(card);
+    wrap.appendChild(block);
+  });
+
+  if(!anyWorks){
+    return el(`<div class="empty big"><div class="ei">📭</div>暂无可用于关联/复盘的作品数据，截图发我即可补充。</div>`);
+  }
+  return wrap;
+}
+
+function drawScatter(id, items, pf){
+  const cvs = document.getElementById(id);
+  if(!cvs) return;
+  const color = pf==="xhs" ? "#FF4D6D" : "#4C8DFF";
+  const pts = items.map(it=>({
+    x: parseNum(it.finishRate||it.ctr), y: parseNum(it.plays),
+    r: Math.max(7, Math.min(26, parseNum(it.avgDur)||18)),
+    title: it.title
+  }));
+  charts.push(new Chart(cvs,{
+    type:"bubble",
+    data:{ datasets:[{ data:pts, backgroundColor:color+"55", borderColor:color, borderWidth:1.5 }]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false},
+        tooltip:{ callbacks:{ label:(ctx)=>{
+          const p=ctx.raw;
+          const playTxt = p.y>=10000 ? (p.y/10000)+"万" : p.y;
+          return `${p.title} · 完播 ${p.x}% · 播放 ${playTxt}`;
+        }}}},
+      scales:{
+        x:{ title:{display:true,text:"5秒完播率 %",font:{size:11},color:"#8f959e"},
+            grid:{color:"#f2f3f5"}, ticks:{font:{size:10},color:"#8f959e"}, beginAtZero:true },
+        y:{ title:{display:true,text:"播放量",font:{size:11},color:"#8f959e"},
+            grid:{color:"#f2f3f5"}, beginAtZero:true,
+            ticks:{font:{size:10},color:"#8f959e",callback:v=>v>=10000?(v/10000)+"万":v} } }
+    }
+  }));
 }
 
 /* ===================== 启动 ===================== */
