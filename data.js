@@ -29,6 +29,17 @@ const DASHBOARD_DATA = {
       /* ================= 账号诊断(雷达) ================= */
       diagnosis: {
                 xhs: {
+          period: "近 7 日 · 真实后台",
+          percentileStale: false,
+          note: "红线=你的数据，半径为「超过同类百分位」，标签为真实值",
+          axes: [
+            { label: "曝光数",   value: "18.5万", percentile: 96 },
+            { label: "观看数",   value: "4.4万",  percentile: 95 },
+            { label: "涨粉数",   value: "2322",   percentile: 97 },
+            { label: "发布数",   value: "2",      percentile: 91 },
+            { label: "互动数",   value: "2368",   percentile: 95 },
+          ],
+        },hs: {
           d7: {
             base: [
               { label:"总粉丝",       value:"7140", sub:"近7日 +2322" },
@@ -4757,9 +4768,9 @@ const DASHBOARD_DATA = {
         xhs: {
           d7: {
             base: [
-              { label:"总粉丝",       value:"7127", sub:"近7日 +2322" },
-              { label:"7日净增粉丝", value:"2294", sub:"涨粉 2322 · 流失 49" },
-              { label:"7日涨粉",     value:"2322", sub:"环比 +14%" },
+              { label:"总粉丝",       value:"7140", sub:"近7日 +2322" },
+              { label:"7日净增粉丝", value:"2273", sub:"涨粉 2322 · 流失 49" },
+              { label:"7日涨粉",     value:"2322", sub:"" },
               { label:"7日点赞",     value:"2174", sub:"" },
               { label:"7日收藏",     value:"2209", sub:"" },
               { label:"7日评论",     value:"204",  sub:"" },
@@ -4768,8 +4779,8 @@ const DASHBOARD_DATA = {
               labels:["06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
               values:[4784,4800,5099,6035,6604,6913,7063] },
             followSource: [
-              { label:"首页推荐", pct:42 }, { label:"视频推荐", pct:35 },
-              { label:"个人主页", pct:12 }, { label:"搜索", pct:6 }, { label:"其他来源", pct:5 },
+              { label:"视频推荐", pct:60 }, { label:"首页推荐", pct:29 },
+              { label:"其他来源", pct:8 }, { label:"个人主页", pct:0 }, { label:"搜索", pct:0 },
             ],
             portrait: {
               gender: { male:24, female:76 },
@@ -4781,19 +4792,19 @@ const DASHBOARD_DATA = {
           },
           d30: {
             base: [
-              { label:"总粉丝",       value:"7127", sub:"获赞 6249" },
-              { label:"30日净增粉丝", value:"6938", sub:"涨粉 6985 · 流失 226" },
+              { label:"总粉丝",       value:"7140", sub:"近30日 +6759" },
+              { label:"30日净增粉丝", value:"6759", sub:"涨粉 6985 · 流失 226" },
               { label:"30日涨粉",     value:"6985", sub:"7日涨粉 2322" },
               { label:"30日点赞",     value:"6249", sub:"" },
               { label:"30日收藏",     value:"4492", sub:"" },
               { label:"30日评论",     value:"528",  sub:"" },
             ],
             growth: { real:true,
-              labels:["05-27","05-30","06-02","06-05","06-08","06-11","06-14","06-17","06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
-              values:[130,137,140,141,142,147,3586,4716,4784,4800,5099,6035,6604,6913,7063] },
+              labels:["05-27","05-28","05-29","05-30","05-31","06-01","06-02","06-03","06-04","06-05","06-06","06-07","06-08","06-09","06-10","06-11","06-12","06-13","06-14","06-15","06-16","06-17","06-18","06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
+              values:[127,129,133,136,138,140,143,144,148,150,158,168,172,172,1113,2754,3586,4234,4441,4572,4648,4716,4769,4784,4800,5099,6035,6604,6913,7063] },
             followSource: [
-              { label:"视频推荐", pct:75 }, { label:"首页推荐", pct:14 },
-              { label:"搜索", pct:4 }, { label:"个人主页", pct:3 }, { label:"其他来源", pct:4 },
+              { label:"视频推荐", pct:60 }, { label:"首页推荐", pct:29 },
+              { label:"其他来源", pct:8 }, { label:"个人主页", pct:0 }, { label:"搜索", pct:0 },
             ],
             portrait: {
               gender: { male:24, female:76 },
@@ -4803,8 +4814,7 @@ const DASHBOARD_DATA = {
                 {label:"北京",pct:7},{label:"上海",pct:6},{label:"广州",pct:4},{label:"深圳",pct:3},{label:"成都",pct:2},{label:"天津",pct:2},{label:"杭州",pct:2} ] },
             },
           },
-        },
-        dy: {
+        },        dy: {
           d7: {
             base: [
               { label:"总粉丝",       value:"15272", sub:"近7日 +2339" },
