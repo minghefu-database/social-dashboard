@@ -339,8 +339,7 @@ function renderContent(){
   // tab 栏
   const tabs = [
     {id:"overview",name:"账号概览"},
-    {id:"flow",name:"流量分析"},
-    {id:"works",name:"作品分析"},
+    {id:"works",name:"作品概览"},
     {id:"insight",name:"复盘洞察"},
     {id:"audience",name:"观众数据"},
     {id:"revenue",name:"收入数据"},
@@ -355,8 +354,7 @@ function renderContent(){
 
   // tab 内容
   if(curTab==="overview") c.appendChild(renderOverview(acc));
-  else if(curTab==="flow") c.appendChild(renderFlowAnalysis(acc));
-  else if(curTab==="works") c.appendChild(renderWorks(acc));
+  else if(curTab==="works") c.appendChild(renderWorksOverview(acc));
   else if(curTab==="insight") c.appendChild(renderInsight(acc));
   else if(curTab==="audience") c.appendChild(renderAudience(acc));
   else if(curTab==="revenue") c.appendChild(renderRevenue(acc));
@@ -615,43 +613,43 @@ function emptyPlatform(pf, txt){
   return b;
 }
 
-/* ---------- 抖音流量分析 ---------- */
-function renderFlowAnalysis(acc){
+/* ---------- 作品概览(原流量分析, 含分析详情弹窗) ---------- */
+function renderWorksOverview(acc){
   const wrap = el(`<div></div>`);
-  wrap.appendChild(sectionLabel("抖音 · 流量分析"));
-  wrap.appendChild(flowBlock("dy", acc.flowAnalysis.dy));
-  return wrap;
-}
-function flowBlock(pf, d){
-  if(!d) return emptyPlatform(pf, "该平台暂无流量分析数据");
+  if(!acc.flowAnalysis || !acc.flowAnalysis.dy){
+    wrap.appendChild(el(`<div class="empty big"><div class="ei">📭</div>暂无作品概览数据</div>`));
+    return wrap;
+  }
+  const d = acc.flowAnalysis.dy;
   const C = "var(--dy)";
-  const block = el(`<div class="platform-block">${pfTitle(pf, `<span style="font-size:11px;color:var(--ink-3);margin-left:auto">${d.period}</span>`)}</div>`);
 
-  // ① 总览指标卡片
+  // ① 平均流量概览指标卡片
   const card1 = el(`<div class="card"></div>`);
-  card1.appendChild(el(`<div class="sub-title">📊 整体流量概览</div>`));
+  card1.appendChild(el(`<div class="sub-title">📊 平均流量概览</div>`));
   const grid = el(`<div class="flow-grid"></div>`);
   d.summary.cards.forEach(c=>{
     grid.appendChild(el(`<div class="fc"><div class="fcl">${c.label}</div><div class="fcv">${c.value}<span class="u">${c.unit}</span></div></div>`));
   });
   card1.appendChild(grid);
-  block.appendChild(card1);
+  wrap.appendChild(card1);
 
-  // ② 每篇作品的流量漏斗表格
+  // ② 单篇作品分析表格(每行带"分析详情"按钮)
   const card2 = el(`<div class="card"></div>`);
-  card2.appendChild(el(`<div class="sub-title">🔍 单篇流量分析</div>`));
+  card2.appendChild(el(`<div class="sub-title">🔍 单篇作品分析</div>`));
   card2.appendChild(el(`<div style="overflow-x:auto">`));
   const table = el(`<table class="flow-table"></table>`);
   const thead = el(`<thead><tr>
     <th>作品</th><th>播放量</th><th>播放时长</th>
     <th>封面点击率</th><th>5秒完播率</th><th>2秒跳出率</th>
-    <th>点赞</th><th>分享</th><th>评论</th>
+    <th>点赞</th><th>分享</th><th>操作</th>
   </tr></thead>`);
   table.appendChild(thead);
   const tbody = el(`<tbody></tbody>`);
-  d.items.forEach(it=>{
+  d.itemList.forEach((it, idx)=>{
+    const detailId = "detail_"+idx;
+    const rewardHtml = it.reward ? `<span class="ft-reward" style="margin-left:4px">🎁 ${it.reward}</span>` : "";
     const row = el(`<tr>
-      <td><div class="ft-title">${it.title}</div><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${it.date}</div></td>
+      <td><div class="ft-title">${it.title}${rewardHtml}</div><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${it.date}</div></td>
       <td class="ft-val" style="color:${C}">${it.plays}</td>
       <td class="ft-val">${it.avgDur}</td>
       <td class="ft-val click">${it.clickRate}</td>
@@ -659,71 +657,262 @@ function flowBlock(pf, d){
       <td class="ft-val bounce">${it.bounce2s}</td>
       <td class="ft-val">${it.like}</td>
       <td class="ft-val">${it.share}</td>
-      <td class="ft-val">${it.comment}</td>
+      <td><button onclick="showDetail('${it.id}','${idx}')" style="background:var(--dy);color:#fff;border:0;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;white-space:nowrap">📄 分析详情</button></td>
     </tr>`);
-    if(it.reward){
-      row.querySelector("td:first-child").innerHTML =
-        `<div class="ft-title">${it.title}</div><span class="ft-reward">🎁 ${it.reward}</span><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${it.date}</div>`;
-    }
     tbody.appendChild(row);
   });
   table.appendChild(tbody);
   card2.querySelector("div[style*='overflow']").appendChild(table);
-  block.appendChild(card2);
+  wrap.appendChild(card2);
 
   // ③ 数据说明
   const card3 = el(`<div class="card"><div class="insight-note" style="border:0;margin:0">
     <b>数据来源：</b>抖音创作者中心「流量分析」页面 API（item_analysis），统计周期 06-09~06-26。<br>
     <b>封面点击率：</b>封面展示后被点击的比例，>60% 算优秀。<br>
     <b>5秒完播率：</b>内容留存的核心指标，>50% 为佳。<br>
-    <b>2秒跳出率：</b>观众在前2秒就划走，越低越好。<br>
-    <b>小提示：</b>点击「复盘洞察」tab 可查看基于5秒完播率的动作建议。
+    <b>2秒跳出率：</b>观众在前2秒就划走，越低越好。
   </div></div>`);
-  block.appendChild(card3);
+  wrap.appendChild(card3);
 
-  return block;
-}
+  // ④ 分析详情弹窗容器
+  const modal = el(`<div id="detailModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:10000;overflow-y:auto;padding:20px" onclick="if(event.target===this)closeDetail()">
+    <div style="background:#fff;max-width:1100px;margin:0 auto;border-radius:16px;padding:24px 28px;position:relative">
+      <button onclick="closeDetail()" style="position:absolute;top:14px;right:16px;border:0;background:var(--bg);font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+      <div id="detailContent"></div>
+    </div>
+  </div>`);
+  wrap.appendChild(modal);
 
-/* ---------- 作品分析 ---------- */
-function renderWorks(acc){
-  const wrap = el(`<div></div>`);
-  wrap.appendChild(sectionLabel("作品分析 · 投稿列表"));
-  wrap.appendChild(worksBlock(curPlatform, acc.works[curPlatform]));
   return wrap;
 }
-function worksBlock(pf, d){
-  if(!d) return emptyPlatform(pf, "该平台本次暂无作品分析数据");
-  const C = pf==="xhs" ? "var(--xhs)" : "var(--dy)";
-  const meta = [d.period, d.note].filter(Boolean)
-    .map(t=>`<span style="font-size:11px;color:var(--ink-3)">${t}</span>`).join("　");
-  const head = `<span style="margin-left:auto;display:flex;gap:10px">${meta}</span>`;
-  const block = el(`<div class="platform-block">${pfTitle(pf, head)}</div>`);
-  const card = el(`<div class="card"></div>`);
-  d.items.forEach(it=>{
-    card.appendChild(el(`<div class="work-item">
-      <div class="work-head"><div class="w-title">${it.title}</div><div class="w-date">${it.date} 发布</div></div>
-      ${it.tags?`<div class="w-tags">${it.tags}</div>`:""}
-      <div class="w-stats">
-        <div class="ws"><div class="v" style="color:${C}">${it.plays}</div><div class="l">播放</div></div>
-        <div class="ws"><div class="v">${it.avgDur}</div><div class="l">平均播放时长</div></div>
-        <div class="ws"><div class="v">${it.ctr||it.finishRate||"—"}</div><div class="l">${it.ctr?"封面点击率":"5秒完播率"}</div></div>
-        <div class="ws"><div class="v">${it.likes}</div><div class="l">点赞</div></div>
-      </div>
-      ${it.reward?`<div class="w-reward">🎁 ${it.reward}</div>`:""}
-    </div>`));
-  });
-  block.appendChild(card);
-  return block;
+
+/* ===== 分析详情弹窗渲染 ===== */
+let detailCharts = [];
+function showDetail(itemId, idx){
+  const d = DASHBOARD_DATA.data.tingzhairen.flowAnalysis.dy;
+  const item = d.itemList.find(i=>i.id===itemId) || d.itemList[idx];
+  if(!item) return;
+  const detail = d.itemDetails[item.title];
+  if(!detail){ alert("暂无该作品的分析详情数据"); return; }
+
+  const modal = document.getElementById("detailModal");
+  const content = document.getElementById("detailContent");
+  detailCharts.forEach(c=>c.destroy());
+  detailCharts = [];
+
+  const ov = detail.overview;
+  const tf = detail.traffic;
+  const ad = detail.audience;
+  const wc = detail.wordCloud || [];
+
+  let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
+    <span style="font-size:13px;color:var(--ink-3)">${item.date} 发布 · 播放 ${item.plays}</span>
+    ${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
+
+  // === 板块1: 单篇作品总览 ===
+  html += `<div class="card"><div class="sub-title">📋 作品总览</div>`;
+  html += `<div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
+    <div class="kpi"><div class="k-label">播放量</div><div class="k-value">${ov.playCount}</div></div>
+    <div class="kpi"><div class="k-label">点赞</div><div class="k-value">${ov.likeCount}</div></div>
+    <div class="kpi"><div class="k-label">评论</div><div class="k-value">${ov.commentCount}</div></div>
+    <div class="kpi"><div class="k-label">分享</div><div class="k-value">${ov.shareCount}</div></div>
+    <div class="kpi"><div class="k-label">收藏</div><div class="k-value">${ov.favoriteCount}</div></div>
+    <div class="kpi"><div class="k-label">涨粉</div><div class="k-value">${ov.subscribeCount}</div></div>
+    <div class="kpi"><div class="k-label">平均播放时长</div><div class="k-value">${ov.avgViewSecond}<span class="u">秒</span></div></div>
+    <div class="kpi"><div class="k-label">完播率</div><div class="k-value">${ov.completionRate}<span class="u">%</span></div></div>
+  </div>`;
+
+  // 观看趋势图
+  if(ov.viewTrend && ov.viewTrend.labels && ov.viewTrend.labels.length){
+    html += `<div class="section-label">观看趋势</div><div class="trend-wrap" style="height:180px"><canvas id="dtViewTrend"></canvas></div>`;
+  }
+  // 涨粉趋势图
+  if(ov.subscribeTrend && ov.subscribeTrend.labels && ov.subscribeTrend.labels.length){
+    html += `<div class="section-label" style="margin-top:10px">涨粉趋势</div><div class="trend-wrap" style="height:180px"><canvas id="dtSubTrend"></canvas></div>`;
+  }
+  html += `</div>`;
+
+  // === 板块2: 流量分析 ===
+  html += `<div class="card"><div class="sub-title">🔎 流量分析</div>`;
+
+  // 观看趋势图(复用)
+  if(ov.viewTrend && ov.viewTrend.labels && ov.viewTrend.labels.length){
+    html += `<div class="section-label">观看趋势</div><div class="trend-wrap" style="height:180px"><canvas id="dtFlowTrend"></canvas></div>`;
+  }
+
+  // 章节点击率
+  if(tf.chapterClickRate && tf.chapterClickRate.top_chapters.length){
+    html += `<div class="sub-title" style="margin-top:14px">📌 章节点击率</div>`;
+    const maxCr = Math.max(...tf.chapterClickRate.top_chapters.map(c=>c.clickRate));
+    const colors = ["#5B9BFF","#22C9A0","#FFC83C","#FF8FB3","#A98BF0","#FF6B6B"];
+    tf.chapterClickRate.top_chapters.forEach((ch, i)=>{
+      const sec = (ch.timestamp/1000).toFixed(1);
+      const w = (ch.clickRate/maxCr*100).toFixed(1);
+      const detailTxt = ch.detail ? `<span style="font-size:11px;color:var(--ink-3);margin-left:6px">${ch.detail}</span>` : "";
+      html += `<div class="bar-row" style="grid-template-columns:70px 1fr 60px;margin-bottom:6px">
+        <div class="b-label" style="font-size:12px">${sec}s · ${ch.desc}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:${colors[i%6]}"></div></div>
+        <div class="b-val" style="font-size:13px"><b>${ch.clickRate}%</b></div>
+      </div>`;
+    });
+    html += `<div style="font-size:11px;color:var(--ink-3);margin-top:6px">用户在该时间点手动回看/点击该章节的比例，越高说明该段内容最受关注</div>`;
+  }
+
+  // 观看来源
+  if(tf.playSource && tf.playSource.length){
+    html += `<div class="sub-title" style="margin-top:14px">📊 观看来源</div>`;
+    const maxPct = Math.max(...tf.playSource.map(s=>s.pct));
+    tf.playSource.forEach(s=>{
+      const w = (s.pct/maxPct*100).toFixed(1);
+      const deltaStr = s.delta !== 0 ? `<span style="font-size:11px;color:${s.delta>0?'var(--up)':'var(--down)'};margin-left:4px">${s.delta>0?'+':''}${s.delta}%</span>` : "";
+      html += `<div class="bar-row" style="grid-template-columns:80px 1fr 60px;margin-bottom:5px">
+        <div class="b-label" style="font-size:12px">${s.label}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:var(--dy)"></div></div>
+        <div class="b-val" style="font-size:13px"><b>${s.pct}%</b>${deltaStr}</div>
+      </div>`;
+    });
+  }
+
+  // 搜索关键词
+  if(tf.searchKeywords && tf.searchKeywords.length){
+    html += `<div class="sub-title" style="margin-top:14px">🔑 搜索关键词</div><div class="word-chips">`;
+    tf.searchKeywords.forEach(k=>{
+      html += `<span class="word-chip">${k.keyword} <b>${k.percent}%</b></span>`;
+    });
+    html += `</div>`;
+  }
+
+  // 启发搜索
+  if(tf.inspireSearch && tf.inspireSearch.length){
+    html += `<div class="sub-title" style="margin-top:10px">💡 启发搜索</div><div class="word-chips">`;
+    tf.inspireSearch.forEach(k=>{
+      html += `<span class="word-chip">${k.keyword} <b>${k.percent}%</b></span>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+
+  // === 板块3: 观众数据 ===
+  if(ad){
+    html += `<div class="card"><div class="sub-title">👥 观众画像</div>`;
+
+    // 性别
+    if(ad.gender){
+      html += `<div class="sub-title" style="font-size:12px;margin-top:0">性别</div>
+      <div class="gender-bar"><div class="male" style="width:${ad.gender.male}%">男 ${ad.gender.male}%</div>
+      <div class="female" style="width:${ad.gender.female}%">女 ${ad.gender.female}%</div></div>`;
+    }
+
+    // 年龄
+    if(ad.age && ad.age.length){
+      html += `<div class="sub-title" style="font-size:12px;margin-top:12px">年龄</div>${barListHtml(ad.age, "var(--dy)")}`;
+    }
+
+    const parts = [];
+    if(ad.province && ad.province.length){
+      parts.push(`<div><div class="sub-title" style="font-size:12px">地域</div>${barListHtml(ad.province, "var(--dy)")}</div>`);
+    }
+    if(ad.city && ad.city.length){
+      parts.push(`<div><div class="sub-title" style="font-size:12px">城市等级</div>${barListHtml(ad.city, "var(--dy)")}</div>`);
+    }
+    if(ad.career && ad.career.length){
+      parts.push(`<div><div class="sub-title" style="font-size:12px">职业</div>${barListHtml(ad.career, "var(--dy)")}</div>`);
+    }
+    if(ad.active && ad.active.length){
+      parts.push(`<div><div class="sub-title" style="font-size:12px">活跃度</div>${barListHtml(ad.active, "var(--dy)")}</div>`);
+    }
+    if(parts.length){
+      html += `<div class="grid-2" style="margin-top:6px">${parts.join("")}</div>`;
+    }
+
+    // 相似作者
+    if(ad.similarAuthors && ad.similarAuthors.length){
+      html += `<div class="sub-title" style="font-size:12px;margin-top:12px">观众也看</div><div class="word-chips">`;
+      ad.similarAuthors.forEach(a=>{
+        const f = a.followers >= 10000 ? (a.followers/10000).toFixed(0)+"万" : a.followers;
+        html += `<span class="word-chip">${a.name} <b>${f}</b></span>`;
+      });
+      html += `</div>`;
+    }
+
+    // 偏好话题
+    if(ad.preferTopics && ad.preferTopics.length){
+      html += `<div class="sub-title" style="font-size:12px;margin-top:10px">偏好话题</div><div class="word-chips">`;
+      ad.preferTopics.forEach(t=>{
+        html += `<span class="word-chip">${t.name}</span>`;
+      });
+      html += `</div>`;
+    }
+
+    html += `</div>`;
+  }
+
+  // === 板块4: 评论热词 ===
+  if(wc.length){
+    html += `<div class="card"><div class="sub-title">💬 评论热词</div><div class="word-chips">`;
+    wc.forEach(w=>{
+      const size = Math.min(26, Math.max(12, 12 + w.score * 3));
+      html += `<span class="word-chip" style="font-size:${size}px;font-weight:${w.score>1?700:400}">${w.word} <b>${w.score}</b></span>`;
+    });
+    html += `</div></div>`;
+  }
+
+  content.innerHTML = html;
+  modal.style.display = "block";
+
+  // 绘制趋势图
+  setTimeout(()=>{
+    const drawTrend = (id, trend, color) => {
+      const cvs = document.getElementById(id);
+      if(!cvs || !trend) return;
+      detailCharts.push(new Chart(cvs, {type:"line",
+        data:{ labels:trend.labels, datasets:[{ data:trend.values, borderColor:color,
+          backgroundColor:color+"15", borderWidth:2, fill:true, tension:.3, pointRadius:2, pointHoverRadius:5 }]},
+        options:{ responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{display:false},
+            tooltip:{mode:"index",intersect:false,
+              callbacks:{ title:(items)=>items[0].label,
+                label:(ctx)=>`${ctx.parsed.y.toLocaleString()}` } } },
+          scales:{ x:{grid:{display:false},ticks:{font:{size:9},color:"#8f959e",maxTicksLimit:12,maxRotation:0}},
+                   y:{grid:{color:"#f2f3f5"},ticks:{font:{size:9},color:"#8f959e"},beginAtZero:true} } }
+      }));
+    };
+    if(ov.viewTrend) drawTrend("dtViewTrend", ov.viewTrend, "var(--dy)");
+    if(ov.subscribeTrend) drawTrend("dtSubTrend", ov.subscribeTrend, "#22C9A0");
+    if(ov.viewTrend) drawTrend("dtFlowTrend", ov.viewTrend, "var(--dy)");
+  }, 100);
+};
+
+function closeDetail(){
+  document.getElementById("detailModal").style.display = "none";
+  detailCharts.forEach(c=>c.destroy());
+  detailCharts = [];
 }
 
-/* ---------- 观众数据(粉丝分析) ---------- */
+/* ---------- 复盘洞察 ---------- */
+
+/* ---------- 观众数据(粉丝分析, 带7天/30天切换) ---------- */
 function renderAudience(acc){
   const wrap = el(`<div></div>`);
+  
+  // 周期切换按钮
+  const tog = el(`<div class="period-toggle">
+    <button data-p="d7" class="${curPeriod==='d7'?'active':''}">近 7 天</button>
+    <button data-p="d30" class="${curPeriod==='d30'?'active':''}">近 30 天</button>
+  </div>`);
+  tog.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    curPeriod=b.dataset.p; renderContent();
+  }));
+  wrap.appendChild(tog);
+  
   wrap.appendChild(audienceBlock(curPlatform, acc.audience[curPlatform]));
   return wrap;
 }
 function audienceBlock(pf, d){
-  if(!d) return emptyPlatform(pf, "该平台本次暂无观众数据");
+  if(!d) return emptyPlatform(pf, "该平台暂无观众数据");
+  // 使用 d7/d30 子数据
+  const sub = d[curPeriod] || d;
   const C = pf==="xhs" ? "var(--xhs)" : "var(--dy)";
   const fillRgba = pf==="xhs" ? "rgba(255,77,109,.08)" : "rgba(76,141,255,.08)";
   const block = el(`<div class="platform-block">${pfTitle(pf)}</div>`);
@@ -732,17 +921,17 @@ function audienceBlock(pf, d){
   const c1 = el(`<div class="card"></div>`);
   c1.appendChild(el(`<div class="sub-title">基础数据</div>`));
   const bg = el(`<div class="base-grid"></div>`);
-  d.base.forEach(b=>bg.appendChild(el(`<div class="base-card">
+  sub.base.forEach(b=>bg.appendChild(el(`<div class="base-card">
     <div class="bc-label">${b.label}</div><div class="bc-value">${b.value}</div>
     <div class="bc-sub">${b.sub||""}</div></div>`)));
   c1.appendChild(bg);
-  if(d.growth){
-    c1.appendChild(el(`<div class="sub-title">粉丝增长趋势 <span class="est-tag">形态依据截图估算</span></div>`));
+  if(sub.growth){
+    c1.appendChild(el(`<div class="sub-title">粉丝增长趋势 <span class="est-tag">真实后台数据</span></div>`));
     const gid = "growth_"+pf;
     c1.appendChild(el(`<div class="growth-wrap"><canvas id="${gid}"></canvas></div>`));
     requestAnimationFrame(()=>{
       charts.push(new Chart(document.getElementById(gid),{ type:"line",
-        data:{ labels:d.growth.labels, datasets:[{ data:d.growth.values, borderColor:C,
+        data:{ labels:sub.growth.labels, datasets:[{ data:sub.growth.values, borderColor:C,
           backgroundColor:fillRgba, borderWidth:2, fill:true, tension:.4, pointRadius:2 }]},
         options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
           scales:{ x:{grid:{display:false},ticks:{font:{size:10},color:"#8f959e"}},
@@ -752,26 +941,26 @@ function audienceBlock(pf, d){
   block.appendChild(c1);
 
   // 关注来源 (有 topFans 则并排展示高互动粉丝)
-  if(d.followSource){
-    if(d.topFans){
+  if(sub.followSource){
+    if(sub.topFans){
       const c2 = el(`<div class="grid-2"></div>`);
-      c2.appendChild(el(`<div class="card"><div class="sub-title">关注来源</div>${barListHtml(d.followSource, C)}</div>`));
+      c2.appendChild(el(`<div class="card"><div class="sub-title">关注来源</div>${barListHtml(sub.followSource, C)}</div>`));
       const fanCard = el(`<div class="card"><div class="sub-title">近7日高互动粉丝</div></div>`);
       const fl = el(`<div class="fan-list"></div>`);
-      d.topFans.forEach((f,i)=>fl.appendChild(el(`<div class="fan-item">
+      sub.topFans.forEach((f,i)=>fl.appendChild(el(`<div class="fan-item">
         <div class="fan-rank">${i+1}</div><div class="fan-name">${f.name}</div>
         <div class="fan-idx">互动指数 ${f.idx}</div></div>`)));
       fanCard.appendChild(fl);
       c2.appendChild(fanCard);
       block.appendChild(c2);
     } else {
-      block.appendChild(el(`<div class="card"><div class="sub-title">新增粉丝来源</div>${barListHtml(d.followSource, C)}</div>`));
+      block.appendChild(el(`<div class="card"><div class="sub-title">新增粉丝来源</div>${barListHtml(sub.followSource, C)}</div>`));
     }
   }
 
   // 粉丝画像
-  if(d.portrait){
-    const p = d.portrait;
+  if(sub.portrait){
+    const p = sub.portrait;
     const c3 = el(`<div class="card"></div>`);
     if(p.conclusion) c3.appendChild(el(`<div class="conclusion">📌 ${p.conclusion}</div>`));
     if(p.gender){
@@ -794,8 +983,8 @@ function audienceBlock(pf, d){
   }
 
   // 粉丝兴趣
-  if(d.interest){
-    const it = d.interest;
+  if(sub.interest){
+    const it = sub.interest;
     const c4 = el(`<div class="card"></div>`);
     if(it.conclusion) c4.appendChild(el(`<div class="conclusion">📌 ${it.conclusion}</div>`));
     if(it.dist) c4.appendChild(el(`<div class="sub-title">兴趣分布 <span class="est-tag">估算</span></div>${barListHtml(it.dist.items, C)}`));
