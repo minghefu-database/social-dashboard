@@ -4616,27 +4616,3 @@ const DASHBOARD_DATA = {
     benchmarks: { hitPlays:100000, goodFinish:45, lowFinish:40 },
   },
 };
-
-
-
-/* ===================== 状态 ===================== */
-const D = DASHBOARD_DATA;
-const STALE = '<span class="stale-tag">未更新最新数据</span>';
-let curAccount = D.defaultAccount;
-let curTab = "overview";          // overview | works | audience | revenue
-let curPeriod = "d30";            // d7 | d30
-let curPlatform = "xhs";          // xhs | dy  (点选式平台切换)
-let charts = [];                  // Chart 实例, 切换时销毁
-
-function destroyCharts(){ charts.forEach(c=>c.destroy()); charts=[]; }
-function el(html){ const t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild; }
-function deltaHtml(d){
-  if(d===null||d===undefined) return "";
-  if(d===0) return `<div class="k-delta flat">环比 +0%</div>`;
-  const cls = d>0 ? "up":"down";
-  const sign = d>0 ? "+":"";
-  return `<div class="k-delta ${cls}">环比 ${sign}${d}%</div>`;
-}
-
-/* ===================== 左栏 ===================== */
-function 
