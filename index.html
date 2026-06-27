@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- v3 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
@@ -272,7 +271,27 @@
 
 <script src="data.js"></script>
 <script>
-renderSidebar(){
+/* ===================== 状态 ===================== */
+const D = DASHBOARD_DATA;
+const STALE = '<span class="stale-tag">未更新最新数据</span>';
+let curAccount = D.defaultAccount;
+let curTab = "overview";          // overview | works | audience | revenue
+let curPeriod = "d30";            // d7 | d30
+let curPlatform = "xhs";          // xhs | dy  (点选式平台切换)
+let charts = [];                  // Chart 实例, 切换时销毁
+
+function destroyCharts(){ charts.forEach(c=>c.destroy()); charts=[]; }
+function el(html){ const t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild; }
+function deltaHtml(d){
+  if(d===null||d===undefined) return "";
+  if(d===0) return `<div class="k-delta flat">环比 +0%</div>`;
+  const cls = d>0 ? "up":"down";
+  const sign = d>0 ? "+":"";
+  return `<div class="k-delta ${cls}">环比 ${sign}${d}%</div>`;
+}
+
+/* ===================== 左栏 ===================== */
+function renderSidebar(){
   const box = document.getElementById("acctGroups");
   box.innerHTML = "";
   D.platformOrder.forEach(pf=>{
@@ -718,7 +737,7 @@ function showDetail(itemId, idx){
 
   // 章节点击率
   if(tf.chapterClickRate && tf.chapterClickRate.top_chapters.length){
-    html += `<div class="sub-title" style="margin-top:0">📌 章节点击率</div>`;
+    html += `<div class=\"sub-title\" style=\"margin-top:0\">📌 章节点击率</div>`;
     const maxCr = Math.max(...tf.chapterClickRate.top_chapters.map(c=>c.clickRate));
     const colors = ["#5B9BFF","#22C9A0","#FFC83C","#FF8FB3","#A98BF0","#FF6B6B"];
     tf.chapterClickRate.top_chapters.forEach((ch, i)=>{
@@ -748,10 +767,6 @@ function showDetail(itemId, idx){
         <div class="b-val" style="font-size:13px"><b>${s.pct}%</b>${deltaStr}</div>
       </div>`;
     });
-    // 平台扶持流量
-    if(tf.boostFlow){
-      html += `<div style="font-size:13px;color:var(--ink-2);margin-top:12px;padding:8px 12px;background:var(--candy-green-bg);border-radius:8px">🚀 ${tf.boostFlow}</div>`;
-    }
   }
 
   // 搜索关键词
@@ -1172,7 +1187,6 @@ function drawScatter(id, items, pf){
 /* ===================== 启动 ===================== */
 renderSidebar();
 renderContent();
-
 </script>
 </body>
 </html>
