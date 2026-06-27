@@ -737,7 +737,7 @@ function showDetail(itemId, idx){
 
   // 章节点击率
   if(tf.chapterClickRate && tf.chapterClickRate.top_chapters.length){
-    html += `<div class=\"sub-title\" style=\"margin-top:0\">📌 章节点击率</div>`;
+    html += `<div class="sub-title" style="margin-top:0">📌 章节点击率</div>`;
     const maxCr = Math.max(...tf.chapterClickRate.top_chapters.map(c=>c.clickRate));
     const colors = ["#5B9BFF","#22C9A0","#FFC83C","#FF8FB3","#A98BF0","#FF6B6B"];
     tf.chapterClickRate.top_chapters.forEach((ch, i)=>{
@@ -767,6 +767,10 @@ function showDetail(itemId, idx){
         <div class="b-val" style="font-size:13px"><b>${s.pct}%</b>${deltaStr}</div>
       </div>`;
     });
+    // 平台扶持流量
+    if(tf.boostFlow){
+      html += `<div style="font-size:13px;color:var(--ink-2);margin-top:12px;padding:8px 12px;background:var(--candy-green-bg);border-radius:8px">🚀 ${tf.boostFlow}</div>`;
+    }
   }
 
   // 搜索关键词
