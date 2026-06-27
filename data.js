@@ -148,7 +148,15 @@
           0.0,
           0.0
         ]
-      }
+      },
+      "playCount": "4450",
+      "likeCount": "115",
+      "commentCount": "7",
+      "shareCount": "32",
+      "favoriteCount": "23",
+      "subscribeCount": "9",
+      "avgViewSecond": "25.6",
+      "completionRate": "3.7"
     },
     "traffic": {
       "boostFlow": "平台扶持流量 1141次播放",
@@ -930,7 +938,15 @@
           0.0,
           0.0
         ]
-      }
+      },
+      "playCount": "33369",
+      "likeCount": "859",
+      "commentCount": "53",
+      "shareCount": "212",
+      "favoriteCount": "615",
+      "subscribeCount": "413",
+      "avgViewSecond": "25.4",
+      "completionRate": "3.9"
     },
     "traffic": {
       "boostFlow": "平台扶持流量 1.1万次播放",
@@ -1688,7 +1704,15 @@
           1.0,
           0.0
         ]
-      }
+      },
+      "playCount": "175297",
+      "likeCount": "3828",
+      "commentCount": "59",
+      "shareCount": "961",
+      "favoriteCount": "2079",
+      "subscribeCount": "1572",
+      "avgViewSecond": "25.0",
+      "completionRate": "3.5"
     },
     "traffic": {
       "boostFlow": "平台扶持流量 7万次播放",
@@ -2443,7 +2467,15 @@
           159.0,
           159.0
         ]
-      }
+      },
+      "playCount": "7655",
+      "likeCount": "186",
+      "commentCount": "10",
+      "shareCount": "48",
+      "favoriteCount": "106",
+      "subscribeCount": "159",
+      "avgViewSecond": "42.1",
+      "completionRate": "5.8"
     },
     "traffic": {
       "boostFlow": "平台扶持流量 2336次播放",
@@ -3166,7 +3198,15 @@
           12844.0,
           12864.0
         ]
-      }
+      },
+      "playCount": "1326531",
+      "likeCount": "21897",
+      "commentCount": "868",
+      "shareCount": "9594",
+      "favoriteCount": "8493",
+      "subscribeCount": "13006",
+      "avgViewSecond": "35.4",
+      "completionRate": "4.3"
     },
     "traffic": {
       "boostFlow": "平台扶持流量 54.1万次播放",
@@ -3912,7 +3952,15 @@
           335.0,
           335.0
         ]
-      }
+      },
+      "playCount": "29398",
+      "likeCount": "575",
+      "commentCount": "24",
+      "shareCount": "126",
+      "favoriteCount": "286",
+      "subscribeCount": "339",
+      "avgViewSecond": "33.5",
+      "completionRate": "6.1"
     },
     "traffic": {
       "boostFlow": "平台扶持流量 1.1万次播放",
