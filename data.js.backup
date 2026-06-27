@@ -29,17 +29,6 @@ const DASHBOARD_DATA = {
       /* ================= 账号诊断(雷达) ================= */
       diagnosis: {
                 xhs: {
-          period: "近 7 日 · 真实后台",
-          percentileStale: false,
-          note: "红线=你的数据，半径为「超过同类百分位」，标签为真实值",
-          axes: [
-            { label: "曝光数",   value: "18.5万", percentile: 96 },
-            { label: "观看数",   value: "4.4万",  percentile: 95 },
-            { label: "涨粉数",   value: "2322",   percentile: 97 },
-            { label: "发布数",   value: "2",      percentile: 91 },
-            { label: "互动数",   value: "2368",   percentile: 95 },
-          ],
-        },hs: {
           d7: {
             base: [
               { label:"总粉丝",       value:"7140", sub:"近7日 +2322" },
@@ -945,33 +934,7 @@ const DASHBOARD_DATA = {
         "word": "在家",
         "score": 1
       }
-    ],
-    "suggestion": {
-      "issues": [
-        {
-          "label": "阅读量极低",
-          "severity": "critical",
-          "detail": "仅551阅读，是所有笔记中最低的"
-        },
-        {
-          "label": "封面点击率最低",
-          "severity": "critical",
-          "detail": "9.7%远低于均值12-16%，封面在信息流中缺乏吸引力"
-        },
-        {
-          "label": "涨粉为0",
-          "severity": "warning",
-          "detail": "仅涨了2个粉丝，内容没有激发关注动机"
-        },
-        {
-          "label": "内容偏离主赛道",
-          "severity": "suggest",
-          "detail": "酒店避坑与账号家居+国学定位偏差大，建议往空间布局方向靠"
-        }
-      ],
-      "action": "封面点击率是最大短板，建议换封面图/标题；内容方向建议与家居空间布局结合",
-      "verdict": "砍"
-    }
+    ]
   },
   "不利家中女性的格局, 三招解决！": {
     "overview": {
@@ -1773,23 +1736,7 @@ const DASHBOARD_DATA = {
         "word": "入户",
         "score": 1
       }
-    ],
-    "suggestion": {
-      "issues": [
-        {
-          "label": "播放量中等",
-          "severity": "info",
-          "detail": "3.3万播放属于中等水平，表现正常"
-        },
-        {
-          "label": "封面点击率一般",
-          "severity": "suggest",
-          "detail": "59.9%的封面点击率，还有优化空间"
-        }
-      ],
-      "action": "内容方向不错，建议优化封面和标题来提升曝光转化率",
-      "verdict": "优化"
-    }
+    ]
   },
   "现代家中男尊女卑的实际理解, 很实用!": {
     "overview": {
@@ -2580,28 +2527,7 @@ const DASHBOARD_DATA = {
         "word": "现在的",
         "score": 1
       }
-    ],
-    "suggestion": {
-      "issues": [
-        {
-          "label": "阅读量中等",
-          "severity": "info",
-          "detail": "2233阅读，属于中等水平"
-        },
-        {
-          "label": "封面点击率高",
-          "severity": "success",
-          "detail": "14.6%表现良好"
-        },
-        {
-          "label": "完播率高",
-          "severity": "success",
-          "detail": "5秒完播率60.2%"
-        }
-      ],
-      "action": "封面点击率和完播率都不错，内容质量好，阅读没跑量可能是标题吸引力不够",
-      "verdict": "观察"
-    }
+    ]
   },
   "容易提升成绩的位置，打造好的学习环境": {
     "overview": {
@@ -3328,28 +3254,7 @@ const DASHBOARD_DATA = {
         "word": "能不能",
         "score": 1
       }
-    ],
-    "suggestion": {
-      "issues": [
-        {
-          "label": "封面点击率最高",
-          "severity": "success",
-          "detail": "16.5%是所有笔记中最高的"
-        },
-        {
-          "label": "平均观看时长最长",
-          "severity": "success",
-          "detail": "157秒，说明内容深度足够"
-        },
-        {
-          "label": "阅读量偏低",
-          "severity": "warning",
-          "detail": "3850阅读，封面好但阅读没跑量，曝光不足"
-        }
-      ],
-      "action": "封面吸引人、内容留得住人，瓶颈在算法推荐曝光，建议优化选题时机（高考季已过）",
-      "verdict": "优化"
-    }
+    ]
   },
   "让你家拥有一个S型身材的家居布局": {
     "overview": {
@@ -4103,23 +4008,7 @@ const DASHBOARD_DATA = {
         "word": "透气",
         "score": 2
       }
-    ],
-    "suggestion": {
-      "issues": [
-        {
-          "label": "爆款标杆",
-          "severity": "success",
-          "detail": "25.6万阅读，4512涨粉，账号最强作品"
-        },
-        {
-          "label": "互动数据出色",
-          "severity": "success",
-          "detail": "3543点赞，229评论，2010收藏，473分享"
-        }
-      ],
-      "action": "账号最佳爆款，复制选题方向和内容结构",
-      "verdict": "保留"
-    }
+    ]
   },
   "不要迷信了！寺庙的秘密被可视化了": {
     "overview": {
@@ -4856,28 +4745,7 @@ const DASHBOARD_DATA = {
         "word": "给出",
         "score": 1
       }
-    ],
-    "suggestion": {
-      "issues": [
-        {
-          "label": "阅读量偏低",
-          "severity": "info",
-          "detail": "2868阅读"
-        },
-        {
-          "label": "完播率不错",
-          "severity": "success",
-          "detail": "5秒完播率63.1%说明内容吸引人"
-        },
-        {
-          "label": "互动少",
-          "severity": "warning",
-          "detail": "仅1条评论，互动引导不足"
-        }
-      ],
-      "action": "完播率不错但阅读没跑量，建议增加结尾互动引导（提问/引导评论）",
-      "verdict": "观察"
-    }
+    ]
   }
 },
         },
@@ -4889,9 +4757,9 @@ const DASHBOARD_DATA = {
         xhs: {
           d7: {
             base: [
-              { label:"总粉丝",       value:"7140", sub:"近7日 +2322" },
-              { label:"7日净增粉丝", value:"2273", sub:"涨粉 2322 · 流失 49" },
-              { label:"7日涨粉",     value:"2322", sub:"" },
+              { label:"总粉丝",       value:"7127", sub:"近7日 +2322" },
+              { label:"7日净增粉丝", value:"2294", sub:"涨粉 2322 · 流失 49" },
+              { label:"7日涨粉",     value:"2322", sub:"环比 +14%" },
               { label:"7日点赞",     value:"2174", sub:"" },
               { label:"7日收藏",     value:"2209", sub:"" },
               { label:"7日评论",     value:"204",  sub:"" },
@@ -4900,8 +4768,8 @@ const DASHBOARD_DATA = {
               labels:["06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
               values:[4784,4800,5099,6035,6604,6913,7063] },
             followSource: [
-              { label:"视频推荐", pct:60 }, { label:"首页推荐", pct:29 },
-              { label:"其他来源", pct:8 }, { label:"个人主页", pct:0 }, { label:"搜索", pct:0 },
+              { label:"首页推荐", pct:42 }, { label:"视频推荐", pct:35 },
+              { label:"个人主页", pct:12 }, { label:"搜索", pct:6 }, { label:"其他来源", pct:5 },
             ],
             portrait: {
               gender: { male:24, female:76 },
@@ -4913,19 +4781,19 @@ const DASHBOARD_DATA = {
           },
           d30: {
             base: [
-              { label:"总粉丝",       value:"7140", sub:"近30日 +6759" },
-              { label:"30日净增粉丝", value:"6759", sub:"涨粉 6985 · 流失 226" },
+              { label:"总粉丝",       value:"7127", sub:"获赞 6249" },
+              { label:"30日净增粉丝", value:"6938", sub:"涨粉 6985 · 流失 226" },
               { label:"30日涨粉",     value:"6985", sub:"7日涨粉 2322" },
               { label:"30日点赞",     value:"6249", sub:"" },
               { label:"30日收藏",     value:"4492", sub:"" },
               { label:"30日评论",     value:"528",  sub:"" },
             ],
             growth: { real:true,
-              labels:["05-27","05-28","05-29","05-30","05-31","06-01","06-02","06-03","06-04","06-05","06-06","06-07","06-08","06-09","06-10","06-11","06-12","06-13","06-14","06-15","06-16","06-17","06-18","06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
-              values:[127,129,133,136,138,140,143,144,148,150,158,168,172,172,1113,2754,3586,4234,4441,4572,4648,4716,4769,4784,4800,5099,6035,6604,6913,7063] },
+              labels:["05-27","05-30","06-02","06-05","06-08","06-11","06-14","06-17","06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
+              values:[130,137,140,141,142,147,3586,4716,4784,4800,5099,6035,6604,6913,7063] },
             followSource: [
-              { label:"视频推荐", pct:60 }, { label:"首页推荐", pct:29 },
-              { label:"其他来源", pct:8 }, { label:"个人主页", pct:0 }, { label:"搜索", pct:0 },
+              { label:"视频推荐", pct:75 }, { label:"首页推荐", pct:14 },
+              { label:"搜索", pct:4 }, { label:"个人主页", pct:3 }, { label:"其他来源", pct:4 },
             ],
             portrait: {
               gender: { male:24, female:76 },
@@ -4935,7 +4803,8 @@ const DASHBOARD_DATA = {
                 {label:"北京",pct:7},{label:"上海",pct:6},{label:"广州",pct:4},{label:"深圳",pct:3},{label:"成都",pct:2},{label:"天津",pct:2},{label:"杭州",pct:2} ] },
             },
           },
-        },        dy: {
+        },
+        dy: {
           d7: {
             base: [
               { label:"总粉丝",       value:"15272", sub:"近7日 +2339" },
