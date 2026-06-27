@@ -949,28 +949,28 @@ const DASHBOARD_DATA = {
     "suggestion": {
       "issues": [
         {
-          "label": "阅读量极低",
-          "severity": "critical",
-          "detail": "仅551阅读，是所有笔记中最低的"
-        },
-        {
-          "label": "封面点击率最低",
-          "severity": "critical",
-          "detail": "9.7%远低于均值12-16%，封面在信息流中缺乏吸引力"
-        },
-        {
-          "label": "涨粉为0",
+          "label": "发布时间短",
           "severity": "warning",
-          "detail": "仅涨了2个粉丝，内容没有激发关注动机"
+          "detail": "发布不到24小时，数据还在冷启动期"
         },
         {
-          "label": "内容偏离主赛道",
+          "label": "封面展示量极低",
+          "severity": "critical",
+          "detail": "封面仅展示40次，算法未给足够曝光"
+        },
+        {
+          "label": "5秒完播率偏低",
+          "severity": "warning",
+          "detail": "40.5%低于其他作品"
+        },
+        {
+          "label": "标签定位偏差",
           "severity": "suggest",
-          "detail": "酒店避坑与账号家居+国学定位偏差大，建议往空间布局方向靠"
+          "detail": "#酒店避坑 与账号主赛道#家居布局 关联弱"
         }
       ],
-      "action": "封面点击率是最大短板，建议换封面图/标题；内容方向建议与家居空间布局结合",
-      "verdict": "砍"
+      "action": "建议优化标题/封面，内容方向往酒店空间布局靠拢",
+      "verdict": "观察"
     }
   },
   "不利家中女性的格局, 三招解决！": {
@@ -1779,15 +1779,15 @@ const DASHBOARD_DATA = {
         {
           "label": "播放量中等",
           "severity": "info",
-          "detail": "3.3万播放属于中等水平，表现正常"
+          "detail": "3.3万播放"
         },
         {
           "label": "封面点击率一般",
           "severity": "suggest",
-          "detail": "59.9%的封面点击率，还有优化空间"
+          "detail": "59.9%还有优化空间"
         }
       ],
-      "action": "内容方向不错，建议优化封面和标题来提升曝光转化率",
+      "action": "建议优化封面和标题",
       "verdict": "优化"
     }
   },
@@ -2584,23 +2584,18 @@ const DASHBOARD_DATA = {
     "suggestion": {
       "issues": [
         {
-          "label": "阅读量中等",
+          "label": "完播率偏低",
+          "severity": "warning",
+          "detail": "3.5%完播率"
+        },
+        {
+          "label": "播放量不错",
           "severity": "info",
-          "detail": "2233阅读，属于中等水平"
-        },
-        {
-          "label": "封面点击率高",
-          "severity": "success",
-          "detail": "14.6%表现良好"
-        },
-        {
-          "label": "完播率高",
-          "severity": "success",
-          "detail": "5秒完播率60.2%"
+          "detail": "17.5万播放"
         }
       ],
-      "action": "封面点击率和完播率都不错，内容质量好，阅读没跑量可能是标题吸引力不够",
-      "verdict": "观察"
+      "action": "优化视频节奏和钩子，提升完播率",
+      "verdict": "优化"
     }
   },
   "容易提升成绩的位置，打造好的学习环境": {
@@ -3332,23 +3327,18 @@ const DASHBOARD_DATA = {
     "suggestion": {
       "issues": [
         {
-          "label": "封面点击率最高",
-          "severity": "success",
-          "detail": "16.5%是所有笔记中最高的"
-        },
-        {
-          "label": "平均观看时长最长",
-          "severity": "success",
-          "detail": "157秒，说明内容深度足够"
-        },
-        {
-          "label": "阅读量偏低",
+          "label": "播放量偏低",
           "severity": "warning",
-          "detail": "3850阅读，封面好但阅读没跑量，曝光不足"
+          "detail": "7655播放量"
+        },
+        {
+          "label": "5秒完播率一般",
+          "severity": "info",
+          "detail": "44.5%"
         }
       ],
-      "action": "封面吸引人、内容留得住人，瓶颈在算法推荐曝光，建议优化选题时机（高考季已过）",
-      "verdict": "优化"
+      "action": "封面/标题不够吸引人",
+      "verdict": "观察"
     }
   },
   "让你家拥有一个S型身材的家居布局": {
@@ -4107,17 +4097,17 @@ const DASHBOARD_DATA = {
     "suggestion": {
       "issues": [
         {
-          "label": "爆款标杆",
+          "label": "表现优秀",
           "severity": "success",
-          "detail": "25.6万阅读，4512涨粉，账号最强作品"
+          "detail": "132.7万播放，爆款"
         },
         {
-          "label": "互动数据出色",
-          "severity": "success",
-          "detail": "3543点赞，229评论，2010收藏，473分享"
+          "label": "封面点击率有提升空间",
+          "severity": "suggest",
+          "detail": "53.2%"
         }
       ],
-      "action": "账号最佳爆款，复制选题方向和内容结构",
+      "action": "复制这个选题方向",
       "verdict": "保留"
     }
   },
@@ -4860,6 +4850,136 @@ const DASHBOARD_DATA = {
     "suggestion": {
       "issues": [
         {
+          "label": "播放量一般",
+          "severity": "info",
+          "detail": "2.9万播放"
+        },
+        {
+          "label": "5秒完播率不错",
+          "severity": "success",
+          "detail": "45.3%"
+        }
+      ],
+      "action": "完播率不错但播放没跑量，优化封面/标题",
+      "verdict": "观察"
+    }
+  }
+},
+        },
+                xhs: {
+          period: "笔记数据 · 真实后台 06-25",
+          note: "小红书每篇带封面点击率",
+          itemList: [
+            { title:"让你家拥有一个S型身材的…", plays:"25.6万", avgDur:"94秒", ctr:"10.2%", likes:"3543", favs:"2010", comments:"229", shares:"473", imps:"33.6万", fans:"4512", reward:"爆款" },
+            { title:"家居布局干货｜可能影响女性的格局", plays:"3.7万", avgDur:"116秒", ctr:"14.5%", likes:"1809", favs:"1956", comments:"164", shares:"313", imps:"16.3万", fans:"1682", reward:"新爆款" },
+            { title:"容易提升成绩的位置，打造好的学习环境", plays:"3851", avgDur:"157秒", ctr:"16.5%", likes:"138", favs:"149", comments:"19", shares:"21", imps:"1.6万", fans:"127" },
+            { title:"不要迷信了! 寺庙的秘密被可视化了", plays:"2868", avgDur:"106秒", ctr:"12.8%", likes:"79", favs:"44", comments:"1", shares:"19", imps:"1.3万", fans:"60" },
+            { title:"现代家中男尊女卑的实际理解, 很实用!", plays:"2234", avgDur:"137秒", ctr:"14.6%", likes:"67", favs:"34", comments:"14", shares:"8", imps:"5477", fans:"39" },
+            { title:"酒店选房避雷指南, 国歌护体，睡稳心安。", plays:"558", avgDur:"82秒", ctr:"9.7%", likes:"12", favs:"5", comments:"1", shares:"5", imps:"798", fans:"2" }
+          ],
+          itemDetails: {
+  "家居布局干货｜可能影响女性的格局": {
+    "overview": {
+      "impl_count": "163436",
+      "view_count": "37380",
+      "like_count": "1809",
+      "comment_count": "164",
+      "collect_count": "1956",
+      "share_count": "313",
+      "rise_fans_count": "1682",
+      "view_time_avg": "116",
+      "cover_click_rate": "14.5",
+      "finish5s_rate": "78.6",
+      "full_view_rate": "11.8",
+      "exit_view2s_rate": "21.2"
+    },
+    "playSource": [
+      {
+        "label": "首页推荐",
+        "pct": 61
+      },
+      {
+        "label": "视频推荐",
+        "pct": 34
+      },
+      {
+        "label": "个人主页",
+        "pct": 1
+      },
+      {
+        "label": "搜索",
+        "pct": 0
+      },
+      {
+        "label": "关注页面",
+        "pct": 0
+      },
+      {
+        "label": "其他来源",
+        "pct": 4
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "表现不错",
+          "severity": "success",
+          "detail": "3.7万阅读，涨粉1682"
+        },
+        {
+          "label": "完播率高",
+          "severity": "success",
+          "detail": "5秒完播率78.6%"
+        }
+      ],
+      "action": "值得加大推广",
+      "verdict": "优化"
+    }
+  },
+  "不要迷信了！寺庙的秘密被可视化了": {
+    "overview": {
+      "impl_count": "13235",
+      "view_count": "2868",
+      "like_count": "79",
+      "comment_count": "1",
+      "collect_count": "44",
+      "share_count": "19",
+      "rise_fans_count": "60",
+      "view_time_avg": "106",
+      "cover_click_rate": "12.8",
+      "finish5s_rate": "63.1",
+      "full_view_rate": "20.3",
+      "exit_view2s_rate": "22.8"
+    },
+    "playSource": [
+      {
+        "label": "个人主页",
+        "pct": 45
+      },
+      {
+        "label": "视频推荐",
+        "pct": 32
+      },
+      {
+        "label": "首页推荐",
+        "pct": 16
+      },
+      {
+        "label": "关注页面",
+        "pct": 1
+      },
+      {
+        "label": "搜索",
+        "pct": 0
+      },
+      {
+        "label": "其他来源",
+        "pct": 6
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
           "label": "阅读量偏低",
           "severity": "info",
           "detail": "2868阅读"
@@ -4867,21 +4987,260 @@ const DASHBOARD_DATA = {
         {
           "label": "完播率不错",
           "severity": "success",
-          "detail": "5秒完播率63.1%说明内容吸引人"
+          "detail": "63.1%"
         },
         {
           "label": "互动少",
           "severity": "warning",
-          "detail": "仅1条评论，互动引导不足"
+          "detail": "仅1条评论"
         }
       ],
-      "action": "完播率不错但阅读没跑量，建议增加结尾互动引导（提问/引导评论）",
+      "action": "增加结尾互动引导",
       "verdict": "观察"
+    }
+  },
+  "容易提升成绩的位置，打造好的学习环境": {
+    "overview": {
+      "impl_count": "15584",
+      "view_count": "3851",
+      "like_count": "138",
+      "comment_count": "19",
+      "collect_count": "149",
+      "share_count": "21",
+      "rise_fans_count": "127",
+      "view_time_avg": "157",
+      "cover_click_rate": "16.5",
+      "finish5s_rate": "67.3",
+      "full_view_rate": "18.1",
+      "exit_view2s_rate": "23.7"
+    },
+    "playSource": [
+      {
+        "label": "个人主页",
+        "pct": 35
+      },
+      {
+        "label": "首页推荐",
+        "pct": 33
+      },
+      {
+        "label": "视频推荐",
+        "pct": 25
+      },
+      {
+        "label": "关注页面",
+        "pct": 1
+      },
+      {
+        "label": "搜索",
+        "pct": 1
+      },
+      {
+        "label": "其他来源",
+        "pct": 5
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "封面点击率最高",
+          "severity": "success",
+          "detail": "16.5%"
+        },
+        {
+          "label": "观看时长最长",
+          "severity": "success",
+          "detail": "157秒"
+        },
+        {
+          "label": "阅读量偏低",
+          "severity": "warning",
+          "detail": "3850阅读"
+        }
+      ],
+      "action": "瓶颈在算法推荐曝光",
+      "verdict": "优化"
+    }
+  },
+  "现代家中男尊女卑的实际理解, 很实用!": {
+    "overview": {
+      "impl_count": "5477",
+      "view_count": "2234",
+      "like_count": "67",
+      "comment_count": "14",
+      "collect_count": "34",
+      "share_count": "8",
+      "rise_fans_count": "39",
+      "view_time_avg": "137",
+      "cover_click_rate": "14.6",
+      "finish5s_rate": "60.2",
+      "full_view_rate": "12.9",
+      "exit_view2s_rate": "23.4"
+    },
+    "playSource": [
+      {
+        "label": "视频推荐",
+        "pct": 70
+      },
+      {
+        "label": "首页推荐",
+        "pct": 12
+      },
+      {
+        "label": "个人主页",
+        "pct": 10
+      },
+      {
+        "label": "关注页面",
+        "pct": 4
+      },
+      {
+        "label": "其他来源",
+        "pct": 4
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "阅读量中等",
+          "severity": "info",
+          "detail": "2233阅读"
+        },
+        {
+          "label": "封面点击率高",
+          "severity": "success",
+          "detail": "14.6%"
+        },
+        {
+          "label": "完播率高",
+          "severity": "success",
+          "detail": "60.2%"
+        }
+      ],
+      "action": "阅读没跑量可能是标题吸引力不够",
+      "verdict": "观察"
+    }
+  },
+  "让你家拥有一个S型身材的家居布局": {
+    "overview": {
+      "impl_count": "335944",
+      "view_count": "255928",
+      "like_count": "3543",
+      "comment_count": "229",
+      "collect_count": "2010",
+      "share_count": "473",
+      "rise_fans_count": "4512",
+      "view_time_avg": "94",
+      "cover_click_rate": "10.2",
+      "finish5s_rate": "62.8",
+      "full_view_rate": "5.8",
+      "exit_view2s_rate": "26.1"
+    },
+    "playSource": [
+      {
+        "label": "视频推荐",
+        "pct": 94
+      },
+      {
+        "label": "首页推荐",
+        "pct": 3
+      },
+      {
+        "label": "个人主页",
+        "pct": 0
+      },
+      {
+        "label": "搜索",
+        "pct": 0
+      },
+      {
+        "label": "其他来源",
+        "pct": 3
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "爆款标杆",
+          "severity": "success",
+          "detail": "25.6万阅读，4512涨粉"
+        },
+        {
+          "label": "互动数据出色",
+          "severity": "success",
+          "detail": "3543点赞，2010收藏"
+        }
+      ],
+      "action": "复制选题方向",
+      "verdict": "保留"
+    }
+  },
+  "酒店选房避雷指南, 国歌护体，睡稳心安。": {
+    "overview": {
+      "impl_count": "798",
+      "view_count": "558",
+      "like_count": "12",
+      "comment_count": "1",
+      "collect_count": "5",
+      "share_count": "5",
+      "rise_fans_count": "2",
+      "view_time_avg": "82",
+      "cover_click_rate": "9.7",
+      "finish5s_rate": "57.4",
+      "full_view_rate": "14.9",
+      "exit_view2s_rate": "23.4"
+    },
+    "playSource": [
+      {
+        "label": "视频推荐",
+        "pct": 68
+      },
+      {
+        "label": "个人主页",
+        "pct": 10
+      },
+      {
+        "label": "首页推荐",
+        "pct": 10
+      },
+      {
+        "label": "关注页面",
+        "pct": 7
+      },
+      {
+        "label": "其他来源",
+        "pct": 5
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "阅读量极低",
+          "severity": "critical",
+          "detail": "仅551阅读"
+        },
+        {
+          "label": "封面点击率最低",
+          "severity": "critical",
+          "detail": "9.7%远低于均值"
+        },
+        {
+          "label": "涨粉为0",
+          "severity": "warning",
+          "detail": "仅涨了2个粉丝"
+        },
+        {
+          "label": "内容偏离主赛道",
+          "severity": "suggest",
+          "detail": "酒店避坑与账号定位偏差大"
+        }
+      ],
+      "action": "封面点击率是最大短板，内容方向建议与家居空间布局结合",
+      "verdict": "砍"
     }
   }
 },
         },
-        xhs: null,
       },
 
       /* ================= 观众数据(tab) ================= */
@@ -4999,7 +5358,381 @@ const DASHBOARD_DATA = {
 
       /* ================= 收入数据(tab) ================= */
       revenue: {
-        xhs: null,
+                xhs: {
+          period: "笔记数据 · 真实后台 06-25",
+          note: "小红书每篇带封面点击率",
+          itemList: [
+            { title:"让你家拥有一个S型身材的…", plays:"25.6万", avgDur:"94秒", ctr:"10.2%", likes:"3543", favs:"2010", comments:"229", shares:"473", imps:"33.6万", fans:"4512", reward:"爆款" },
+            { title:"家居布局干货｜可能影响女性的格局", plays:"3.7万", avgDur:"116秒", ctr:"14.5%", likes:"1809", favs:"1956", comments:"164", shares:"313", imps:"16.3万", fans:"1682", reward:"新爆款" },
+            { title:"容易提升成绩的位置，打造好的学习环境", plays:"3851", avgDur:"157秒", ctr:"16.5%", likes:"138", favs:"149", comments:"19", shares:"21", imps:"1.6万", fans:"127" },
+            { title:"不要迷信了! 寺庙的秘密被可视化了", plays:"2868", avgDur:"106秒", ctr:"12.8%", likes:"79", favs:"44", comments:"1", shares:"19", imps:"1.3万", fans:"60" },
+            { title:"现代家中男尊女卑的实际理解, 很实用!", plays:"2234", avgDur:"137秒", ctr:"14.6%", likes:"67", favs:"34", comments:"14", shares:"8", imps:"5477", fans:"39" },
+            { title:"酒店选房避雷指南, 国歌护体，睡稳心安。", plays:"558", avgDur:"82秒", ctr:"9.7%", likes:"12", favs:"5", comments:"1", shares:"5", imps:"798", fans:"2" }
+          ],
+          itemDetails: {
+  "家居布局干货｜可能影响女性的格局": {
+    "overview": {
+      "impl_count": "163436",
+      "view_count": "37380",
+      "like_count": "1809",
+      "comment_count": "164",
+      "collect_count": "1956",
+      "share_count": "313",
+      "rise_fans_count": "1682",
+      "view_time_avg": "116",
+      "cover_click_rate": "14.5",
+      "finish5s_rate": "78.6",
+      "full_view_rate": "11.8",
+      "exit_view2s_rate": "21.2"
+    },
+    "playSource": [
+      {
+        "label": "首页推荐",
+        "pct": 61
+      },
+      {
+        "label": "视频推荐",
+        "pct": 34
+      },
+      {
+        "label": "个人主页",
+        "pct": 1
+      },
+      {
+        "label": "搜索",
+        "pct": 0
+      },
+      {
+        "label": "关注页面",
+        "pct": 0
+      },
+      {
+        "label": "其他来源",
+        "pct": 4
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "表现不错",
+          "severity": "success",
+          "detail": "3.7万阅读，涨粉1682"
+        },
+        {
+          "label": "完播率高",
+          "severity": "success",
+          "detail": "5秒完播率78.6%"
+        }
+      ],
+      "action": "值得加大推广",
+      "verdict": "优化"
+    }
+  },
+  "不要迷信了！寺庙的秘密被可视化了": {
+    "overview": {
+      "impl_count": "13235",
+      "view_count": "2868",
+      "like_count": "79",
+      "comment_count": "1",
+      "collect_count": "44",
+      "share_count": "19",
+      "rise_fans_count": "60",
+      "view_time_avg": "106",
+      "cover_click_rate": "12.8",
+      "finish5s_rate": "63.1",
+      "full_view_rate": "20.3",
+      "exit_view2s_rate": "22.8"
+    },
+    "playSource": [
+      {
+        "label": "个人主页",
+        "pct": 45
+      },
+      {
+        "label": "视频推荐",
+        "pct": 32
+      },
+      {
+        "label": "首页推荐",
+        "pct": 16
+      },
+      {
+        "label": "关注页面",
+        "pct": 1
+      },
+      {
+        "label": "搜索",
+        "pct": 0
+      },
+      {
+        "label": "其他来源",
+        "pct": 6
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "阅读量偏低",
+          "severity": "info",
+          "detail": "2868阅读"
+        },
+        {
+          "label": "完播率不错",
+          "severity": "success",
+          "detail": "63.1%"
+        },
+        {
+          "label": "互动少",
+          "severity": "warning",
+          "detail": "仅1条评论"
+        }
+      ],
+      "action": "增加结尾互动引导",
+      "verdict": "观察"
+    }
+  },
+  "容易提升成绩的位置，打造好的学习环境": {
+    "overview": {
+      "impl_count": "15584",
+      "view_count": "3851",
+      "like_count": "138",
+      "comment_count": "19",
+      "collect_count": "149",
+      "share_count": "21",
+      "rise_fans_count": "127",
+      "view_time_avg": "157",
+      "cover_click_rate": "16.5",
+      "finish5s_rate": "67.3",
+      "full_view_rate": "18.1",
+      "exit_view2s_rate": "23.7"
+    },
+    "playSource": [
+      {
+        "label": "个人主页",
+        "pct": 35
+      },
+      {
+        "label": "首页推荐",
+        "pct": 33
+      },
+      {
+        "label": "视频推荐",
+        "pct": 25
+      },
+      {
+        "label": "关注页面",
+        "pct": 1
+      },
+      {
+        "label": "搜索",
+        "pct": 1
+      },
+      {
+        "label": "其他来源",
+        "pct": 5
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "封面点击率最高",
+          "severity": "success",
+          "detail": "16.5%"
+        },
+        {
+          "label": "观看时长最长",
+          "severity": "success",
+          "detail": "157秒"
+        },
+        {
+          "label": "阅读量偏低",
+          "severity": "warning",
+          "detail": "3850阅读"
+        }
+      ],
+      "action": "瓶颈在算法推荐曝光",
+      "verdict": "优化"
+    }
+  },
+  "现代家中男尊女卑的实际理解, 很实用!": {
+    "overview": {
+      "impl_count": "5477",
+      "view_count": "2234",
+      "like_count": "67",
+      "comment_count": "14",
+      "collect_count": "34",
+      "share_count": "8",
+      "rise_fans_count": "39",
+      "view_time_avg": "137",
+      "cover_click_rate": "14.6",
+      "finish5s_rate": "60.2",
+      "full_view_rate": "12.9",
+      "exit_view2s_rate": "23.4"
+    },
+    "playSource": [
+      {
+        "label": "视频推荐",
+        "pct": 70
+      },
+      {
+        "label": "首页推荐",
+        "pct": 12
+      },
+      {
+        "label": "个人主页",
+        "pct": 10
+      },
+      {
+        "label": "关注页面",
+        "pct": 4
+      },
+      {
+        "label": "其他来源",
+        "pct": 4
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "阅读量中等",
+          "severity": "info",
+          "detail": "2233阅读"
+        },
+        {
+          "label": "封面点击率高",
+          "severity": "success",
+          "detail": "14.6%"
+        },
+        {
+          "label": "完播率高",
+          "severity": "success",
+          "detail": "60.2%"
+        }
+      ],
+      "action": "阅读没跑量可能是标题吸引力不够",
+      "verdict": "观察"
+    }
+  },
+  "让你家拥有一个S型身材的家居布局": {
+    "overview": {
+      "impl_count": "335944",
+      "view_count": "255928",
+      "like_count": "3543",
+      "comment_count": "229",
+      "collect_count": "2010",
+      "share_count": "473",
+      "rise_fans_count": "4512",
+      "view_time_avg": "94",
+      "cover_click_rate": "10.2",
+      "finish5s_rate": "62.8",
+      "full_view_rate": "5.8",
+      "exit_view2s_rate": "26.1"
+    },
+    "playSource": [
+      {
+        "label": "视频推荐",
+        "pct": 94
+      },
+      {
+        "label": "首页推荐",
+        "pct": 3
+      },
+      {
+        "label": "个人主页",
+        "pct": 0
+      },
+      {
+        "label": "搜索",
+        "pct": 0
+      },
+      {
+        "label": "其他来源",
+        "pct": 3
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "爆款标杆",
+          "severity": "success",
+          "detail": "25.6万阅读，4512涨粉"
+        },
+        {
+          "label": "互动数据出色",
+          "severity": "success",
+          "detail": "3543点赞，2010收藏"
+        }
+      ],
+      "action": "复制选题方向",
+      "verdict": "保留"
+    }
+  },
+  "酒店选房避雷指南, 国歌护体，睡稳心安。": {
+    "overview": {
+      "impl_count": "798",
+      "view_count": "558",
+      "like_count": "12",
+      "comment_count": "1",
+      "collect_count": "5",
+      "share_count": "5",
+      "rise_fans_count": "2",
+      "view_time_avg": "82",
+      "cover_click_rate": "9.7",
+      "finish5s_rate": "57.4",
+      "full_view_rate": "14.9",
+      "exit_view2s_rate": "23.4"
+    },
+    "playSource": [
+      {
+        "label": "视频推荐",
+        "pct": 68
+      },
+      {
+        "label": "个人主页",
+        "pct": 10
+      },
+      {
+        "label": "首页推荐",
+        "pct": 10
+      },
+      {
+        "label": "关注页面",
+        "pct": 7
+      },
+      {
+        "label": "其他来源",
+        "pct": 5
+      }
+    ],
+    "suggestion": {
+      "issues": [
+        {
+          "label": "阅读量极低",
+          "severity": "critical",
+          "detail": "仅551阅读"
+        },
+        {
+          "label": "封面点击率最低",
+          "severity": "critical",
+          "detail": "9.7%远低于均值"
+        },
+        {
+          "label": "涨粉为0",
+          "severity": "warning",
+          "detail": "仅涨了2个粉丝"
+        },
+        {
+          "label": "内容偏离主赛道",
+          "severity": "suggest",
+          "detail": "酒店避坑与账号定位偏差大"
+        }
+      ],
+      "action": "封面点击率是最大短板，内容方向建议与家居空间布局结合",
+      "verdict": "砍"
+    }
+  }
+},
+        },
         dy: {
           cards: [
             { label:"总收入",   value:"0.00", unit:"元", sub:"" },
