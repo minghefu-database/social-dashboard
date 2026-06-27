@@ -735,22 +735,18 @@ function showDetail(itemId, idx){
   // === 板块2: 流量分析 ===
   html += `<div class="card"><div class="sub-title">🔎 流量分析</div>`;
 
-  // 观看趋势图(复用)
-  if(ov.viewTrend && ov.viewTrend.labels && ov.viewTrend.labels.length){
-    html += `<div class="section-label">观看趋势</div><div class="trend-wrap" style="height:180px"><canvas id="dtFlowTrend"></canvas></div>`;
-  }
-
   // 章节点击率
   if(tf.chapterClickRate && tf.chapterClickRate.top_chapters.length){
-    html += `<div class="sub-title" style="margin-top:14px">📌 章节点击率</div>`;
+    html += `<div class=\"sub-title\" style=\"margin-top:0\">📌 章节点击率</div>`;
     const maxCr = Math.max(...tf.chapterClickRate.top_chapters.map(c=>c.clickRate));
     const colors = ["#5B9BFF","#22C9A0","#FFC83C","#FF8FB3","#A98BF0","#FF6B6B"];
     tf.chapterClickRate.top_chapters.forEach((ch, i)=>{
-      const sec = (ch.timestamp/1000).toFixed(1);
+      // 使用 timestamp_display (分:秒格式)
+      const tsDisplay = ch.timestamp_display || (()=>{ const s=ch.timestamp/1000; return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"); })();
       const w = (ch.clickRate/maxCr*100).toFixed(1);
       const detailTxt = ch.detail ? `<span style="font-size:11px;color:var(--ink-3);margin-left:6px">${ch.detail}</span>` : "";
-      html += `<div class="bar-row" style="grid-template-columns:70px 1fr 60px;margin-bottom:6px">
-        <div class="b-label" style="font-size:12px">${sec}s · ${ch.desc}</div>
+      html += `<div class="bar-row" style="grid-template-columns:80px 1fr 60px;margin-bottom:6px">
+        <div class="b-label" style="font-size:12px">${tsDisplay} · ${ch.desc}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:${colors[i%6]}"></div></div>
         <div class="b-val" style="font-size:13px"><b>${ch.clickRate}%</b></div>
       </div>`;
@@ -868,7 +864,7 @@ function showDetail(itemId, idx){
       if(!cvs || !trend) return;
       detailCharts.push(new Chart(cvs, {type:"line",
         data:{ labels:trend.labels, datasets:[{ data:trend.values, borderColor:color,
-          backgroundColor:color+"15", borderWidth:2, fill:true, tension:.3, pointRadius:2, pointHoverRadius:5 }]},
+          backgroundColor:color+"18", borderWidth:2, fill:true, tension:.3, pointRadius:2, pointHoverRadius:5 }]},
         options:{ responsive:true, maintainAspectRatio:false,
           plugins:{legend:{display:false},
             tooltip:{mode:"index",intersect:false,
@@ -878,9 +874,8 @@ function showDetail(itemId, idx){
                    y:{grid:{color:"#f2f3f5"},ticks:{font:{size:9},color:"#8f959e"},beginAtZero:true} } }
       }));
     };
-    if(ov.viewTrend) drawTrend("dtViewTrend", ov.viewTrend, "var(--dy)");
+    if(ov.viewTrend) drawTrend("dtViewTrend", ov.viewTrend, "#4C8DFF");
     if(ov.subscribeTrend) drawTrend("dtSubTrend", ov.subscribeTrend, "#22C9A0");
-    if(ov.viewTrend) drawTrend("dtFlowTrend", ov.viewTrend, "var(--dy)");
   }, 100);
 };
 
@@ -1102,38 +1097,39 @@ function computeVerdict(plays, finish){
 function renderInsight(acc){
   const wrap = el(`<div></div>`);
   if(curPlatform!=="dy"){
-    wrap.appendChild(el(`<div class="empty big"><div class="ei">💡</div>「复盘洞察」当前为<b>抖音</b>口径（5秒完播率）。<br>点上方「抖音」查看；小红书笔记数据见「作品分析」tab。</div>`));
+    wrap.appendChild(el(`<div class="empty big"><div class="ei">💡</div>「复盘洞察」当前为<b>抖音</b>口径（5秒完播率）。<br>点上方「抖音」查看。</div>`));
     return wrap;
   }
-  wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。小红书笔记数据（含封面点击率）见「作品分析」tab。</div>`));
+  wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。数据来自作品概览中的6篇作品。</div>`));
+
+  // 从 flowAnalysis.itemList 获取数据
+  const w = acc.flowAnalysis && acc.flowAnalysis.dy ? acc.flowAnalysis.dy.itemList : null;
 
   // 关联探索
   wrap.appendChild(sectionLabel("① 抖音作品关联探索 · 5秒完播率 × 播放量"));
   let anyWorks = false;
-  ["dy"].forEach(pf=>{
-    const w = acc.works[pf];
-    if(!w || !w.items || !w.items.length){ wrap.appendChild(emptyPlatform(pf,"该平台暂无作品数据，无法做关联")); return; }
+  if(w && w.length){
     anyWorks = true;
-    const block = el(`<div class="platform-block">${pfTitle(pf)}</div>`);
+    const block = el(`<div class="platform-block">${pfTitle("dy")}</div>`);
     const card = el(`<div class="card"></div>`);
-    const id = "scatter_"+pf;
+    const id = "scatter_dy";
     card.appendChild(el(`<div class="scatter-wrap"><canvas id="${id}"></canvas></div>`));
     card.appendChild(el(`<div class="insight-note">每个气泡是一条作品：横轴=5秒完播率（留存），纵轴=播放量，气泡越大=平均播放时长越长。<b>右上角</b>=既留得住人又跑得动量的好选题；<b>右下角</b>=留存好但没跑量（曝光/封面待优化）。</div>`));
     block.appendChild(card);
     wrap.appendChild(block);
-    requestAnimationFrame(()=>drawScatter(id, w.items, pf));
-  });
+    requestAnimationFrame(()=>drawScatter(id, w, "dy"));
+  } else {
+    wrap.appendChild(emptyPlatform("dy","该平台暂无作品数据，无法做关联"));
+  }
 
   // 动作建议
   wrap.appendChild(sectionLabel("② 抖音复盘动作建议 · 数据直接接动作（保留 / 优化 / 砍）"));
-  ["dy"].forEach(pf=>{
-    const w = acc.works[pf];
-    if(!w || !w.items || !w.items.length) return;
-    const block = el(`<div class="platform-block">${pfTitle(pf)}</div>`);
+  if(w && w.length){
+    const block = el(`<div class="platform-block">${pfTitle("dy")}</div>`);
     const card = el(`<div class="card"></div>`);
     const list = el(`<div class="act-list"></div>`);
-    w.items.forEach(it=>{
-      const plays = parseNum(it.plays), finish = parseNum(it.finishRate||it.ctr);
+    w.forEach(it=>{
+      const plays = parseNum(it.plays), finish = parseNum(it.finishRate5s);
       const v = computeVerdict(plays, finish);
       list.appendChild(el(`<div class="act-item">
         <div class="act-badge ${v.c}">${v.v}</div>
@@ -1142,7 +1138,7 @@ function renderInsight(acc){
           <div class="act-reason">${v.r}</div>
           <div class="act-stats">
             <span>播放 <b>${it.plays}</b></span>
-            <span>5秒完播率 <b>${it.finishRate||it.ctr||"—"}</b></span>
+            <span>5秒完播率 <b>${it.finishRate5s||"—"}</b></span>
             <span>平均时长 <b>${it.avgDur||"—"}</b></span>
           </div>
         </div>
@@ -1151,7 +1147,7 @@ function renderInsight(acc){
     card.appendChild(list);
     block.appendChild(card);
     wrap.appendChild(block);
-  });
+  }
 
   if(!anyWorks){
     return el(`<div class="empty big"><div class="ei">📭</div>暂无可用于关联/复盘的作品数据，截图发我即可补充。</div>`);

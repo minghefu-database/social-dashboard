@@ -31,6 +31,7 @@ const DASHBOARD_DATA = {
         xhs: {
           period: "近 7 日 · 真实后台(06-19~06-25)",
           percentileStale: false,
+          note: "红线=你的数据，半径为「超过同类百分位」，标签为真实值",
           axes: [
             { label: "观看数",   value: "5.7万",  percentile: 97 },
             { label: "涨粉数",   value: "2322",   percentile: 98 },
@@ -41,7 +42,7 @@ const DASHBOARD_DATA = {
         },
         dy: {
           period: "近 7 日 (06-20~06-26)",
-          note: "真实后台数据 · 06-26. 蓝=你的帐号，橙=同类作者，标签为真实值",
+          note: "蓝=你的帐号，橙=同类作者，标签为真实值。播放量高于99%同类，完播率远低于同类均值需优化开头，互动率低于同类均值需加强引导",
           axes: [
             { label: "播放量",   mine: 244869, peer: 35,   mineText: "24.49万", peerText: "35" },
             { label: "完播率",   mine: 3.7,    peer: 16.7, mineText: "3.7%",    peerText: "16.7%" },
@@ -101,7 +102,7 @@ const DASHBOARD_DATA = {
           },
           d30: {
             cards: [
-              { label: "投稿数",   value: "7",      unit: "",  delta: null },
+              { label: "投稿数",   value: "6",      unit: "",  delta: null },
               { label: "播放量",   value: "157.07", unit: "万", delta: null },
               { label: "点赞量",   value: "27307",  unit: "",  delta: null },
               { label: "分享量",   value: "10941",  unit: "",  delta: null },
@@ -130,10 +131,18 @@ const DASHBOARD_DATA = {
             { label:"搜索", pct:4 }, { label:"个人主页", pct:3 }, { label:"其他来源", pct:4 } ] },
         },
         dy: {
-          d7: { extra:"近7日来自overview/all", items:[
-            { label:"推荐页", pct:94.3 }, { label:"搜索", pct:3.8 },
-            { label:"个人主页", pct:1.4 }, { label:"其他", pct:0.4 } ] },
-          d30: null,
+          d7: {
+            items: [
+              { label:"推荐页", pct:94.3 }, { label:"搜索", pct:3.8 },
+              { label:"个人主页", pct:1.4 }, { label:"其他", pct:0.4 },
+            ],
+          },
+          d30: {
+            items: [
+              { label:"推荐页", pct:92.1 }, { label:"搜索", pct:4.3 },
+              { label:"个人主页", pct:0.6 }, { label:"其他", pct:2.0 },
+            ],
+          },
         },
       },
 
@@ -193,7 +202,7 @@ const DASHBOARD_DATA = {
         },
       },
 
-      /* ================= 作品概览(tab, 原名流量分析) ================= */
+      /* ================= 作品概览(tab) ================= */
       flowAnalysis: {
         dy: {
           period: "全部作品(06-09~06-26)",
@@ -210,7 +219,6 @@ const DASHBOARD_DATA = {
               { label: "条均2秒跳出率", value: "30.2", unit: "%" },
             ],
           },
-          // 每篇作品的基础指标列表
           itemList: [
             { id:"穿堂风", title:"让你家拥有一个S型身材的家居布局",
               date:"2026-06-11 11:52", plays:"132.4万", avgDur:"35.4秒",
@@ -237,7 +245,6 @@ const DASHBOARD_DATA = {
               clickRate:"100%", finishRate5s:"40.5%", bounce2s:"26.2%",
               like:"115", share:"32", comment:"7" },
           ],
-          // 每篇作品的完整分析详情（用于"分析详情"弹窗）
           itemDetails: {
   "酒店选房避雷指南, 国歌护体，睡稳心安。": {
     "overview": {
@@ -406,11 +413,6 @@ const DASHBOARD_DATA = {
           "delta": -0.5
         },
         {
-          "label": "关注",
-          "pct": 7.4,
-          "delta": 6.7
-        },
-        {
           "label": "搜索",
           "pct": 6.0,
           "delta": -3.5
@@ -419,11 +421,6 @@ const DASHBOARD_DATA = {
           "label": "个人主页",
           "pct": 2.0,
           "delta": -1.9
-        },
-        {
-          "label": "消息",
-          "pct": 0.7,
-          "delta": 0.1
         },
         {
           "label": "其他",
@@ -436,32 +433,38 @@ const DASHBOARD_DATA = {
           {
             "timestamp": 1000,
             "desc": "引言",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "0:01"
           },
           {
             "timestamp": 19500,
             "desc": "避雷原因",
-            "detail": "次声波是人类听不见但可能感受到的声波，19赫兹次声波易引起人体眼球共振，电梯等设备会产生次声波，身体状态弱时会变得对次声波敏感。"
+            "detail": "次声波是人类听不见但可能感受到的声波，19赫兹次声波易引起人体眼球共振，电梯等设备会产生次声波，身体状态弱时会变得对次声波敏感。",
+            "timestamp_display": "0:19"
           },
           {
             "timestamp": 72000,
             "desc": "尾房",
-            "detail": "尾房指走廊尽头直冲的房间，可能有水管、电气井等产生噪音的设备。"
+            "detail": "尾房指走廊尽头直冲的房间，可能有水管、电气井等产生噪音的设备。",
+            "timestamp_display": "1:12"
           },
           {
             "timestamp": 103000,
             "desc": "羞羞的梦",
-            "detail": "房间内的频率会影响人的情绪。"
+            "detail": "房间内的频率会影响人的情绪。",
+            "timestamp_display": "1:43"
           },
           {
             "timestamp": 165794,
             "desc": "小妙招",
-            "detail": "可通过除秽香、艾绒等增强内在能量。"
+            "detail": "可通过除秽香、艾绒等增强内在能量。",
+            "timestamp_display": "2:45"
           },
           {
             "timestamp": 207717,
             "desc": "特殊体质",
-            "detail": "敏感体质可吃黄精或播放正能量歌曲。"
+            "detail": "敏感体质可吃黄精或播放正能量歌曲。",
+            "timestamp_display": "3:27"
           }
         ],
         "top_chapters": [
@@ -469,37 +472,43 @@ const DASHBOARD_DATA = {
             "timestamp": 72000,
             "desc": "尾房",
             "detail": "尾房指走廊尽头直冲的房间，可能有水管、电气井等产生噪音的设备。",
-            "clickRate": 50.0
+            "clickRate": 50.0,
+            "timestamp_display": "1:12"
           },
           {
             "timestamp": 19500,
             "desc": "避雷原因",
             "detail": "次声波是人类听不见但可能感受到的声波，19赫兹次声波易引起人体眼球共振，电梯等设备会产生次声波，身体状态弱时会变得对次声波敏感。",
-            "clickRate": 32.3
+            "clickRate": 32.3,
+            "timestamp_display": "0:19"
           },
           {
             "timestamp": 207717,
             "desc": "特殊体质",
             "detail": "敏感体质可吃黄精或播放正能量歌曲。",
-            "clickRate": 12.9
+            "clickRate": 12.9,
+            "timestamp_display": "3:27"
           },
           {
             "timestamp": 1000,
             "desc": "引言",
             "detail": "",
-            "clickRate": 1.6
+            "clickRate": 1.6,
+            "timestamp_display": "0:01"
           },
           {
             "timestamp": 103000,
             "desc": "羞羞的梦",
             "detail": "房间内的频率会影响人的情绪。",
-            "clickRate": 1.6
+            "clickRate": 1.6,
+            "timestamp_display": "1:43"
           },
           {
             "timestamp": 165794,
             "desc": "小妙招",
             "detail": "可通过除秽香、艾绒等增强内在能量。",
-            "clickRate": 1.6
+            "clickRate": 1.6,
+            "timestamp_display": "2:45"
           }
         ]
       },
@@ -1021,31 +1030,6 @@ const DASHBOARD_DATA = {
           "label": "个人主页",
           "pct": 2.3,
           "delta": -1.6
-        },
-        {
-          "label": "关注",
-          "pct": 1.7,
-          "delta": 1.1
-        },
-        {
-          "label": "消息",
-          "pct": 0.4,
-          "delta": -0.2
-        },
-        {
-          "label": "yumme_vv_all",
-          "pct": 0.1,
-          "delta": 0.1
-        },
-        {
-          "label": "familiar",
-          "pct": 0.0,
-          "delta": -0.0
-        },
-        {
-          "label": "fresh",
-          "pct": 0.0,
-          "delta": -0.1
         }
       ],
       "chapterClickRate": {
@@ -1053,32 +1037,38 @@ const DASHBOARD_DATA = {
           {
             "timestamp": 0,
             "desc": "引言",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 28000,
             "desc": "格局分析",
-            "detail": "西南和东南位置是厕所或厨房，影响女性身体和家庭矛盾，问题发生节点与3有关。"
+            "detail": "西南和东南位置是厕所或厨房，影响女性身体和家庭矛盾，问题发生节点与3有关。",
+            "timestamp_display": "0:28"
           },
           {
             "timestamp": 78000,
             "desc": "判断方法",
-            "detail": "传统的解决方法包括少用、摆件和符，但需信仰，作者提出三件事，最后一个方法是关键。"
+            "detail": "传统的解决方法包括少用、摆件和符，但需信仰，作者提出三件事，最后一个方法是关键。",
+            "timestamp_display": "1:18"
           },
           {
             "timestamp": 107000,
             "desc": "已婚女性",
-            "detail": "西南位置放粗海盐，播放古琴曲，放埙，激发道德感，影响思维和行为。"
+            "detail": "西南位置放粗海盐，播放古琴曲，放埙，激发道德感，影响思维和行为。",
+            "timestamp_display": "1:47"
           },
           {
             "timestamp": 158000,
             "desc": "独居女性",
-            "detail": "东南位置放弯月形摆件或画，播放角调式乐曲，挂植物果壳风铃，补水滋润。"
+            "detail": "东南位置放弯月形摆件或画，播放角调式乐曲，挂植物果壳风铃，补水滋润。",
+            "timestamp_display": "2:38"
           },
           {
             "timestamp": 247448,
             "desc": "结语",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "4:07"
           }
         ],
         "top_chapters": [
@@ -1086,37 +1076,43 @@ const DASHBOARD_DATA = {
             "timestamp": 0,
             "desc": "引言",
             "detail": "",
-            "clickRate": 51.7
+            "clickRate": 51.7,
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 158000,
             "desc": "独居女性",
             "detail": "东南位置放弯月形摆件或画，播放角调式乐曲，挂植物果壳风铃，补水滋润。",
-            "clickRate": 19.2
+            "clickRate": 19.2,
+            "timestamp_display": "2:38"
           },
           {
             "timestamp": 28000,
             "desc": "格局分析",
             "detail": "西南和东南位置是厕所或厨房，影响女性身体和家庭矛盾，问题发生节点与3有关。",
-            "clickRate": 14.4
+            "clickRate": 14.4,
+            "timestamp_display": "0:28"
           },
           {
             "timestamp": 107000,
             "desc": "已婚女性",
             "detail": "西南位置放粗海盐，播放古琴曲，放埙，激发道德感，影响思维和行为。",
-            "clickRate": 14.4
+            "clickRate": 14.4,
+            "timestamp_display": "1:47"
           },
           {
             "timestamp": 78000,
             "desc": "判断方法",
             "detail": "传统的解决方法包括少用、摆件和符，但需信仰，作者提出三件事，最后一个方法是关键。",
-            "clickRate": 0.2
+            "clickRate": 0.2,
+            "timestamp_display": "1:18"
           },
           {
             "timestamp": 247448,
             "desc": "结语",
             "detail": "",
-            "clickRate": 0.1
+            "clickRate": 0.1,
+            "timestamp_display": "4:07"
           }
         ]
       },
@@ -1797,34 +1793,9 @@ const DASHBOARD_DATA = {
           "delta": -0.4
         },
         {
-          "label": "关注",
-          "pct": 0.5,
-          "delta": -0.1
-        },
-        {
-          "label": "消息",
-          "pct": 0.5,
-          "delta": -0.1
-        },
-        {
           "label": "搜索",
           "pct": 0.2,
           "delta": -9.3
-        },
-        {
-          "label": "yumme_vv_all",
-          "pct": 0.0,
-          "delta": 0.0
-        },
-        {
-          "label": "familiar",
-          "pct": 0.0,
-          "delta": -0.1
-        },
-        {
-          "label": "fresh",
-          "pct": 0.0,
-          "delta": -0.1
         }
       ],
       "chapterClickRate": {
@@ -1832,37 +1803,44 @@ const DASHBOARD_DATA = {
           {
             "timestamp": 0,
             "desc": "引言",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 21000,
             "desc": "男尊女卑",
-            "detail": "博主认为男尊女卑并非封建糟粕，而是强调男女都要有尊严和谦卑之心，通过调整家中格局改善生活。"
+            "detail": "博主认为男尊女卑并非封建糟粕，而是强调男女都要有尊严和谦卑之心，通过调整家中格局改善生活。",
+            "timestamp_display": "0:21"
           },
           {
             "timestamp": 46993,
             "desc": "天道规律",
-            "detail": "暑日寻凉，寒时向暖。正是男女有别，夫妻同尊卑的原理。"
+            "detail": "暑日寻凉，寒时向暖。正是男女有别，夫妻同尊卑的原理。",
+            "timestamp_display": "0:46"
           },
           {
             "timestamp": 77474,
             "desc": "卧室你睡对了吗",
-            "detail": "卧室方位影响家庭和谐，对应不同卦象和家庭成员。"
+            "detail": "卧室方位影响家庭和谐，对应不同卦象和家庭成员。",
+            "timestamp_display": "1:17"
           },
           {
             "timestamp": 130455,
             "desc": "位置的选择",
-            "detail": "男主人和女主人睡觉的位置得当，便能形成天地交合，阴阳互抱。"
+            "detail": "男主人和女主人睡觉的位置得当，便能形成天地交合，阴阳互抱。",
+            "timestamp_display": "2:10"
           },
           {
             "timestamp": 187346,
             "desc": "现代户型",
-            "detail": "现代户型可通过音乐改善，需创造符合现代人审美和中国传统哲学理论的新礼乐。"
+            "detail": "现代户型可通过音乐改善，需创造符合现代人审美和中国传统哲学理论的新礼乐。",
+            "timestamp_display": "3:07"
           },
           {
             "timestamp": 213993,
             "desc": "天地同和",
-            "detail": "传统的礼乐讲的不是同频共振，而是天地同和，有道德感的音乐才是真正的大乐。"
+            "detail": "传统的礼乐讲的不是同频共振，而是天地同和，有道德感的音乐才是真正的大乐。",
+            "timestamp_display": "3:33"
           }
         ],
         "top_chapters": [
@@ -1870,43 +1848,50 @@ const DASHBOARD_DATA = {
             "timestamp": 130455,
             "desc": "位置的选择",
             "detail": "男主人和女主人睡觉的位置得当，便能形成天地交合，阴阳互抱。",
-            "clickRate": 44.4
+            "clickRate": 44.4,
+            "timestamp_display": "2:10"
           },
           {
             "timestamp": 46993,
             "desc": "天道规律",
             "detail": "暑日寻凉，寒时向暖。正是男女有别，夫妻同尊卑的原理。",
-            "clickRate": 41.4
+            "clickRate": 41.4,
+            "timestamp_display": "0:46"
           },
           {
             "timestamp": 213993,
             "desc": "天地同和",
             "detail": "传统的礼乐讲的不是同频共振，而是天地同和，有道德感的音乐才是真正的大乐。",
-            "clickRate": 12.7
+            "clickRate": 12.7,
+            "timestamp_display": "3:33"
           },
           {
             "timestamp": 77474,
             "desc": "卧室你睡对了吗",
             "detail": "卧室方位影响家庭和谐，对应不同卦象和家庭成员。",
-            "clickRate": 1.0
+            "clickRate": 1.0,
+            "timestamp_display": "1:17"
           },
           {
             "timestamp": 187346,
             "desc": "现代户型",
             "detail": "现代户型可通过音乐改善，需创造符合现代人审美和中国传统哲学理论的新礼乐。",
-            "clickRate": 0.3
+            "clickRate": 0.3,
+            "timestamp_display": "3:07"
           },
           {
             "timestamp": 21000,
             "desc": "男尊女卑",
             "detail": "博主认为男尊女卑并非封建糟粕，而是强调男女都要有尊严和谦卑之心，通过调整家中格局改善生活。",
-            "clickRate": 0.2
+            "clickRate": 0.2,
+            "timestamp_display": "0:21"
           },
           {
             "timestamp": 0,
             "desc": "引言",
             "detail": "",
-            "clickRate": 0.1
+            "clickRate": 0.1,
+            "timestamp_display": "0:00"
           }
         ]
       },
@@ -2580,11 +2565,6 @@ const DASHBOARD_DATA = {
           "delta": -60.2
         },
         {
-          "label": "关注",
-          "pct": 4.1,
-          "delta": 3.5
-        },
-        {
           "label": "搜索",
           "pct": 2.3,
           "delta": -7.2
@@ -2593,21 +2573,6 @@ const DASHBOARD_DATA = {
           "label": "其他",
           "pct": 2.2,
           "delta": 0.9
-        },
-        {
-          "label": "消息",
-          "pct": 0.5,
-          "delta": -0.1
-        },
-        {
-          "label": "yumme_vv_all",
-          "pct": 0.2,
-          "delta": 0.2
-        },
-        {
-          "label": "familiar",
-          "pct": 0.1,
-          "delta": 0.0
         }
       ],
       "chapterClickRate": {
@@ -2615,32 +2580,38 @@ const DASHBOARD_DATA = {
           {
             "timestamp": 0,
             "desc": "引言",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 23000,
             "desc": "提升成绩的位置",
-            "detail": "文昌位起源于古人对文昌帝君的信仰，民间流派将东南位置视为文昌位。"
+            "detail": "文昌位起源于古人对文昌帝君的信仰，民间流派将东南位置视为文昌位。",
+            "timestamp_display": "0:23"
           },
           {
             "timestamp": 84737,
             "desc": "家中文昌位",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "1:24"
           },
           {
             "timestamp": 133000,
             "desc": "成绩不好的原因",
-            "detail": "学习环境对孩子学习至关重要，需满足充足阳光、开阔视野、合适空间等要求。"
+            "detail": "学习环境对孩子学习至关重要，需满足充足阳光、开阔视野、合适空间等要求。",
+            "timestamp_display": "2:13"
           },
           {
             "timestamp": 181000,
             "desc": "造文昌位",
-            "detail": "借文昌位的神，制造对应的象，通过播放角音音乐改变空间频率。"
+            "detail": "借文昌位的神，制造对应的象，通过播放角音音乐改变空间频率。",
+            "timestamp_display": "3:01"
           },
           {
             "timestamp": 245000,
             "desc": "解决办法",
-            "detail": "推荐无旋律自然声音，如风吹树叶、森林声音，音量调至若有若无。"
+            "detail": "推荐无旋律自然声音，如风吹树叶、森林声音，音量调至若有若无。",
+            "timestamp_display": "4:05"
           }
         ],
         "top_chapters": [
@@ -2648,37 +2619,43 @@ const DASHBOARD_DATA = {
             "timestamp": 84737,
             "desc": "家中文昌位",
             "detail": "",
-            "clickRate": 49.3
+            "clickRate": 49.3,
+            "timestamp_display": "1:24"
           },
           {
             "timestamp": 133000,
             "desc": "成绩不好的原因",
             "detail": "学习环境对孩子学习至关重要，需满足充足阳光、开阔视野、合适空间等要求。",
-            "clickRate": 36.7
+            "clickRate": 36.7,
+            "timestamp_display": "2:13"
           },
           {
             "timestamp": 245000,
             "desc": "解决办法",
             "detail": "推荐无旋律自然声音，如风吹树叶、森林声音，音量调至若有若无。",
-            "clickRate": 10.4
+            "clickRate": 10.4,
+            "timestamp_display": "4:05"
           },
           {
             "timestamp": 0,
             "desc": "引言",
             "detail": "",
-            "clickRate": 2.4
+            "clickRate": 2.4,
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 181000,
             "desc": "造文昌位",
             "detail": "借文昌位的神，制造对应的象，通过播放角音音乐改变空间频率。",
-            "clickRate": 0.9
+            "clickRate": 0.9,
+            "timestamp_display": "3:01"
           },
           {
             "timestamp": 23000,
             "desc": "提升成绩的位置",
             "detail": "文昌位起源于古人对文昌帝君的信仰，民间流派将东南位置视为文昌位。",
-            "clickRate": 0.3
+            "clickRate": 0.3,
+            "timestamp_display": "0:23"
           }
         ]
       },
@@ -3324,39 +3301,9 @@ const DASHBOARD_DATA = {
           "delta": 0.7
         },
         {
-          "label": "消息",
-          "pct": 0.7,
-          "delta": 0.1
-        },
-        {
           "label": "个人主页",
           "pct": 0.6,
           "delta": -3.3
-        },
-        {
-          "label": "fresh",
-          "pct": 0.1,
-          "delta": 0.1
-        },
-        {
-          "label": "familiar",
-          "pct": 0.1,
-          "delta": 0.0
-        },
-        {
-          "label": "yumme_vv_all",
-          "pct": 0.0,
-          "delta": 0.0
-        },
-        {
-          "label": "关注",
-          "pct": 0.0,
-          "delta": -0.6
-        },
-        {
-          "label": "compilation",
-          "pct": 0.0,
-          "delta": -0.0
         }
       ],
       "chapterClickRate": {
@@ -3364,32 +3311,38 @@ const DASHBOARD_DATA = {
           {
             "timestamp": 0,
             "desc": "引言",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 34000,
             "desc": "穿堂煞的影响",
-            "detail": "穿堂煞会导致人财两空，居住时间长了还会引发身体各种问题。"
+            "detail": "穿堂煞会导致人财两空，居住时间长了还会引发身体各种问题。",
+            "timestamp_display": "0:34"
           },
           {
             "timestamp": 84000,
             "desc": "好格局的标准",
-            "detail": "好的格局应该是曲水有情，以柔克刚，避免直来直去的气流。"
+            "detail": "好的格局应该是曲水有情，以柔克刚，避免直来直去的气流。",
+            "timestamp_display": "1:24"
           },
           {
             "timestamp": 148000,
             "desc": "底层逻辑",
-            "detail": "屏风、柜子、植物等有形的东西可以挡住气，宫音在频率空间上也可以做止。"
+            "detail": "屏风、柜子、植物等有形的东西可以挡住气，宫音在频率空间上也可以做止。",
+            "timestamp_display": "2:28"
           },
           {
             "timestamp": 204000,
             "desc": "解决方案",
-            "detail": "播放宫音音乐和角音音乐，用频率改变空间的物质形态，解决穿堂煞问题。"
+            "detail": "播放宫音音乐和角音音乐，用频率改变空间的物质形态，解决穿堂煞问题。",
+            "timestamp_display": "3:24"
           },
           {
             "timestamp": 231000,
             "desc": "结语",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "3:51"
           }
         ],
         "top_chapters": [
@@ -3397,37 +3350,43 @@ const DASHBOARD_DATA = {
             "timestamp": 34000,
             "desc": "穿堂煞的影响",
             "detail": "穿堂煞会导致人财两空，居住时间长了还会引发身体各种问题。",
-            "clickRate": 28.2
+            "clickRate": 28.2,
+            "timestamp_display": "0:34"
           },
           {
             "timestamp": 84000,
             "desc": "好格局的标准",
             "detail": "好的格局应该是曲水有情，以柔克刚，避免直来直去的气流。",
-            "clickRate": 24.9
+            "clickRate": 24.9,
+            "timestamp_display": "1:24"
           },
           {
             "timestamp": 148000,
             "desc": "底层逻辑",
             "detail": "屏风、柜子、植物等有形的东西可以挡住气，宫音在频率空间上也可以做止。",
-            "clickRate": 24.2
+            "clickRate": 24.2,
+            "timestamp_display": "2:28"
           },
           {
             "timestamp": 231000,
             "desc": "结语",
             "detail": "",
-            "clickRate": 20.1
+            "clickRate": 20.1,
+            "timestamp_display": "3:51"
           },
           {
             "timestamp": 0,
             "desc": "引言",
             "detail": "",
-            "clickRate": 1.6
+            "clickRate": 1.6,
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 204000,
             "desc": "解决方案",
             "detail": "播放宫音音乐和角音音乐，用频率改变空间的物质形态，解决穿堂煞问题。",
-            "clickRate": 1.0
+            "clickRate": 1.0,
+            "timestamp_display": "3:24"
           }
         ]
       },
@@ -4203,34 +4162,9 @@ const DASHBOARD_DATA = {
           "delta": 0.8
         },
         {
-          "label": "关注",
-          "pct": 1.6,
-          "delta": 0.9
-        },
-        {
           "label": "搜索",
           "pct": 1.2,
           "delta": -8.3
-        },
-        {
-          "label": "消息",
-          "pct": 0.3,
-          "delta": -0.3
-        },
-        {
-          "label": "familiar",
-          "pct": 0.1,
-          "delta": 0.0
-        },
-        {
-          "label": "yumme_vv_all",
-          "pct": 0.1,
-          "delta": 0.1
-        },
-        {
-          "label": "fresh",
-          "pct": 0.1,
-          "delta": -0.0
         }
       ],
       "chapterClickRate": {
@@ -4238,27 +4172,32 @@ const DASHBOARD_DATA = {
           {
             "timestamp": 0,
             "desc": "引言",
-            "detail": ""
+            "detail": "",
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 18000,
             "desc": "声音与环境",
-            "detail": "声音在不同环境下频率不同，身体接收到的能量也不同。"
+            "detail": "声音在不同环境下频率不同，身体接收到的能量也不同。",
+            "timestamp_display": "0:18"
           },
           {
             "timestamp": 52500,
             "desc": "克拉尼图形",
-            "detail": "克拉尼图形证明声音能塑造物质形态，特定频率能影响身体。"
+            "detail": "克拉尼图形证明声音能塑造物质形态，特定频率能影响身体。",
+            "timestamp_display": "0:52"
           },
           {
             "timestamp": 111000,
             "desc": "寺庙的布局",
-            "detail": "寺庙布局是完美的频率共振场，符合天地秩序。"
+            "detail": "寺庙布局是完美的频率共振场，符合天地秩序。",
+            "timestamp_display": "1:51"
           },
           {
             "timestamp": 201000,
             "desc": "结语",
-            "detail": "现代人应审视起居空间，建立符合身体自然规律的秩序。"
+            "detail": "现代人应审视起居空间，建立符合身体自然规律的秩序。",
+            "timestamp_display": "3:21"
           }
         ],
         "top_chapters": [
@@ -4266,31 +4205,36 @@ const DASHBOARD_DATA = {
             "timestamp": 52500,
             "desc": "克拉尼图形",
             "detail": "克拉尼图形证明声音能塑造物质形态，特定频率能影响身体。",
-            "clickRate": 49.0
+            "clickRate": 49.0,
+            "timestamp_display": "0:52"
           },
           {
             "timestamp": 18000,
             "desc": "声音与环境",
             "detail": "声音在不同环境下频率不同，身体接收到的能量也不同。",
-            "clickRate": 23.0
+            "clickRate": 23.0,
+            "timestamp_display": "0:18"
           },
           {
             "timestamp": 201000,
             "desc": "结语",
             "detail": "现代人应审视起居空间，建立符合身体自然规律的秩序。",
-            "clickRate": 19.2
+            "clickRate": 19.2,
+            "timestamp_display": "3:21"
           },
           {
             "timestamp": 0,
             "desc": "引言",
             "detail": "",
-            "clickRate": 7.2
+            "clickRate": 7.2,
+            "timestamp_display": "0:00"
           },
           {
             "timestamp": 111000,
             "desc": "寺庙的布局",
             "detail": "寺庙布局是完美的频率共振场，符合天地秩序。",
-            "clickRate": 1.6
+            "clickRate": 1.6,
+            "timestamp_display": "1:51"
           }
         ]
       },
@@ -4825,29 +4769,6 @@ const DASHBOARD_DATA = {
       /* ================= 观众数据(tab) ================= */
       audience: {
         xhs: {
-          base: [
-            { label:"总粉丝",       value:"7127", sub:"获赞 6249" },
-            { label:"30日净增粉丝", value:"6938", sub:"7日净增 2294" },
-            { label:"30日流失粉丝", value:"226",  sub:"7日流失 49" },
-            { label:"7日涨粉",      value:"2322", sub:"14日涨粉 4711" },
-            { label:"7日点赞",      value:"2174", sub:"" },
-            { label:"7日收藏",      value:"2209", sub:"" },
-          ],
-          growth: { real:true,
-            labels:["05-27","05-30","06-02","06-05","06-08","06-11","06-14","06-17","06-19","06-20","06-21","06-22","06-23","06-24","06-25"],
-            values:[130,137,140,141,142,147,3586,4716,4784,4800,5099,6035,6604,6913,7063] },
-          followSource: [
-            { label:"视频推荐", pct:60 }, { label:"首页推荐", pct:29 },
-            { label:"其他来源", pct:8 }, { label:"个人主页", pct:0 }, { label:"搜索", pct:0 },
-          ],
-          portrait: {
-            gender: { male:24, female:76 },
-            age: { items:[
-              {label:"<18",pct:0},{label:"18-24",pct:8},{label:"25-34",pct:35},{label:"35-44",pct:38},{label:">44",pct:16} ] },
-            city: { items:[
-              {label:"北京",pct:7},{label:"上海",pct:6},{label:"广州",pct:4},{label:"深圳",pct:3},{label:"成都",pct:2},{label:"天津",pct:2},{label:"杭州",pct:2} ] },
-          },
-          // 7天和30天切换所需数据
           d7: {
             base: [
               { label:"总粉丝",       value:"7127", sub:"近7日 +2322" },
@@ -4953,7 +4874,7 @@ const DASHBOARD_DATA = {
               device: { estimated:true, items:[
                 {label:"苹果",pct:43},{label:"华为",pct:24},{label:"小米",pct:6},{label:"荣耀",pct:6},{label:"VIVO",pct:6},{label:"OPPO",pct:5},{label:"红米",pct:3} ] },
               active: { items:[
-                {label:"低活",pct:2},{label:"轻度",pct:1},{label:"中度",pct:2},{label:"重度",pct:95} ] },
+                {label:"低活",pct:2},{label:"轻度",pct:1},{label:"中度",pct:2},{"label":"重度",pct:95} ] },
             },
           },
         },
