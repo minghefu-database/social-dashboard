@@ -1139,16 +1139,20 @@ function computeVerdict(plays, finish){
 /* ② 复盘洞察 tab: 关联探索散点 + 动作建议 */
 function renderInsight(acc){
   const wrap = el(`<div></div>`);
-  if(curPlatform!=="dy"){
-    wrap.appendChild(el(`<div class="empty big"><div class="ei">💡</div>「复盘洞察」当前为<b>抖音</b>口径（5秒完播率）。<br>点上方「抖音」查看。</div>`));
-    return wrap;
+  
+  if(curPlatform==="dy"){
+    wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。数据来自作品概览中的6篇作品。</div>`));
+    renderDyInsight(acc, wrap);
+  } else {
+    wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>小红书</b>口径（封面点击率×阅读量×平均观看时长）。数据来自作品概览中的6篇笔记。</div>`));
+    renderXhsInsight(acc, wrap);
   }
-  wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。数据来自作品概览中的6篇作品。</div>`));
+  return wrap;
+}
 
-  // 从 flowAnalysis.itemList 获取数据
+function renderDyInsight(acc, wrap){
   const w = acc.flowAnalysis && acc.flowAnalysis.dy ? acc.flowAnalysis.dy.itemList : null;
 
-  // 关联探索
   wrap.appendChild(sectionLabel("① 抖音作品关联探索 · 5秒完播率 × 播放量"));
   let anyWorks = false;
   if(w && w.length){
@@ -1160,12 +1164,11 @@ function renderInsight(acc){
     card.appendChild(el(`<div class="insight-note">每个气泡是一条作品：横轴=5秒完播率（留存），纵轴=播放量，气泡越大=平均播放时长越长。<b>右上角</b>=既留得住人又跑得动量的好选题；<b>右下角</b>=留存好但没跑量（曝光/封面待优化）。</div>`));
     block.appendChild(card);
     wrap.appendChild(block);
-    requestAnimationFrame(()=>drawScatter(id, w, "dy"));
+    requestAnimationFrame(()=>drawDyScatter(id, w, "dy"));
   } else {
     wrap.appendChild(emptyPlatform("dy","该平台暂无作品数据，无法做关联"));
   }
 
-  // 动作建议
   wrap.appendChild(sectionLabel("② 抖音复盘动作建议 · 数据直接接动作（保留 / 优化 / 砍）"));
   if(w && w.length){
     const block = el(`<div class="platform-block">${pfTitle("dy")}</div>`);
@@ -1193,17 +1196,72 @@ function renderInsight(acc){
   }
 
   if(!anyWorks){
-    return el(`<div class="empty big"><div class="ei">📭</div>暂无可用于关联/复盘的作品数据，截图发我即可补充。</div>`);
+    wrap.appendChild(el(`<div class="empty big"><div class="ei">📭</div>暂无可用于关联/复盘的作品数据。</div>`));
   }
-  return wrap;
 }
 
-function drawScatter(id, items, pf){
+function renderXhsInsight(acc, wrap){
+  const w = acc.flowAnalysis && acc.flowAnalysis.xhs ? acc.flowAnalysis.xhs.itemList : null;
+
+  wrap.appendChild(sectionLabel("① 小红书笔记关联探索 · 封面点击率 × 阅读量"));
+  let anyWorks = false;
+  if(w && w.length){
+    anyWorks = true;
+    const block = el(`<div class="platform-block">${pfTitle("xhs")}</div>`);
+    const card = el(`<div class="card"></div>`);
+    const id = "scatter_xhs";
+    card.appendChild(el(`<div class="scatter-wrap"><canvas id="${id}"></canvas></div>`));
+    card.appendChild(el(`<div class="insight-note">每个气泡是一条笔记：横轴=封面点击率（吸引度），纵轴=阅读量，气泡越大=平均观看时长越长。<b>右上角</b>=封面吸引人且阅读量高；<b>右下角</b>=封面好但阅读没跑量（标题/推荐算法待优化）。</div>`));
+    block.appendChild(card);
+    wrap.appendChild(block);
+    requestAnimationFrame(()=>drawXhsScatter(id, w));
+  } else {
+    wrap.appendChild(emptyPlatform("xhs","该平台暂无笔记数据，无法做关联"));
+  }
+
+  wrap.appendChild(sectionLabel("② 小红书复盘动作建议 · 封面点击率 × 阅读量 × 观看时长"));
+  if(w && w.length){
+    const block = el(`<div class="platform-block">${pfTitle("xhs")}</div>`);
+    const card = el(`<div class="card"></div>`);
+    const list = el(`<div class="act-list"></div>`);
+    w.forEach(it=>{
+      const plays = parseNum(it.plays);
+      const ctr = parseNum(it.ctr);
+      const avgDur = parseNum(it.avgDur);
+      let verdict;
+      if(plays >= 100000) verdict = {v:"保留", c:"keep", r:"爆款笔记，阅读破10万——复制这个选题方向，加大同类产出"};
+      else if(ctr >= 15 && avgDur >= 80) verdict = {v:"优化", c:"tune", r:"封面点击率和观看时长都不错、但阅读没跑量——内容留得住人，瓶颈在曝光/标题，值得加推或复制选题"};
+      else if(ctr < 10 || avgDur < 40) verdict = {v:"砍", c:"cut", r:"封面点击率偏低或观看时长太短——封面/标题没吸引力或内容留不住人，优化前3秒或换选题"};
+      else verdict = {v:"观察", c:"watch", r:"数据居中，再观察一轮或做小步优化（封面 / 标题 A/B）"};
+      list.appendChild(el(`<div class="act-item">
+        <div class="act-badge ${verdict.c}">${verdict.v}</div>
+        <div class="act-main">
+          <div class="act-title">${it.title}</div>
+          <div class="act-reason">${verdict.r}</div>
+          <div class="act-stats">
+            <span>阅读 <b>${it.plays}</b></span>
+            <span>封面点击率 <b>${it.ctr||"—"}</b></span>
+            <span>平均时长 <b>${it.avgDur||"—"}</b></span>
+          </div>
+        </div>
+      </div>`));
+    });
+    card.appendChild(list);
+    block.appendChild(card);
+    wrap.appendChild(block);
+  }
+
+  if(!anyWorks){
+    wrap.appendChild(el(`<div class="empty big"><div class="ei">📭</div>暂无可用于关联/复盘的作品数据。</div>`));
+  }
+}
+
+function drawDyScatter(id, items, pf){
   const cvs = document.getElementById(id);
   if(!cvs) return;
-  const color = pf==="xhs" ? "#FF4D6D" : "#4C8DFF";
+  const color = "#4C8DFF";
   const pts = items.map(it=>({
-    x: parseNum(it.finishRate||it.ctr), y: parseNum(it.plays),
+    x: parseNum(it.finishRate5s), y: parseNum(it.plays),
     r: Math.max(7, Math.min(26, parseNum(it.avgDur)||18)),
     title: it.title
   }));
@@ -1221,6 +1279,35 @@ function drawScatter(id, items, pf){
         x:{ title:{display:true,text:"5秒完播率 %",font:{size:11},color:"#8f959e"},
             grid:{color:"#f2f3f5"}, ticks:{font:{size:10},color:"#8f959e"}, beginAtZero:true },
         y:{ title:{display:true,text:"播放量",font:{size:11},color:"#8f959e"},
+            grid:{color:"#f2f3f5"}, beginAtZero:true,
+            ticks:{font:{size:10},color:"#8f959e",callback:v=>v>=10000?(v/10000)+"万":v} } }
+    }
+  }));
+}
+
+function drawXhsScatter(id, items){
+  const cvs = document.getElementById(id);
+  if(!cvs) return;
+  const color = "#FF4D6D";
+  const pts = items.map(it=>({
+    x: parseNum(it.ctr), y: parseNum(it.plays),
+    r: Math.max(7, Math.min(26, parseNum(it.avgDur)||18)),
+    title: it.title
+  }));
+  charts.push(new Chart(cvs,{
+    type:"bubble",
+    data:{ datasets:[{ data:pts, backgroundColor:color+"55", borderColor:color, borderWidth:1.5 }]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false},
+        tooltip:{ callbacks:{ label:(ctx)=>{
+          const p=ctx.raw;
+          const playTxt = p.y>=10000 ? (p.y/10000)+"万" : p.y;
+          return `${p.title} · 点击率 ${p.x}% · 阅读 ${playTxt}`;
+        }}}},
+      scales:{
+        x:{ title:{display:true,text:"封面点击率 %",font:{size:11},color:"#8f959e"},
+            grid:{color:"#f2f3f5"}, ticks:{font:{size:10},color:"#8f959e"}, beginAtZero:true },
+        y:{ title:{display:true,text:"阅读量",font:{size:11},color:"#8f959e"},
             grid:{color:"#f2f3f5"}, beginAtZero:true,
             ticks:{font:{size:10},color:"#8f959e",callback:v=>v>=10000?(v/10000)+"万":v} } }
     }
