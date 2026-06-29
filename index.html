@@ -668,7 +668,8 @@ function renderWorksOverview(acc){
         // 计算笔记流量概览均值
     if(xhsData.itemList && xhsData.itemDetails){
       let totalCtr = 0, totalDur = 0, totalFull = 0, ctrCount = 0, durCount = 0, fullCount = 0;
-      let totalViewTime = 0;
+      // 观看总时长用账号级的 note_detail_new 数据(毫秒合计)
+      let totalViewTime = (DASHBOARD_DATA.data.tingzhairen.overview.xhs[curPeriod||'d7']?.totalViewTimeMs || 0) / 1000 / 3600;
       xhsData.itemList.forEach(it=>{
         const d = xhsData.itemDetails[it.title];
         if(d && d.overview){
@@ -676,7 +677,8 @@ function renderWorksOverview(acc){
           if(d.overview.view_time_avg){ totalDur += parseFloat(d.overview.view_time_avg); durCount++; }
           if(d.overview.full_view_rate){ totalFull += parseFloat(d.overview.full_view_rate); fullCount++; }
           if(d.overview.view_time_avg && d.overview.view_count){
-            totalViewTime += parseFloat(d.overview.view_time_avg) * parseInt(d.overview.view_count) / 3600;
+            // note_detail_new 的 view_time_avg 是毫秒级合计，单位转换
+            totalViewTime += parseFloat(d.overview.view_time_avg) / 1000 / 3600;
           }
         }
       });
