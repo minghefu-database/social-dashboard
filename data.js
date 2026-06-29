@@ -4887,7 +4887,7 @@ const DASHBOARD_DATA = {
           period: "笔记数据 · 真实后台 06-25",
           note: "小红书每篇带封面点击率",
           itemList: [
-            { title:"让你家拥有一个S型身材的…", plays:"25.6万", avgDur:"94秒", ctr:"10.2%", likes:"3543", favs:"2010", comments:"229", shares:"473", imps:"33.6万", fans:"4512", reward:"爆款" },
+            { title:"让你家拥有一个S型身材的家居布局", plays:"25.6万", avgDur:"94秒", ctr:"10.2%", likes:"3543", favs:"2010", comments:"229", shares:"473", imps:"33.6万", fans:"4512", reward:"爆款" },
             { title:"家居布局干货｜可能影响女性的格局", plays:"3.7万", avgDur:"116秒", ctr:"14.5%", likes:"1809", favs:"1956", comments:"164", shares:"313", imps:"16.3万", fans:"1682", reward:"新爆款" },
             { title:"容易提升成绩的位置，打造好的学习环境", plays:"3851", avgDur:"157秒", ctr:"16.5%", likes:"138", favs:"149", comments:"19", shares:"21", imps:"1.6万", fans:"127" },
             { title:"不要迷信了! 寺庙的秘密被可视化了", plays:"2868", avgDur:"106秒", ctr:"12.8%", likes:"79", favs:"44", comments:"1", shares:"19", imps:"1.3万", fans:"60" },
@@ -5380,7 +5380,7 @@ const DASHBOARD_DATA = {
           period: "笔记数据 · 真实后台 06-25",
           note: "小红书每篇带封面点击率",
           itemList: [
-            { title:"让你家拥有一个S型身材的…", plays:"25.6万", avgDur:"94秒", ctr:"10.2%", likes:"3543", favs:"2010", comments:"229", shares:"473", imps:"33.6万", fans:"4512", reward:"爆款" },
+            { title:"让你家拥有一个S型身材的家居布局", plays:"25.6万", avgDur:"94秒", ctr:"10.2%", likes:"3543", favs:"2010", comments:"229", shares:"473", imps:"33.6万", fans:"4512", reward:"爆款" },
             { title:"家居布局干货｜可能影响女性的格局", plays:"3.7万", avgDur:"116秒", ctr:"14.5%", likes:"1809", favs:"1956", comments:"164", shares:"313", imps:"16.3万", fans:"1682", reward:"新爆款" },
             { title:"容易提升成绩的位置，打造好的学习环境", plays:"3851", avgDur:"157秒", ctr:"16.5%", likes:"138", favs:"149", comments:"19", shares:"21", imps:"1.6万", fans:"127" },
             { title:"不要迷信了! 寺庙的秘密被可视化了", plays:"2868", avgDur:"106秒", ctr:"12.8%", likes:"79", favs:"44", comments:"1", shares:"19", imps:"1.3万", fans:"60" },
