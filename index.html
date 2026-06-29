@@ -1001,13 +1001,59 @@ function showXhsDetail(title){
   const ov = detail.overview || {};
   const ps = detail.playSource || [];
   const sug = detail.suggestion;
+  const trend = detail.trend;
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
     <span style="font-size:13px;color:var(--ink-3)">阅读 ${item.plays} · 点赞 ${item.likes}</span>
     ${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
 
   // 作品总览
-  html += `<div class="card"><div class="sub-title">📋 作品总览</div>
+  html += xhsOverviewCards(ov);
+
+  // 流量分析
+  html += xhsTrafficCards(ov);
+
+  // 观看来源
+  if(ps.length){
+    const maxPct = Math.max(...ps.map(s=>s.pct));
+    html += `<div class="card"><div class="sub-title">📊 观看来源</div>`;
+    ps.forEach(s=>{
+      const w = (s.pct/maxPct*100).toFixed(1);
+      html += `<div class="bar-row" style="grid-template-columns:80px 1fr 50px;margin-bottom:5px">
+        <div class="b-label" style="font-size:12px">${s.label}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:var(--xhs)"></div></div>
+        <div class="b-val" style="font-size:13px"><b>${s.pct}%</b></div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // 观众画像 (抖音同款样式)
+  const acc = DASHBOARD_DATA.data.tingzhairen;
+  const portrait = acc.audience?.xhs?.d7?.portrait;
+  if(portrait){
+    html += renderXhsPortrait(portrait);
+  }
+
+  // 优化建议 (移到最底下)
+  if(sug){
+    const vColors = {保留:"var(--down)",优化:"#E89C00",观察:"var(--ink-3)",砍:"var(--up)"};
+    const vBg = {保留:"var(--candy-green-bg)",优化:"var(--candy-yellow-bg)",观察:"var(--bg)",砍:"var(--candy-pink-bg)"};
+    html += xhsSuggestionCard(sug, vColors, vBg);
+  }
+
+  content.innerHTML = html;
+  modal.style.display = "block";
+
+  // 渲染趋势图
+  if(trend && trend.daily && trend.daily.view && trend.daily.view.length){
+    renderXhsTrendCharts(trend);
+  }
+}
+
+/* ---- 作品总览卡片 ---- */
+function xhsOverviewCards(ov){
+  return `<div class="card"><div class="sub-title">📋 作品总览</div>
     <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
       <div class="kpi"><div class="k-label">曝光数</div><div class="k-value">${ov.impl_count||"?"}</div></div>
       <div class="kpi"><div class="k-label">阅读量</div><div class="k-value">${ov.view_count||"?"}</div></div>
@@ -1018,72 +1064,91 @@ function showXhsDetail(title){
       <div class="kpi"><div class="k-label">涨粉</div><div class="k-value">${ov.rise_fans_count||"?"}</div></div>
       <div class="kpi"><div class="k-label">平均观看时长</div><div class="k-value">${ov.view_time_avg||"?"}<span class="u">秒</span></div></div>
     </div></div>`;
+}
 
-  // 流量分析
-  html += `<div class="card"><div class="sub-title">🔎 流量分析</div>`;
+/* ---- 流量分析卡片 ---- */
+function xhsTrafficCards(ov){
+  let h = `<div class="card"><div class="sub-title">🔎 流量分析</div>`;
   if(ov.cover_click_rate || ov.finish5s_rate || ov.full_view_rate || ov.exit_view2s_rate){
-    html += `<div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">
+    h += `<div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">
       <div class="kpi"><div class="k-label">封面点击率</div><div class="k-value">${ov.cover_click_rate}<span class="u">%</span></div></div>
       <div class="kpi"><div class="k-label">5秒完播率</div><div class="k-value">${ov.finish5s_rate}<span class="u">%</span></div></div>
       <div class="kpi"><div class="k-label">完整完播率</div><div class="k-value">${ov.full_view_rate}<span class="u">%</span></div></div>
       <div class="kpi"><div class="k-label">2秒跳出率</div><div class="k-value">${ov.exit_view2s_rate}<span class="u">%</span></div></div>
     </div>`;
   }
-  // 观看来源
-  if(ps.length){
-    const maxPct = Math.max(...ps.map(s=>s.pct));
-    html += `<div class="sub-title" style="margin-top:10px">📊 观看来源</div>`;
-    ps.forEach(s=>{
-      const w = (s.pct/maxPct*100).toFixed(1);
-      html += `<div class="bar-row" style="grid-template-columns:80px 1fr 50px;margin-bottom:5px">
-        <div class="b-label" style="font-size:12px">${s.label}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:var(--xhs)"></div></div>
-        <div class="b-val" style="font-size:13px"><b>${s.pct}%</b></div>
-      </div>`;
-    });
-  }
-  html += `</div>`;
+  h += `</div>`;
+  return h;
+}
 
-  // 优化建议
-  if(sug){
-    const vColors = {保留:"var(--down)",优化:"#E89C00",观察:"var(--ink-3)",砍:"var(--up)"};
-    const vBg = {保留:"var(--candy-green-bg)",优化:"var(--candy-yellow-bg)",观察:"var(--bg)",砍:"var(--candy-pink-bg)"};
-    const sevLabels = {critical:"严重",warning:"需关注",suggest:"建议",info:"正常",success:"优秀"};
-    const sevColors = {critical:"var(--up)",warning:"#E89C00",suggest:"var(--dy)",info:"var(--ink-3)",success:"var(--down)"};
-    html += `<div class="card" style="border-left:4px solid ${vColors[sug.verdict]||'var(--xhs)'};background:${vBg[sug.verdict]||'var(--bg)'}">
-      <div class="sub-title" style="display:flex;align-items:center;gap:10px">💡 优化建议
-        <span style="font-size:12px;padding:2px 10px;border-radius:6px;color:#fff;background:${vColors[sug.verdict]||'var(--xhs)'}">${sug.verdict}</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">`;
-    sug.issues.forEach(issue=>{
-      html += `<div style="display:flex;align-items:flex-start;gap:8px;font-size:13px">
-        <span style="flex-shrink:0;padding:1px 8px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:${sevColors[issue.severity]||'var(--ink-3)'}">${sevLabels[issue.severity]||issue.severity}</span>
-        <span><b>${issue.label}</b>：${issue.detail}</span>
-      </div>`;
+/* ---- 小红书观众画像(抖音同款) ---- */
+function renderXhsPortrait(p){
+  let h = `<div class="card"><div class="sub-title">👥 观众画像</div>`;
+  // 性别
+  const g = p.gender || {};
+  if(g.male !== undefined){
+    h += `<div style="margin-bottom:10px"><div class="k-label" style="margin-bottom:6px">性别</div>
+      <div style="display:flex;gap:20px">
+        <div style="flex:1;text-align:center;padding:10px;border-radius:10px;background:#3D8AF518"><div style="font-size:22px;font-weight:700;color:#3D8AF5">${g.male}%</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px">男性</div></div>
+        <div style="flex:1;text-align:center;padding:10px;border-radius:10px;background:#FF7C8E18"><div style="font-size:22px;font-weight:700;color:#FF7C8E">${g.female}%</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px">女性</div></div>
+      </div></div>`;
+  }
+  // 年龄
+  const a = p.age || {};
+  if(a.items && a.items.length){
+    h += `<div style="margin-bottom:10px"><div class="k-label" style="margin-bottom:6px">年龄分布</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    a.items.forEach(item=>{
+      const hue = Math.round(220 - item.pct * 2.2);
+      h += `<span style="padding:4px 12px;border-radius:8px;font-size:12px;background:hsl(${hue},70%,92%);color:hsl(${hue},70%,30%);font-weight:600">${item.label} ${item.pct}%</span>`;
     });
-    html += `</div>
-      <div style="font-size:13px;padding:10px 14px;background:var(--card);border-radius:8px;border:1px solid var(--line)">
-        <b>建议行动：</b>${sug.action}
-      </div>
+    h += `</div></div>`;
+  }
+  // 城市 TOP
+  const c = p.city || {};
+  if(c.items && c.items.length){
+    h += `<div style="margin-bottom:10px"><div class="k-label" style="margin-bottom:6px">城市 TOP</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    c.items.slice(0,5).forEach(item=>{
+      h += `<span style="padding:4px 12px;border-radius:8px;font-size:12px;background:var(--candy-blue-bg);color:var(--xhs);font-weight:600">${item.label} ${item.pct}%</span>`;
+    });
+    h += `</div></div>`;
+  }
+  // 兴趣 TOP
+  const i = p.interest || {};
+  if(i.items && i.items.length){
+    h += `<div style="margin-bottom:4px"><div class="k-label" style="margin-bottom:6px">兴趣偏好</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    i.items.slice(0,5).forEach(item=>{
+      h += `<span style="padding:4px 12px;border-radius:8px;font-size:12px;background:var(--candy-green-bg);color:var(--down);font-weight:600">${item.label} ${item.pct}%</span>`;
+    });
+    h += `</div></div>`;
+  }
+  h += `</div>`;
+  return h;
+}
+
+/* ---- 优化建议卡片 ---- */
+function xhsSuggestionCard(sug, vColors, vBg){
+  const sevLabels = {critical:"严重",warning:"需关注",suggest:"建议",info:"正常",success:"优秀"};
+  const sevColors = {critical:"var(--up)",warning:"#E89C00",suggest:"var(--dy)",info:"var(--ink-3)",success:"var(--down)"};
+  let h = `<div class="card" style="border-left:4px solid ${vColors[sug.verdict]||'var(--xhs)'};background:${vBg[sug.verdict]||'var(--bg)'}">
+    <div class="sub-title" style="display:flex;align-items:center;gap:10px">💡 优化建议
+      <span style="font-size:12px;padding:2px 10px;border-radius:6px;color:#fff;background:${vColors[sug.verdict]||'var(--xhs)'}">${sug.verdict}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">`;
+  sug.issues.forEach(issue=>{
+    h += `<div style="display:flex;align-items:flex-start;gap:8px;font-size:13px">
+      <span style="flex-shrink:0;padding:1px 8px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:${sevColors[issue.severity]||'var(--ink-3)'}">${sevLabels[issue.severity]||issue.severity}</span>
+      <span><b>${issue.label}</b>：${issue.detail}</span>
     </div>`;
-  }
-
-
-  // 观众画像
-  const acc = DASHBOARD_DATA.data.tingzhairen;
-  const portrait = acc.audience?.xhs?.d7?.portrait;
-  if(portrait){
-    html += renderPortraitCard(portrait);
-  }
-
-    content.innerHTML = html;
-  modal.style.display = "block";
-
-  // 渲染趋势图
-  const trend = detail.trend;
-  if(trend && trend.daily && trend.daily.view && trend.daily.view.length){
-    renderXhsTrendCharts(trend);
-  }
+  });
+  h += `</div>
+    <div style="font-size:13px;padding:10px 14px;background:var(--card);border-radius:8px;border:1px solid var(--line)">
+      <b>建议行动：</b>${sug.action}
+    </div>
+  </div>`;
+  return h;
 }
 
 /* ---- 渲染三个趋势图 ---- */
@@ -1278,60 +1343,6 @@ function renderXhsTrendCharts(trend){
       drawRiseChart(false);
     });
   },0);
-}
-
-/* ---------- 观众画像渲染(通用) ---------- */
-function renderPortraitCard(portrait){
-  if(!portrait) return '';
-  const g = portrait.gender || {};
-  const a = portrait.age || {};
-  const c = portrait.city || {};
-  const i = portrait.interest || {};
-  let h = `<div class="card"><div class="sub-title">👥 观众画像</div>`;
-  // 性别
-  if(g.male !== undefined){
-    h += `<div style="margin-bottom:12px"><div class="k-label" style="margin-bottom:6px">性别</div>
-      <div style="display:flex;gap:12px">${renderPieBar('男性', g.male, '#3D8AF5')}${renderPieBar('女性', g.female, '#FF7C8E')}</div></div>`;
-  }
-  // 年龄
-  if(a.items && a.items.length){
-    h += `<div style="margin-bottom:12px"><div class="k-label" style="margin-bottom:6px">年龄分布</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
-    a.items.forEach(item=>{
-      const hue = Math.round(220 - item.pct * 2.2);
-      h += `<span style="padding:3px 10px;border-radius:6px;font-size:12px;background:hsl(${hue},70%,92%);color:hsl(${hue},70%,30%)">${item.label} ${item.pct}%</span>`;
-    });
-    h += `</div></div>`;
-  }
-  // 城市 TOP5
-  if(c.items && c.items.length){
-    h += `<div style="margin-bottom:12px"><div class="k-label" style="margin-bottom:6px">城市 TOP</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
-    c.items.slice(0,5).forEach(item=>{
-      h += `<span style="padding:3px 10px;border-radius:6px;font-size:12px;background:var(--candy-blue-bg);color:var(--xhs)">${item.label} ${item.pct}%</span>`;
-    });
-    h += `</div></div>`;
-  }
-  // 兴趣 TOP5
-  if(i.items && i.items.length){
-    h += `<div style="margin-bottom:4px"><div class="k-label" style="margin-bottom:6px">兴趣偏好</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
-    i.items.slice(0,5).forEach(item=>{
-      h += `<span style="padding:3px 10px;border-radius:6px;font-size:12px;background:var(--candy-green-bg);color:var(--down)">${item.label} ${item.pct}%</span>`;
-    });
-    h += `</div></div>`;
-  }
-  if(portrait.conclusion){
-    h += `<div style="font-size:11px;color:var(--ink-3);margin-top:8px">${portrait.conclusion}</div>`;
-  }
-  h += `</div>`;
-  return h;
-  function renderPieBar(label, pct, color){
-    return `<div style="flex:1;text-align:center;padding:8px;border-radius:10px;background:${color}18">
-      <div style="font-size:20px;font-weight:700;color:${color}">${pct}%</div>
-      <div style="font-size:12px;color:var(--ink-3)">${label}</div>
-    </div>`;
-  }
 }
 
 /* ---------- 复盘洞察 ---------- */
