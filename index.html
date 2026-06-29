@@ -633,7 +633,7 @@ function renderWorksOverview(acc){
     // 笔记列表
     const card = el(`<div class="card"></div>`);
     card.appendChild(el(`<div class="sub-title">🔍 小红书笔记分析</div>`));
-    card.appendChild(el(`<div class="card" style="margin-bottom:14px"><div class="sub-title">📊 笔记流量概览</div>
+    card.appendChild(el(`<div class="card" style="margin-bottom:14px"><div class="sub-title">📊 笔记流量概览 <span style="font-size:11px;color:var(--ink-3);font-weight:400">· ${xhsData.period||'真实后台数据'}</span></div>
       <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
         <div class="kpi"><div class="k-label">封面点击率</div><div class="k-value"><span id="xhsAvgCtr">-</span><span class="u">%</span></div></div>
         <div class="kpi"><div class="k-label">平均观看时长</div><div class="k-value"><span id="xhsAvgDur">-</span><span class="u">秒</span></div></div>
@@ -1068,8 +1068,70 @@ function showXhsDetail(title){
     </div>`;
   }
 
-  content.innerHTML = html;
+
+  // 观众画像
+  const acc = DASHBOARD_DATA.data.tingzhairen;
+  const portrait = acc.audience?.xhs?.d7?.portrait;
+  if(portrait){
+    html += renderPortraitCard(portrait);
+  }
+
+    content.innerHTML = html;
   modal.style.display = "block";
+}
+
+/* ---------- 观众画像渲染(通用) ---------- */
+function renderPortraitCard(portrait){
+  if(!portrait) return '';
+  const g = portrait.gender || {};
+  const a = portrait.age || {};
+  const c = portrait.city || {};
+  const i = portrait.interest || {};
+  let h = `<div class="card"><div class="sub-title">👥 观众画像</div>`;
+  // 性别
+  if(g.male !== undefined){
+    h += `<div style="margin-bottom:12px"><div class="k-label" style="margin-bottom:6px">性别</div>
+      <div style="display:flex;gap:12px">${renderPieBar('男性', g.male, '#3D8AF5')}${renderPieBar('女性', g.female, '#FF7C8E')}</div></div>`;
+  }
+  // 年龄
+  if(a.items && a.items.length){
+    h += `<div style="margin-bottom:12px"><div class="k-label" style="margin-bottom:6px">年龄分布</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    a.items.forEach(item=>{
+      const hue = Math.round(220 - item.pct * 2.2);
+      h += `<span style="padding:3px 10px;border-radius:6px;font-size:12px;background:hsl(${hue},70%,92%);color:hsl(${hue},70%,30%)">${item.label} ${item.pct}%</span>`;
+    });
+    h += `</div></div>`;
+  }
+  // 城市 TOP5
+  if(c.items && c.items.length){
+    h += `<div style="margin-bottom:12px"><div class="k-label" style="margin-bottom:6px">城市 TOP</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    c.items.slice(0,5).forEach(item=>{
+      h += `<span style="padding:3px 10px;border-radius:6px;font-size:12px;background:var(--candy-blue-bg);color:var(--xhs)">${item.label} ${item.pct}%</span>`;
+    });
+    h += `</div></div>`;
+  }
+  // 兴趣 TOP5
+  if(i.items && i.items.length){
+    h += `<div style="margin-bottom:4px"><div class="k-label" style="margin-bottom:6px">兴趣偏好</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    i.items.slice(0,5).forEach(item=>{
+      h += `<span style="padding:3px 10px;border-radius:6px;font-size:12px;background:var(--candy-green-bg);color:var(--down)">${item.label} ${item.pct}%</span>`;
+    });
+    h += `</div></div>`;
+  }
+  if(portrait.conclusion){
+    h += `<div style="font-size:11px;color:var(--ink-3);margin-top:8px">${portrait.conclusion}</div>`;
+  }
+  h += `</div>`;
+  return h;
+  function renderPieBar(label, pct, color){
+    return `<div style="flex:1;text-align:center;padding:8px;border-radius:10px;background:${color}18">
+      <div style="font-size:20px;font-weight:700;color:${color}">${pct}%</div>
+      <div style="font-size:12px;color:var(--ink-3)">${label}</div>
+    </div>`;
+  }
 }
 
 /* ---------- 复盘洞察 ---------- */
