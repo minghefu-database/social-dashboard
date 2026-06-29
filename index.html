@@ -853,7 +853,7 @@ function showDetail(itemId, idx){
     }
   })();
 
-  // 观看来源
+   // 观看来源
   if(tf.playSource && tf.playSource.length){
     html += `<div class="sub-title" style="margin-top:14px">📊 观看来源</div>`;
     const maxPct = Math.max(...tf.playSource.map(s=>s.pct));
