@@ -633,13 +633,21 @@ function renderWorksOverview(acc){
     // 笔记列表
     const card = el(`<div class="card"></div>`);
     card.appendChild(el(`<div class="sub-title">🔍 小红书笔记分析</div>`));
-    card.appendChild(el(`<div class="card" style="margin-bottom:14px"><div class="sub-title">📊 笔记流量概览 <span style="font-size:11px;color:var(--ink-3);font-weight:400">· ${xhsData.period||'真实后台数据'}</span>
+    // 笔记流量概览 + 周期切换
+    const flowCard = el(`<div class="card" style="margin-bottom:14px">
+      <div class="sub-title" style="display:flex;align-items:center;gap:10px">📊 笔记流量概览
+        <span class="period-toggle" style="display:inline-flex;vertical-align:middle">
+          <button data-fp="d7" class="flow-period-btn active" style="padding:2px 10px;font-size:11px;cursor:pointer;border:1px solid var(--xhs);background:var(--xhs);color:#fff;border-radius:4px 0 0 4px">近 7 天</button>
+          <button data-fp="d30" class="flow-period-btn" style="padding:2px 10px;font-size:11px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink-2);border-radius:0 4px 4px 0">近 30 天</button>
+        </span>
+      </div>
       <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
         <div class="kpi"><div class="k-label">封面点击率</div><div class="k-value"><span class="xhsFlowCtr">-</span><span class="u">%</span></div></div>
         <div class="kpi"><div class="k-label">平均观看时长</div><div class="k-value"><span class="xhsFlowDur">-</span><span class="u">秒</span></div></div>
         <div class="kpi"><div class="k-label">观看总时长</div><div class="k-value"><span class="xhsFlowTime">-</span><span class="u">小时</span></div></div>
         <div class="kpi"><div class="k-label">视频完播率</div><div class="k-value"><span class="xhsFlowFull">-</span><span class="u">%</span></div></div>
-      </div></div>`));
+      </div></div>`);
+    card.appendChild(flowCard);
     card.appendChild(el(`<div style="overflow-x:auto">`));
     const table = el(`<table class="flow-table"></table>`);
     const thead = el(`<thead><tr>
@@ -667,13 +675,6 @@ function renderWorksOverview(acc){
         // 计算笔记流量概览均值
     if(xhsData.itemList && xhsData.itemDetails){
       let totalCtr = 0, totalDur = 0, totalFull = 0, ctrCount = 0, durCount = 0, fullCount = 0;
-      // 观看总时长用账号级的 note_detail_new 数据(毫秒合计)
-      let totalViewTime = 0;
-      const ovXhs = DASHBOARD_DATA.data.tingzhairen.overview.xhs;
-      const curP = typeof curPeriod !== 'undefined' ? curPeriod : 'd7';
-      if(ovXhs[curP] && ovXhs[curP].totalViewTimeMs){
-        totalViewTime = ovXhs[curP].totalViewTimeMs / 1000 / 3600;
-      }
       xhsData.itemList.forEach(it=>{
         const d = xhsData.itemDetails[it.title];
         if(d && d.overview){
@@ -696,10 +697,31 @@ function renderWorksOverview(acc){
       const setClass = (cls, val)=>{
         wrap.querySelectorAll('.' + cls).forEach(el => { el.textContent = val; });
       };
-      setClass('xhsFlowCtr', ctrCount ? (totalCtr/ctrCount).toFixed(1) : '-');
-      setClass('xhsFlowDur', durCount ? Math.round(totalDur/durCount) : '-');
-      setClass('xhsFlowTime', totalViewTime ? totalViewTime.toFixed(1) : '-');
-      setClass('xhsFlowFull', fullCount ? (totalFull/fullCount).toFixed(1) : '-');
+      // 首次渲染
+      let fp = 'd7';
+      const drawFlow = (period)=>{
+        const ovXhs = DASHBOARD_DATA.data.tingzhairen.overview.xhs;
+        const pd = ovXhs[period];
+        setClass('xhsFlowCtr', ctrCount ? (totalCtr/ctrCount).toFixed(1) : '-');
+        setClass('xhsFlowDur', durCount ? Math.round(totalDur/durCount) : '-');
+        setClass('xhsFlowTime', (pd && pd.flowTotalHours) ? pd.flowTotalHours : '-');
+        setClass('xhsFlowFull', fullCount ? (totalFull/fullCount).toFixed(1) : '-');
+      };
+      drawFlow(fp);
+      // 周期切换绑定
+      setTimeout(()=>{
+        wrap.querySelectorAll('.flow-period-btn').forEach(btn => {
+          btn.addEventListener('click', ()=>{
+            fp = btn.dataset.fp;
+            wrap.querySelectorAll('.flow-period-btn').forEach(b => {
+              b.style.cssText = b===btn
+                ? 'padding:2px 10px;font-size:11px;cursor:pointer;border:1px solid var(--xhs);background:var(--xhs);color:#fff;border-radius:4px 0 0 4px'
+                : 'padding:2px 10px;font-size:11px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink-2);border-radius:0 4px 4px 0';
+            });
+            drawFlow(fp);
+          });
+        });
+      }, 0);
     }
     return wrap;
   }
