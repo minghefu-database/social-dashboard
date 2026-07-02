@@ -502,6 +502,13 @@ function overviewBlock(pf, d){
   } else if(d.trendStale){
     card.appendChild(el(`<div class="section-label" style="margin-top:18px">浏览趋势 ${STALE}</div>`));
   }
+  if(pf === "xhs" && d.timeslot && d.timeslot.values && d.timeslot.values.length){
+    const slotId = "overview_slot_" + pf;
+    card.appendChild(el(`<div class="section-label" style="margin-top:18px">观看时段 · ${d.timeslot.period}
+      <span class="est-tag" style="color:#0a7d54;background:#e3f8ef">✓ 真实后台数据</span></div>`));
+    card.appendChild(el(`<div class="slot-wrap"><canvas id="${slotId}"></canvas></div>`));
+    requestAnimationFrame(()=>drawOverviewTimeslot(slotId, d.timeslot));
+  }
   block.appendChild(card);
   return block;
 }
@@ -516,6 +523,24 @@ function drawTrend(id, t, pf){
       plugins:{legend:{display:false}},
       scales:{ x:{grid:{display:false},ticks:{font:{size:10},color:"#8f959e",maxRotation:0,autoSkip:true,maxTicksLimit:8}},
                y:{grid:{color:"#f2f3f5"},ticks:{font:{size:10},color:"#8f959e"},beginAtZero:true} } }
+  }));
+}
+
+function drawOverviewTimeslot(id, data){
+  const canvas = document.getElementById(id);
+  if(!canvas) return;
+  charts.push(new Chart(canvas, {
+    type:"bar",
+    data:{ labels:data.labels, datasets:[{ data:data.values, backgroundColor:"rgba(255,77,109,.72)",
+      borderColor:"#FF4D6D", borderWidth:1, borderRadius:3, maxBarThickness:24 }]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      interaction:{mode:"index",intersect:false},
+      plugins:{ legend:{display:false}, tooltip:{displayColors:false,
+        callbacks:{ title:(items)=>`${items[0].label}:00 – ${items[0].label}:59`,
+          label:(ctx)=>`观看 ${Number(ctx.parsed.y).toLocaleString()}` } } },
+      scales:{ x:{grid:{display:false},ticks:{font:{size:11},color:"#949aa3",autoSkip:false,
+                 callback:function(v,i){ return i%2===0 ? this.getLabelForValue(v)+"时" : ""; }}},
+               y:{grid:{color:"#f2f3f5"},ticks:{font:{size:11},color:"#949aa3"},beginAtZero:true} } }
   }));
 }
 
@@ -634,7 +659,7 @@ function renderWorksOverview(acc){
     const card = el(`<div class="card"></div>`);
     card.appendChild(el(`<div class="sub-title">🔍 小红书笔记分析</div>`));
     card.appendChild(el(`<div class="card" style="margin-bottom:14px"><div class="sub-title">📊 笔记流量概览 <span style="font-size:11px;color:var(--ink-3);font-weight:400">· ${xhsData.period||'真实后台数据'}</span></div>
-      <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi-grid">
         <div class="kpi"><div class="k-label">封面点击率</div><div class="k-value"><span id="xhsAvgCtr">-</span><span class="u">%</span></div></div>
         <div class="kpi"><div class="k-label">平均观看时长</div><div class="k-value"><span id="xhsAvgDur">-</span><span class="u">秒</span></div></div>
         <div class="kpi"><div class="k-label">观看总时长</div><div class="k-value"><span id="xhsTotalTime">-</span><span class="u">小时</span></div></div>
@@ -750,7 +775,7 @@ function renderWorksOverview(acc){
 
   // ③ 数据说明
   const card3 = el(`<div class="card"><div class="insight-note" style="border:0;margin:0">
-    <b>数据来源：</b>抖音创作者中心「流量分析」页面 API（item_analysis），统计周期 06-09~06-26。<br>
+    <b>数据来源：</b>抖音创作者中心「流量分析」页面 API（item_analysis），数据更新至 07-01。<br>
     <b>封面点击率：</b>封面展示后被点击的比例，>60% 算优秀。<br>
     <b>5秒完播率：</b>内容留存的核心指标，>50% 为佳。<br>
     <b>2秒跳出率：</b>观众在前2秒就划走，越低越好。
@@ -785,7 +810,7 @@ function showDetail(itemId, idx){
 
   // === 板块1: 单篇作品总览 ===
   html += `<div class="card"><div class="sub-title">📋 作品总览</div>`;
-  html += `<div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
+  html += `<div class="kpi-grid" style="margin-bottom:14px">
     <div class="kpi"><div class="k-label">播放量</div><div class="k-value">${ov.playCount}</div></div>
     <div class="kpi"><div class="k-label">点赞</div><div class="k-value">${ov.likeCount}</div></div>
     <div class="kpi"><div class="k-label">评论</div><div class="k-value">${ov.commentCount}</div></div>
@@ -837,6 +862,7 @@ function showDetail(itemId, idx){
       "容易提升成绩的位置，打造好的学习环境": { replay: "3:30-3:40", skip: "2:00-2:10" },
       "让你家拥有一个S型身材的家居布局": { replay: "3:40-3:50", skip: "3:10-3:20" },
       "不要迷信了！寺庙的秘密被可视化了": { replay: "2:24-2:32", skip: "1:36-1:44" },
+      "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨": { replay: "3:27-3:36", skip: "3:00-3:09" },
     };
     const sd = skipMap[item.title];
     if(sd){
@@ -1030,7 +1056,7 @@ function showXhsDetail(title){
   const ov = detail.overview || {};
   const ps = detail.playSource || [];
   const sug = detail.suggestion;
-  const trend = detail.trend;
+  const trend = detail.trend || ov.trend;
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
     <span style="font-size:13px;color:var(--ink-3)">阅读 ${item.plays} · 点赞 ${item.likes}</span>
@@ -1041,6 +1067,9 @@ function showXhsDetail(title){
 
   // 流量分析
   html += xhsTrafficCards(ov);
+
+  // 每小时观看/涨粉趋势和离开总结插入在核心数据之后
+  html += `<div id="xhsTrendAnchor"></div>`;
 
   // 观看来源
   if(ps.length){
@@ -1059,7 +1088,7 @@ function showXhsDetail(title){
 
   // 观众画像 (抖音同款样式)
   const acc = DASHBOARD_DATA.data.tingzhairen;
-  const portrait = acc.audience?.xhs?.d7?.portrait;
+  const portrait = detail.portrait || acc.audience?.xhs?.d7?.portrait;
   if(portrait){
     html += renderXhsPortrait(portrait);
   }
@@ -1076,34 +1105,43 @@ function showXhsDetail(title){
 
   // 渲染趋势图
   if(trend && trend.daily && trend.daily.view && trend.daily.view.length){
-    renderXhsTrendCharts(trend);
+    renderXhsTrendCharts(trend, detail.leaveSummary, document.getElementById("xhsTrendAnchor"));
   }
 }
 
 /* ---- 作品总览卡片 ---- */
+function xhsFanSub(value, unit="%", label="粉丝占比"){
+  if(value === undefined || value === null || value === ""){
+    return `<div class="k-delta flat" style="color:var(--ink-3)">未获取最新数据</div>`;
+  }
+  return `<div class="k-delta flat" style="color:var(--ink-3)">${label} ${value}${unit}</div>`;
+}
+
 function xhsOverviewCards(ov){
+  const f = ov.fans || {};
   return `<div class="card"><div class="sub-title">📋 作品总览</div>
-    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
-      <div class="kpi"><div class="k-label">曝光数</div><div class="k-value">${ov.impl_count||"?"}</div></div>
-      <div class="kpi"><div class="k-label">阅读量</div><div class="k-value">${ov.view_count||"?"}</div></div>
-      <div class="kpi"><div class="k-label">点赞</div><div class="k-value">${ov.like_count||"?"}</div></div>
-      <div class="kpi"><div class="k-label">评论</div><div class="k-value">${ov.comment_count||"?"}</div></div>
-      <div class="kpi"><div class="k-label">收藏</div><div class="k-value">${ov.collect_count||"?"}</div></div>
-      <div class="kpi"><div class="k-label">分享</div><div class="k-value">${ov.share_count||"?"}</div></div>
+    <div class="kpi-grid" style="margin-bottom:14px">
+      <div class="kpi"><div class="k-label">曝光数</div><div class="k-value">${ov.impl_count||"?"}</div>${xhsFanSub(f.impl)}</div>
+      <div class="kpi"><div class="k-label">阅读量</div><div class="k-value">${ov.view_count||"?"}</div>${xhsFanSub(f.view)}</div>
+      <div class="kpi"><div class="k-label">点赞</div><div class="k-value">${ov.like_count||"?"}</div>${xhsFanSub(f.like)}</div>
+      <div class="kpi"><div class="k-label">评论</div><div class="k-value">${ov.comment_count||"?"}</div>${xhsFanSub(f.comment)}</div>
+      <div class="kpi"><div class="k-label">收藏</div><div class="k-value">${ov.collect_count||"?"}</div>${xhsFanSub(f.collect)}</div>
+      <div class="kpi"><div class="k-label">分享</div><div class="k-value">${ov.share_count||"?"}</div>${xhsFanSub(f.share)}</div>
       <div class="kpi"><div class="k-label">涨粉</div><div class="k-value">${ov.rise_fans_count||"?"}</div></div>
-      <div class="kpi"><div class="k-label">平均观看时长</div><div class="k-value">${ov.view_time_avg||"?"}<span class="u">秒</span></div></div>
+      <div class="kpi"><div class="k-label">平均观看时长</div><div class="k-value">${ov.view_time_avg||"?"}<span class="u">秒</span></div>${xhsFanSub(f.viewTime,"秒","粉丝")}</div>
     </div></div>`;
 }
 
 /* ---- 流量分析卡片 ---- */
 function xhsTrafficCards(ov){
+  const f = ov.fans || {};
   let h = `<div class="card"><div class="sub-title">🔎 流量分析</div>`;
   if(ov.cover_click_rate || ov.finish5s_rate || ov.full_view_rate || ov.exit_view2s_rate){
-    h += `<div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">
-      <div class="kpi"><div class="k-label">封面点击率</div><div class="k-value">${ov.cover_click_rate}<span class="u">%</span></div></div>
-      <div class="kpi"><div class="k-label">5秒完播率</div><div class="k-value">${ov.finish5s_rate}<span class="u">%</span></div></div>
-      <div class="kpi"><div class="k-label">完整完播率</div><div class="k-value">${ov.full_view_rate}<span class="u">%</span></div></div>
-      <div class="kpi"><div class="k-label">2秒跳出率</div><div class="k-value">${ov.exit_view2s_rate}<span class="u">%</span></div></div>
+    h += `<div class="kpi-grid" style="margin-bottom:12px">
+      <div class="kpi"><div class="k-label">封面点击率</div><div class="k-value">${ov.cover_click_rate}<span class="u">%</span></div>${xhsFanSub(f.coverClick,"%","粉丝")}</div>
+      <div class="kpi"><div class="k-label">5秒完播率</div><div class="k-value">${ov.finish5s_rate}<span class="u">%</span></div>${xhsFanSub(f.finish5s,"%","粉丝")}</div>
+      <div class="kpi"><div class="k-label">完整完播率</div><div class="k-value">${ov.full_view_rate}<span class="u">%</span></div>${xhsFanSub(f.fullView,"%","粉丝")}</div>
+      <div class="kpi"><div class="k-label">2秒跳出率</div><div class="k-value">${ov.exit_view2s_rate}<span class="u">%</span></div>${xhsFanSub(f.exit2s,"%","粉丝")}</div>
     </div>`;
   }
   h += `</div>`;
@@ -1122,36 +1160,23 @@ function renderXhsPortrait(p){
         <div style="flex:1;text-align:center;padding:10px;border-radius:10px;background:#FF7C8E18"><div style="font-size:22px;font-weight:700;color:#FF7C8E">${g.female}%</div><div style="font-size:12px;color:var(--ink-3);margin-top:2px">女性</div></div>
       </div></div>`;
   }
-  // 年龄
+  // 年龄：与小红书创作者中心一致，使用横向柱形图
   const a = p.age || {};
   if(a.items && a.items.length){
-    h += `<div style="margin-bottom:10px"><div class="k-label" style="margin-bottom:6px">年龄分布</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
-    a.items.forEach(item=>{
-      const hue = Math.round(220 - item.pct * 2.2);
-      h += `<span style="padding:4px 12px;border-radius:8px;font-size:12px;background:hsl(${hue},70%,92%);color:hsl(${hue},70%,30%);font-weight:600">${item.label} ${item.pct}%</span>`;
-    });
-    h += `</div></div>`;
+    h += `<div style="margin-bottom:14px"><div class="k-label" style="margin-bottom:8px">年龄分布</div>
+      ${barListHtml(a.items, "var(--xhs)")}</div>`;
   }
-  // 城市 TOP
+  // 城市分布
   const c = p.city || {};
   if(c.items && c.items.length){
-    h += `<div style="margin-bottom:10px"><div class="k-label" style="margin-bottom:6px">城市 TOP</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
-    c.items.slice(0,5).forEach(item=>{
-      h += `<span style="padding:4px 12px;border-radius:8px;font-size:12px;background:var(--candy-blue-bg);color:var(--xhs);font-weight:600">${item.label} ${item.pct}%</span>`;
-    });
-    h += `</div></div>`;
+    h += `<div style="margin-bottom:14px"><div class="k-label" style="margin-bottom:8px">城市分布</div>
+      ${barListHtml(c.items, "var(--xhs)")}</div>`;
   }
-  // 兴趣 TOP
+  // 兴趣分布
   const i = p.interest || {};
   if(i.items && i.items.length){
-    h += `<div style="margin-bottom:4px"><div class="k-label" style="margin-bottom:6px">兴趣偏好</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
-    i.items.slice(0,5).forEach(item=>{
-      h += `<span style="padding:4px 12px;border-radius:8px;font-size:12px;background:var(--candy-green-bg);color:var(--down);font-weight:600">${item.label} ${item.pct}%</span>`;
-    });
-    h += `</div></div>`;
+    h += `<div style="margin-bottom:4px"><div class="k-label" style="margin-bottom:8px">兴趣分布</div>
+      ${barListHtml(i.items, "var(--xhs)")}</div>`;
   }
   h += `</div>`;
   return h;
@@ -1181,8 +1206,8 @@ function xhsSuggestionCard(sug, vColors, vBg){
 }
 
 /* ---- 渲染三个趋势图 ---- */
-function renderXhsTrendCharts(trend){
-  const modal = document.getElementById("detailContent");
+function renderXhsTrendCharts(trend, leaveSummary, target){
+  const modal = target || document.getElementById("detailContent");
   const hourlyView = trend.hourly?.view || [];
   const dailyView = trend.daily?.view || [];
   const dailyExit = trend.daily?.exit_view2s || [];
@@ -1274,6 +1299,12 @@ function renderXhsTrendCharts(trend){
     exitCanvas.id = "chartExitTrend";
     exitWrap.appendChild(exitCanvas);
     exitCard.appendChild(exitWrap);
+    if(leaveSummary){
+      const summary = document.createElement("div");
+      summary.style.cssText = "font-size:13px;color:var(--ink-2);margin-top:10px;padding:9px 12px;background:var(--xhs-soft);border-radius:8px";
+      summary.textContent = leaveSummary;
+      exitCard.appendChild(summary);
+    }
     modal.appendChild(exitCard);
     const exitCtx = document.getElementById("chartExitTrend");
     if(exitCtx){
@@ -1298,6 +1329,11 @@ function renderXhsTrendCharts(trend){
       });
       detailCharts.push(exitChart);
     }
+  } else if(leaveSummary){
+    const exitCard = document.createElement("div");
+    exitCard.className = "card";
+    exitCard.innerHTML = `<div class="sub-title">🚪 离开趋势</div><div style="font-size:13px;color:var(--ink-2);padding:9px 12px;background:var(--xhs-soft);border-radius:8px">${leaveSummary}</div>`;
+    modal.appendChild(exitCard);
   }
 
   // --- ③ 涨粉趋势 ---
