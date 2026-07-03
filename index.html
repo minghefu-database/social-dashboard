@@ -507,7 +507,7 @@ function overviewBlock(pf, d){
     const slotId = "overview_slot_" + pf;
     const slotTag = pf === "xhs"
       ? `<span class="est-tag" style="color:#0a7d54;background:#e3f8ef">✓ 真实后台数据</span>`
-      : `<span class="est-tag" style="color:#2568c9;background:var(--dy-soft)">根据 ${timeslot.coveredWorks} 篇作品小时趋势汇总</span>`;
+      : `<span class="est-tag" style="color:#2568c9;background:var(--dy-soft)">覆盖 ${timeslot.coveredWorks} 篇有效小时数据作品</span>`;
     card.appendChild(el(`<div class="section-label" style="margin-top:18px">观看时段 · ${timeslot.period}
       ${slotTag}</div>`));
     card.appendChild(el(`<div class="slot-wrap"><canvas id="${slotId}"></canvas></div>`));
