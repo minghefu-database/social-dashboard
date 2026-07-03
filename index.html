@@ -502,16 +502,71 @@ function overviewBlock(pf, d){
   } else if(d.trendStale){
     card.appendChild(el(`<div class="section-label" style="margin-top:18px">浏览趋势 ${STALE}</div>`));
   }
-  if(pf === "xhs" && d.timeslot && d.timeslot.values && d.timeslot.values.length){
+  const timeslot = pf === "xhs" ? d.timeslot : deriveDyViewingTimeslot(curPeriod);
+  if(timeslot && timeslot.values && timeslot.values.some(v=>v>0)){
     const slotId = "overview_slot_" + pf;
-    card.appendChild(el(`<div class="section-label" style="margin-top:18px">观看时段 · ${d.timeslot.period}
-      <span class="est-tag" style="color:#0a7d54;background:#e3f8ef">✓ 真实后台数据</span></div>`));
+    const slotTag = pf === "xhs"
+      ? `<span class="est-tag" style="color:#0a7d54;background:#e3f8ef">✓ 真实后台数据</span>`
+      : `<span class="est-tag" style="color:#2568c9;background:var(--dy-soft)">根据 ${timeslot.coveredWorks} 篇作品小时趋势汇总</span>`;
+    card.appendChild(el(`<div class="section-label" style="margin-top:18px">观看时段 · ${timeslot.period}
+      ${slotTag}</div>`));
     card.appendChild(el(`<div class="slot-wrap"><canvas id="${slotId}"></canvas></div>`));
-    requestAnimationFrame(()=>drawOverviewTimeslot(slotId, d.timeslot));
+    requestAnimationFrame(()=>drawOverviewTimeslot(slotId, timeslot, pf));
+  } else if(pf === "dy"){
+    card.appendChild(el(`<div class="section-label" style="margin-top:18px">观看时段
+      <span class="stale-tag">未获取可计算的作品小时趋势</span></div>`));
   }
   block.appendChild(card);
   return block;
 }
+
+function deriveDyViewingTimeslot(periodKey){
+  const dayCount = periodKey === "d7" ? 7 : 30;
+  const endDate = new Date(`${D.updatedAt}T00:00:00Z`);
+  if(Number.isNaN(endDate.getTime())) return null;
+  const startDate = new Date(endDate);
+  startDate.setUTCDate(startDate.getUTCDate() - dayCount + 1);
+
+  const isoDate = date => date.toISOString().slice(0,10);
+  const shortDate = date => isoDate(date).slice(5);
+  const startIso = isoDate(startDate);
+  const endIso = isoDate(endDate);
+  const values = Array(24).fill(0);
+  const details = D.data[curAccount]?.flowAnalysis?.dy?.itemDetails || {};
+  let coveredWorks = 0;
+  let coveredPoints = 0;
+
+  Object.values(details).forEach(detail=>{
+    const trend = detail?.overview?.viewTrend;
+    const labels = trend?.labels || [];
+    const trendValues = trend?.values || [];
+    let workCovered = false;
+    const pointCount = Math.min(labels.length, trendValues.length);
+
+    for(let i=0;i<pointCount;i++){
+      const match = String(labels[i]).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{1,2}):/);
+      const value = Number(trendValues[i]);
+      if(!match || !Number.isFinite(value) || value < 0) continue;
+      const pointDate = match[1];
+      const hour = Number(match[2]);
+      if(pointDate < startIso || pointDate > endIso || hour < 0 || hour > 23) continue;
+      values[hour] += value;
+      coveredPoints++;
+      workCovered = true;
+    }
+    if(workCovered) coveredWorks++;
+  });
+
+  return {
+    period:`${shortDate(startDate)} 至 ${shortDate(endDate)}`,
+    labels:Array.from({length:24},(_,hour)=>String(hour)),
+    values,
+    coveredWorks,
+    coveredPoints,
+    derived:true
+  };
+}
+
 function drawTrend(id, t, pf){
   const color = pf==="xhs" ? "#FF4D6D" : "#4C8DFF";
   charts.push(new Chart(document.getElementById(id),{
@@ -526,13 +581,15 @@ function drawTrend(id, t, pf){
   }));
 }
 
-function drawOverviewTimeslot(id, data){
+function drawOverviewTimeslot(id, data, pf="xhs"){
   const canvas = document.getElementById(id);
   if(!canvas) return;
+  const color = pf === "xhs" ? "#FF4D6D" : "#4C8DFF";
+  const fill = pf === "xhs" ? "rgba(255,77,109,.72)" : "rgba(76,141,255,.72)";
   charts.push(new Chart(canvas, {
     type:"bar",
-    data:{ labels:data.labels, datasets:[{ data:data.values, backgroundColor:"rgba(255,77,109,.72)",
-      borderColor:"#FF4D6D", borderWidth:1, borderRadius:3, maxBarThickness:24 }]},
+    data:{ labels:data.labels, datasets:[{ data:data.values, backgroundColor:fill,
+      borderColor:color, borderWidth:1, borderRadius:3, maxBarThickness:24 }]},
     options:{ responsive:true, maintainAspectRatio:false,
       interaction:{mode:"index",intersect:false},
       plugins:{ legend:{display:false}, tooltip:{displayColors:false,
