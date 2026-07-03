@@ -238,6 +238,27 @@
   .act-stats{font-size:11px;color:var(--ink-3);margin-top:7px;display:flex;gap:14px;flex-wrap:wrap}
   .act-stats b{color:var(--ink);font-weight:600}
 
+  /* 单篇作品智能复盘 */
+  .smart-summary{font-size:13px;line-height:1.7;color:var(--ink-2);padding:12px 14px;
+    background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:10px;margin-bottom:14px}
+  .smart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .smart-block{padding:12px 14px;background:rgba(255,255,255,.66);border-radius:10px;border:1px solid var(--line)}
+  .smart-block-title{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+  .smart-list{display:flex;flex-direction:column;gap:7px}
+  .smart-item{font-size:12px;line-height:1.55;color:var(--ink-2);padding-left:14px;position:relative}
+  .smart-item:before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--ink-3)}
+  .smart-block.good .smart-item:before{background:var(--down)}
+  .smart-block.risk .smart-item:before{background:var(--up)}
+  .smart-actions{counter-reset:smart-action;display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+  .smart-action{counter-increment:smart-action;font-size:13px;line-height:1.55;color:var(--ink-2);padding:9px 12px 9px 38px;
+    background:rgba(255,255,255,.76);border:1px solid var(--line);border-radius:9px;position:relative}
+  .smart-action:before{content:counter(smart-action);position:absolute;left:11px;top:9px;width:18px;height:18px;border-radius:5px;
+    display:flex;align-items:center;justify-content:center;color:#fff;background:var(--dy);font-size:11px;font-weight:700}
+  .smart-action.xhs:before{background:var(--xhs)}
+  .smart-watch{display:flex;flex-wrap:wrap;gap:7px}
+  .smart-watch span{font-size:11px;color:var(--ink-2);background:rgba(255,255,255,.76);border:1px solid var(--line);border-radius:7px;padding:5px 9px}
+  .smart-manual{font-size:11px;line-height:1.6;color:var(--ink-3);margin-top:12px;padding-top:10px;border-top:1px dashed rgba(0,0,0,.1)}
+
   @media(max-width:900px){
     .app{flex-direction:column}
     .sidebar{width:100%;height:auto;position:static;border-right:0;border-bottom:1px solid var(--line)}
@@ -248,6 +269,7 @@
     .base-grid{grid-template-columns:repeat(2,1fr)}
     .w-stats{grid-template-columns:repeat(2,1fr)}
     .grid-2{grid-template-columns:1fr}
+    .smart-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -1040,31 +1062,8 @@ function showDetail(itemId, idx){
     html += `</div></div>`;
   }
 
-  // === 板块5: 优化建议 ===
-  if(detail.suggestion){
-    const sug = detail.suggestion;
-    const vColors = {保留:"var(--down)",优化:"#E89C00",观察:"var(--ink-3)",砍:"var(--up)"};
-    const vBg = {保留:"var(--candy-green-bg)",优化:"var(--candy-yellow-bg)",观察:"var(--bg)",砍:"var(--candy-pink-bg)"};
-    const sevLabels = {critical:"严重",warning:"需关注",suggest:"建议",info:"正常",success:"优秀"};
-    const sevColors = {critical:"var(--up)",warning:"#E89C00",suggest:"var(--dy)",info:"var(--ink-3)",success:"var(--down)"};
-    html += `<div class="card" style="border-left:4px solid ${vColors[sug.verdict]||'var(--dy)'};background:${vBg[sug.verdict]||'var(--bg)'}">
-      <div class="sub-title" style="display:flex;align-items:center;gap:10px">
-        💡 优化建议
-        <span style="font-size:12px;padding:2px 10px;border-radius:6px;color:#fff;background:${vColors[sug.verdict]||'var(--dy)'}">${sug.verdict}</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">`;
-    sug.issues.forEach(issue=>{
-      html += `<div style="display:flex;align-items:flex-start;gap:8px;font-size:13px">
-        <span style="flex-shrink:0;padding:1px 8px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:${sevColors[issue.severity]||'var(--ink-3)'}">${sevLabels[issue.severity]||issue.severity}</span>
-        <span><b>${issue.label}</b>：${issue.detail}</span>
-      </div>`;
-    });
-    html += `</div>
-      <div style="font-size:13px;padding:10px 14px;background:var(--card);border-radius:8px;border:1px solid var(--line)">
-        <b>建议行动：</b>${sug.action}
-      </div>
-    </div>`;
-  }
+  // === 板块5: 智能优化建议（始终位于详情最底部） ===
+  html += smartSuggestionCard(buildSmartSuggestion("dy", item, detail, d), "dy");
 
   content.innerHTML = html;
   modal.style.display = "block";
@@ -1112,7 +1111,6 @@ function showXhsDetail(title){
 
   const ov = detail.overview || {};
   const ps = detail.playSource || [];
-  const sug = detail.suggestion;
   const trend = detail.trend || ov.trend;
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
@@ -1150,12 +1148,8 @@ function showXhsDetail(title){
     html += renderXhsPortrait(portrait);
   }
 
-  // 优化建议 (移到最底下)
-  if(sug){
-    const vColors = {保留:"var(--down)",优化:"#E89C00",观察:"var(--ink-3)",砍:"var(--up)"};
-    const vBg = {保留:"var(--candy-green-bg)",优化:"var(--candy-yellow-bg)",观察:"var(--bg)",砍:"var(--candy-pink-bg)"};
-    html += xhsSuggestionCard(sug, vColors, vBg);
-  }
+  // 智能优化建议（始终位于详情最底部）
+  html += smartSuggestionCard(buildSmartSuggestion("xhs", item, detail, xhsData), "xhs");
 
   content.innerHTML = html;
   modal.style.display = "block";
@@ -1239,27 +1233,219 @@ function renderXhsPortrait(p){
   return h;
 }
 
-/* ---- 优化建议卡片 ---- */
-function xhsSuggestionCard(sug, vColors, vBg){
-  const sevLabels = {critical:"严重",warning:"需关注",suggest:"建议",info:"正常",success:"优秀"};
-  const sevColors = {critical:"var(--up)",warning:"#E89C00",suggest:"var(--dy)",info:"var(--ink-3)",success:"var(--down)"};
-  let h = `<div class="card" style="border-left:4px solid ${vColors[sug.verdict]||'var(--xhs)'};background:${vBg[sug.verdict]||'var(--bg)'}">
-    <div class="sub-title" style="display:flex;align-items:center;gap:10px">💡 优化建议
-      <span style="font-size:12px;padding:2px 10px;border-radius:6px;color:#fff;background:${vColors[sug.verdict]||'var(--xhs)'}">${sug.verdict}</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">`;
-  sug.issues.forEach(issue=>{
-    h += `<div style="display:flex;align-items:flex-start;gap:8px;font-size:13px">
-      <span style="flex-shrink:0;padding:1px 8px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:${sevColors[issue.severity]||'var(--ink-3)'}">${sevLabels[issue.severity]||issue.severity}</span>
-      <span><b>${issue.label}</b>：${issue.detail}</span>
-    </div>`;
+/* ---- 单篇作品智能复盘 ---- */
+function smartNumber(value){
+  if(value === undefined || value === null || value === "") return null;
+  if(typeof value === "number") return Number.isFinite(value) ? value : null;
+  const text = String(value).trim();
+  const parsed = Number.parseFloat(text.replace(/,/g,""));
+  if(!Number.isFinite(parsed)) return null;
+  if(text.includes("万")) return parsed * 10000;
+  if(text.includes("亿")) return parsed * 100000000;
+  return parsed;
+}
+
+function smartMedian(values){
+  const nums = values.filter(Number.isFinite).sort((a,b)=>a-b);
+  if(!nums.length) return null;
+  const middle = Math.floor(nums.length/2);
+  return nums.length%2 ? nums[middle] : (nums[middle-1]+nums[middle])/2;
+}
+
+function smartCount(value){
+  if(!Number.isFinite(value)) return "—";
+  if(value >= 100000000) return `${(value/100000000).toFixed(1).replace(/\.0$/,"")}亿`;
+  if(value >= 10000) return `${(value/10000).toFixed(1).replace(/\.0$/,"")}万`;
+  return Math.round(value).toLocaleString();
+}
+
+function smartMetricValue(value, unit){
+  if(!Number.isFinite(value)) return "—";
+  const digits = unit === "秒" ? 1 : 2;
+  return `${Number(value.toFixed(digits))}${unit}`;
+}
+
+function normalizeWorkMetrics(pf, item, detail){
+  const ov = detail?.overview || {};
+  const plays = smartNumber(pf === "xhs" ? ov.view_count : ov.playCount) || 0;
+  const likes = smartNumber(pf === "xhs" ? ov.like_count : ov.likeCount) || 0;
+  const comments = smartNumber(pf === "xhs" ? ov.comment_count : ov.commentCount) || 0;
+  const collects = smartNumber(pf === "xhs" ? ov.collect_count : ov.favoriteCount) || 0;
+  const shares = smartNumber(pf === "xhs" ? ov.share_count : ov.shareCount) || 0;
+  const fans = smartNumber(pf === "xhs" ? ov.rise_fans_count : ov.subscribeCount) || 0;
+  const rate = value => plays > 0 ? value / plays * 100 : null;
+
+  return {
+    plays,
+    avg:smartNumber(pf === "xhs" ? ov.view_time_avg : ov.avgViewSecond),
+    ctr:smartNumber(pf === "xhs" ? ov.cover_click_rate : item?.clickRate),
+    finish5:smartNumber(pf === "xhs" ? ov.finish5s_rate : item?.finishRate5s),
+    full:smartNumber(pf === "xhs" ? ov.full_view_rate : ov.completionRate),
+    bounce:smartNumber(pf === "xhs" ? ov.exit_view2s_rate : item?.bounce2s),
+    engagement:rate(likes + comments + collects + shares),
+    collectRate:rate(collects),
+    shareRate:rate(shares),
+    fanRate:rate(fans)
+  };
+}
+
+function smartMetricDefinitions(pf){
+  const shared = [
+    {key:"finish5",label:"5秒完播率",unit:"%",better:"up",action:"把结论、冲突或最反常识的一句话提前到前5秒，删掉寒暄和重复铺垫。"},
+    {key:"bounce",label:"2秒跳出率",unit:"%",better:"down",action:"开场首帧直接出现核心画面和结果，用一句明确问题代替背景介绍。"},
+    {key:"full",label:"完整完播率",unit:"%",better:"up",action:"压缩中段信息密度较低的部分，每20至30秒安排一次新信息或视觉变化。"},
+    {key:"avg",label:pf === "xhs" ? "平均观看时长" : "平均播放时长",unit:"秒",better:"up",action:"复查观看趋势的回落位置，将关键论点前移，并缩短相邻案例之间的过渡。"},
+    {key:"engagement",label:"综合互动率",unit:"%",better:"up",action:"结尾增加一个与观点直接相关的二选一问题，引导观众表达立场。"},
+    {key:"collectRate",label:"收藏率",unit:"%",better:"up",action:"把核心方法整理成可截图的三点清单，提高内容的工具属性和收藏理由。"},
+    {key:"shareRate",label:"分享率",unit:"%",better:"up",action:"保留可直接转发给家人朋友的判断句，并在结论处给出明确适用场景。"},
+    {key:"fanRate",label:"涨粉转化率",unit:"%",better:"up",action:"在价值最高的段落后补一句账号长期提供的内容方向，再自然引导关注。"}
+  ];
+  const cover = {key:"ctr",label:"封面点击率",unit:"%",better:"up",action:pf === "xhs"
+    ? "用一个明确结果和一个核心冲突重做封面标题，避免同时出现多个信息重点。"
+    : "针对需要封面承接的入口，统一标题承诺与首帧结果，减少点击后的预期落差。"};
+  return [cover,...shared];
+}
+
+function smartFallbackBenchmarks(pf){
+  return pf === "xhs"
+    ? {plays:10000,ctr:12,finish5:60,full:12,bounce:23,avg:90,engagement:4,collectRate:1.5,shareRate:.5,fanRate:1}
+    : {plays:10000,ctr:60,finish5:50,full:5,bounce:30,avg:30,engagement:3,collectRate:1,shareRate:.5,fanRate:.7};
+}
+
+function smartBenchmarks(pf, dataset){
+  const works = (dataset?.itemList || []).map(item=>{
+    const detail = dataset.itemDetails?.[item.title];
+    return detail ? normalizeWorkMetrics(pf,item,detail) : null;
+  }).filter(Boolean);
+  const fallback = smartFallbackBenchmarks(pf);
+  const keys = ["plays",...smartMetricDefinitions(pf).map(def=>def.key)];
+  const result = {};
+  keys.forEach(key=>{
+    const median = works.length > 1 ? smartMedian(works.map(work=>work[key])) : null;
+    result[key] = Number.isFinite(median) ? median : fallback[key];
   });
-  h += `</div>
-    <div style="font-size:13px;padding:10px 14px;background:var(--card);border-radius:8px;border:1px solid var(--line)">
-      <b>建议行动：</b>${sug.action}
+  return result;
+}
+
+function buildSmartSuggestion(pf, item, detail, dataset){
+  const platformName = pf === "xhs" ? "小红书" : "抖音";
+  const trafficName = pf === "xhs" ? "阅读" : "播放";
+  const manual = detail?.suggestion || null;
+  const metrics = normalizeWorkMetrics(pf,item,detail);
+  const benchmarks = smartBenchmarks(pf,dataset);
+  const strengths = [];
+  const priorities = [];
+
+  smartMetricDefinitions(pf).forEach(def=>{
+    const value = metrics[def.key];
+    const baseline = benchmarks[def.key];
+    if(!Number.isFinite(value) || !Number.isFinite(baseline)) return;
+    const scale = Math.max(Math.abs(baseline),.1);
+    const rawDiff = (value-baseline)/scale;
+    const score = def.better === "down" ? -rawDiff : rawDiff;
+    if(Math.abs(score) < .08) return;
+    const favorableDirection = def.better === "down" ? "低于" : "高于";
+    const unfavorableDirection = def.better === "down" ? "高于" : "低于";
+    const observation = {
+      key:def.key,
+      label:def.label,
+      value,
+      baseline,
+      unit:def.unit,
+      score,
+      action:def.action,
+      detail:`${smartMetricValue(value,def.unit)}，${score>0?favorableDirection:unfavorableDirection}当前${platformName}作品中位数 ${smartMetricValue(baseline,def.unit)}`
+    };
+    (score>0 ? strengths : priorities).push(observation);
+  });
+
+  const playBaseline = benchmarks.plays || 1;
+  const playRatio = metrics.plays/playBaseline;
+  if(playRatio >= 1.08){
+    strengths.push({key:"plays",label:`${trafficName}规模`,value:metrics.plays,baseline:playBaseline,unit:"",score:playRatio-1,
+      detail:`${smartCount(metrics.plays)}，达到当前${platformName}作品中位数的 ${Number(playRatio.toFixed(1))} 倍`});
+  }else if(playRatio <= .92){
+    priorities.push({key:"plays",label:`${trafficName}规模`,value:metrics.plays,baseline:playBaseline,unit:"",score:playRatio-1,
+      action:pf === "xhs" ? "优先测试封面和标题的单变量版本，确认曝光不足还是点击不足。" : "优先复用高播放作品的选题结构和开场方式，再测试标题与首帧表达。",
+      detail:`${smartCount(metrics.plays)}，约为当前${platformName}作品中位数的 ${Math.round(playRatio*100)}%`});
+  }
+
+  strengths.sort((a,b)=>Math.abs(b.score)-Math.abs(a.score));
+  priorities.sort((a,b)=>Math.abs(b.score)-Math.abs(a.score));
+  const topStrengths = strengths.slice(0,3);
+  const topPriorities = priorities.slice(0,3);
+  const validMetricCount = smartMetricDefinitions(pf).filter(def=>Number.isFinite(metrics[def.key])).length;
+
+  let verdict = manual?.verdict;
+  if(!verdict){
+    if(validMetricCount < 4) verdict = "观察";
+    else if(playRatio >= 1.5 && priorities.length <= 2) verdict = "保留";
+    else if(playRatio < .45 && priorities.length >= 3) verdict = "砍";
+    else if(priorities.length >= 2) verdict = "优化";
+    else verdict = "观察";
+  }
+
+  const playComparison = playRatio >= 1
+    ? `达到当前${platformName}作品中位数的 ${Number(playRatio.toFixed(1))} 倍`
+    : `约为当前${platformName}作品中位数的 ${Math.round(playRatio*100)}%`;
+  const strengthNames = topStrengths.length ? topStrengths.map(item=>item.label).join("、") : "暂未形成明显领先项";
+  const priorityNames = topPriorities.length ? topPriorities.map(item=>item.label).join("、") : "目前没有显著短板";
+  const summary = `本篇${trafficName} ${smartCount(metrics.plays)}，${playComparison}。优势集中在${strengthNames}；本轮复盘优先关注${priorityNames}。`;
+
+  const actions = [];
+  if(manual?.action) actions.push(`延续原有人工判断：${manual.action}`);
+  topPriorities.forEach(item=>{ if(item.action && !actions.includes(item.action)) actions.push(item.action); });
+  const fallbackActions = pf === "xhs"
+    ? ["下一篇保留本篇表现最好的信息点，只改一个变量做封面或开头对照测试。","发布后24小时记录封面点击、5秒完播和涨粉转化，确认流量卡在哪一层。","把评论区高频问题整理成下一篇选题，形成连续内容。"]
+    : ["下一篇延续本篇有效选题，只改首帧或前5秒做单变量测试。","发布后24小时重点记录2秒跳出、5秒完播和分享率，定位推荐流量损失环节。","将评论区高频疑问写进下一版脚本，形成更明确的观看动机。"];
+  fallbackActions.forEach(action=>{ if(actions.length<3 && !actions.includes(action)) actions.push(action); });
+
+  const watchSource = [...topPriorities,...topStrengths];
+  const watch = [];
+  watchSource.forEach(item=>{
+    if(watch.length>=3 || watch.some(existing=>existing.key===item.key)) return;
+    const current = item.key === "plays" ? smartCount(item.value) : smartMetricValue(item.value,item.unit);
+    const baseline = item.key === "plays" ? smartCount(item.baseline) : smartMetricValue(item.baseline,item.unit);
+    watch.push({key:item.key,text:`${item.label} ${current} · 中位数 ${baseline}`});
+  });
+
+  const manualLabels = (manual?.issues || []).map(issue=>issue.label).filter(Boolean);
+  return {
+    verdict,
+    summary,
+    strengths:topStrengths.length ? topStrengths : [{label:"数据仍在积累",detail:"当前指标接近账号常态，暂未形成明显领先项。"}],
+    priorities:topPriorities.length ? topPriorities : [{label:"保持观察",detail:"当前没有显著短板，继续观察后续流量和转粉变化。"}],
+    actions:actions.slice(0,3),
+    watch,
+    manualNote:manualLabels.length ? `人工复盘标签：${manualLabels.join("、")}。` : "",
+    platform:pf
+  };
+}
+
+function smartSuggestionCard(suggestion, pf){
+  const vColors = {保留:"var(--down)",优化:"#E89C00",观察:"var(--ink-3)",砍:"var(--up)"};
+  const vBg = {保留:"var(--candy-green-bg)",优化:"var(--candy-yellow-bg)",观察:"var(--bg)",砍:"var(--candy-pink-bg)"};
+  const accent = vColors[suggestion.verdict] || (pf === "xhs" ? "var(--xhs)" : "var(--dy)");
+  let html = `<div class="card" style="border-left:4px solid ${accent};background:${vBg[suggestion.verdict]||'var(--bg)'}">
+    <div class="sub-title" style="display:flex;align-items:center;gap:10px">💡 智能优化建议
+      <span style="font-size:12px;padding:2px 10px;border-radius:6px;color:#fff;background:${accent}">${suggestion.verdict}</span>
     </div>
+    <div class="smart-summary"><b>数据复盘：</b>${suggestion.summary}</div>
+    <div class="smart-grid">
+      <div class="smart-block good"><div class="smart-block-title">做得好的</div><div class="smart-list">
+        ${suggestion.strengths.map(item=>`<div class="smart-item"><b>${item.label}</b>：${item.detail}</div>`).join("")}
+      </div></div>
+      <div class="smart-block risk"><div class="smart-block-title">优先优化</div><div class="smart-list">
+        ${suggestion.priorities.map(item=>`<div class="smart-item"><b>${item.label}</b>：${item.detail}</div>`).join("")}
+      </div></div>
+    </div>
+    <div class="smart-block-title">下一篇行动建议</div>
+    <div class="smart-actions">${suggestion.actions.map(action=>`<div class="smart-action ${pf}">${action}</div>`).join("")}</div>
+    <div class="smart-block-title">下次复盘重点</div>
+    <div class="smart-watch">${suggestion.watch.map(item=>`<span>${item.text}</span>`).join("")}</div>
+    ${suggestion.manualNote?`<div class="smart-manual">${suggestion.manualNote}</div>`:""}
   </div>`;
-  return h;
+  return html;
 }
 
 /* ---- 渲染三个趋势图 ---- */
