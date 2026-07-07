@@ -60940,3 +60940,56 @@ const DATA_REFRESH_2026_07_08_FULL_BOARD_FIX = {
   });
 })(DASHBOARD_DATA, DATA_REFRESH_2026_07_08_FULL_BOARD_FIX);
 /* === DATA_REFRESH_2026_07_08_FULL_BOARD_FIX_END === */
+
+/* === DATA_REFRESH_2026_07_08_NORTHSTAR_ADVICE_START === */
+const DATA_REFRESH_2026_07_08_NORTHSTAR_ADVICE = {
+  "lastUpdate": "2026-07-08 02:35",
+  "playbook": {
+    "northStar": {
+      "title": "留存质量",
+      "sub": "抖音看前5秒留存，小红书看账号概览完播率；完整完播率作为抖音参考指标",
+      "items": [
+        {
+          "pf": "dy",
+          "label": "抖音条均5秒完播率",
+          "value": 46.4,
+          "unit": "%",
+          "peer": null,
+          "peerLabel": null,
+          "evaluation": "良好，开头留人能力达标",
+          "advice": "继续把结论、冲突或视觉变化前置到前3-5秒；同时盯住2秒跳出率和平均播放时长，避免只有开头强但中段掉人。",
+          "references": [
+            { "label": "条均完整完播率", "value": 4.6, "unit": "%" },
+            { "label": "条均2秒跳出率", "value": 29.7, "unit": "%" },
+            { "label": "条均播放时长", "value": 31, "unit": "秒" }
+          ]
+        },
+        {
+          "pf": "xhs",
+          "label": "小红书完播率",
+          "value": 10.7,
+          "unit": "%",
+          "peer": null,
+          "peerLabel": null,
+          "evaluation": "偏低，需要提升中后段留存",
+          "advice": "小红书不建议改用5秒完播率做北极星；账号判断更应该看封面点击、观看时长和完播率组合。后续笔记要更早给结论，减少铺垫，把可自测/可复用的方法提前。",
+          "references": [
+            { "label": "封面点击率", "value": 12.9, "unit": "%" },
+            { "label": "平均观看时长", "value": 71.2, "unit": "秒" },
+            { "label": "观看数", "value": 3.7, "unit": "万" }
+          ]
+        }
+      ]
+    }
+  }
+};
+(function applyDataRefresh(target, source) {
+  Object.keys(source).forEach(function(key) {
+    const value = source[key];
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      if (!target[key] || typeof target[key] !== "object" || Array.isArray(target[key])) target[key] = {};
+      applyDataRefresh(target[key], value);
+    } else { target[key] = value; }
+  });
+})(DASHBOARD_DATA, DATA_REFRESH_2026_07_08_NORTHSTAR_ADVICE);
+/* === DATA_REFRESH_2026_07_08_NORTHSTAR_ADVICE_END === */
