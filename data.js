@@ -57349,3 +57349,389 @@ const DATA_REFRESH_2026_07_07_DY_DETAILS = {
   });
 })(DASHBOARD_DATA, DATA_REFRESH_2026_07_07_DY_DETAILS);
 /* === DATA_REFRESH_2026_07_07_DY_DETAILS_END === */
+/* === DATA_REFRESH_2026_07_07_ORDER_AND_DETAIL_FIX_START === */
+const DATA_REFRESH_2026_07_07_ORDER_AND_DETAIL_FIX = {
+  "updatedAt": "2026-07-07",
+  "lastUpdate": "2026-07-07 20:43",
+  "data": {
+    "tingzhairen": {
+      "flowAnalysis": {
+        "xhs": {
+          "itemList": [
+            {
+              "title": "第1集｜找到家里最\"旺\"你的位置",
+              "date": "2026-07-04",
+              "plays": "2102",
+              "avgDur": "101秒",
+              "ctr": "9.1%",
+              "likes": "55",
+              "favs": "47",
+              "comments": "3",
+              "shares": "7",
+              "imps": "3976",
+              "fans": "22",
+              "reward": ""
+            },
+            {
+              "title": "家中手办正在悄悄改变你的认知！🚨",
+              "date": "2026-06-30",
+              "plays": "2.5万",
+              "avgDur": "61.1秒",
+              "ctr": "10.1%",
+              "likes": "473",
+              "favs": "318",
+              "comments": "72",
+              "shares": "266",
+              "imps": "2.6万",
+              "fans": "201",
+              "reward": ""
+            },
+            {
+              "title": "酒店选房避雷指南, 国歌护体，睡稳心安。",
+              "date": "2026-06-26",
+              "plays": "1237",
+              "avgDur": "59.4秒",
+              "ctr": "11.5%",
+              "likes": "27",
+              "favs": "13",
+              "comments": "8",
+              "shares": "9",
+              "imps": "3651",
+              "fans": "8",
+              "reward": ""
+            },
+            {
+              "title": "家居布局干货｜可能影响女性的格局",
+              "date": "2026-06-22",
+              "plays": "4.7万",
+              "avgDur": "103.6秒",
+              "ctr": "14.1%",
+              "likes": "2352",
+              "favs": "2550",
+              "comments": "212",
+              "shares": "418",
+              "imps": "23.1万",
+              "fans": "2217",
+              "reward": ""
+            },
+            {
+              "title": "现代家中男尊女卑的实际理解, 很实用!",
+              "date": "2026-06-18",
+              "plays": "2509",
+              "avgDur": "100.2秒",
+              "ctr": "14.4%",
+              "likes": "72",
+              "favs": "37",
+              "comments": "17",
+              "shares": "10",
+              "imps": "6435",
+              "fans": "40",
+              "reward": ""
+            },
+            {
+              "title": "容易提升成绩的位置，打造好的学习环境",
+              "date": "2026-06-15",
+              "plays": "4611",
+              "avgDur": "120.7秒",
+              "ctr": "15.1%",
+              "likes": "166",
+              "favs": "185",
+              "comments": "19",
+              "shares": "29",
+              "imps": "2.1万",
+              "fans": "151",
+              "reward": ""
+            },
+            {
+              "title": "让你家拥有一个S型身材的家居布局",
+              "date": "2026-06-11",
+              "plays": "25.7万",
+              "avgDur": "111.7秒",
+              "ctr": "10.2%",
+              "likes": "3569",
+              "favs": "2028",
+              "comments": "228",
+              "shares": "482",
+              "imps": "34.4万",
+              "fans": "4546",
+              "reward": ""
+            },
+            {
+              "title": "不要迷信了！寺庙的秘密被可视化了",
+              "date": "2026-06-07",
+              "plays": "3189",
+              "avgDur": "75.3秒",
+              "ctr": "12.5%",
+              "likes": "87",
+              "favs": "49",
+              "comments": "4",
+              "shares": "21",
+              "imps": "1.4万",
+              "fans": "61",
+              "reward": ""
+            }
+          ]
+        },
+        "dy": {
+          "itemList": [
+            {
+              "id": "7658276437728391281",
+              "title": "找到家里最\"旺\"你的位置，不用找\"大师\"。",
+              "date": "2026-07-04",
+              "plays": "7036",
+              "avgDur": "24.1秒",
+              "clickRate": "100%",
+              "finishRate5s": "41.6%",
+              "bounce2s": "29.3%",
+              "like": "184",
+              "share": "21",
+              "reward": ""
+            },
+            {
+              "id": "7656787757771445349",
+              "title": "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨",
+              "date": "2026-06-30",
+              "plays": "9.2万",
+              "avgDur": "33.6秒",
+              "clickRate": "99.7%",
+              "finishRate5s": "49.1%",
+              "bounce2s": "27.9%",
+              "like": "1505",
+              "share": "1680",
+              "reward": ""
+            },
+            {
+              "id": "7655548439049549669",
+              "title": "酒店选房避雷指南, 国歌护体，睡稳心安。",
+              "date": "2026-06-26",
+              "plays": "7060",
+              "avgDur": "29秒",
+              "clickRate": "100%",
+              "finishRate5s": "44.6%",
+              "bounce2s": "26%",
+              "like": "158",
+              "share": "56",
+              "reward": "扶持 1638"
+            },
+            {
+              "id": "7654027606584993701",
+              "title": "不利家中女性的格局, 三招解决！",
+              "date": "2026-06-22",
+              "plays": "4.7万",
+              "avgDur": "26.5秒",
+              "clickRate": "47.1%",
+              "finishRate5s": "48%",
+              "bounce2s": "32.7%",
+              "like": "1232",
+              "share": "315",
+              "reward": "扶持 1.1万"
+            },
+            {
+              "id": "7652581925735312633",
+              "title": "现代家中男尊女卑的实际理解, 很实用!",
+              "date": "2026-06-18",
+              "plays": "18.2万",
+              "avgDur": "25.3秒",
+              "clickRate": "100%",
+              "finishRate5s": "44.6%",
+              "bounce2s": "32.9%",
+              "like": "4016",
+              "share": "1013",
+              "reward": "扶持 7万"
+            },
+            {
+              "id": "7651578818137783675",
+              "title": "容易提升成绩的位置，打造好的学习环境",
+              "date": "2026-06-15",
+              "plays": "8875",
+              "avgDur": "42秒",
+              "clickRate": "100%",
+              "finishRate5s": "44.7%",
+              "bounce2s": "32.7%",
+              "like": "211",
+              "share": "57",
+              "reward": "扶持 2474"
+            },
+            {
+              "id": "7649980868819643877",
+              "title": "让你家拥有一个S型身材的家居布局",
+              "date": "2026-06-11",
+              "plays": "137万",
+              "avgDur": "35.5秒",
+              "clickRate": "55.9%",
+              "finishRate5s": "54.5%",
+              "bounce2s": "27.7%",
+              "like": "2.2万",
+              "share": "9870",
+              "reward": "扶持 54.1万"
+            },
+            {
+              "id": "7649243282254738609",
+              "title": "不要迷信了！寺庙的秘密被可视化了",
+              "date": "2026-06-09",
+              "plays": "3万",
+              "avgDur": "33.2秒",
+              "clickRate": "100%",
+              "finishRate5s": "44.8%",
+              "bounce2s": "28.6%",
+              "like": "592",
+              "share": "128",
+              "reward": "扶持 1.1万"
+            }
+          ],
+          "itemDetails": {
+            "找到家里最\"旺\"你的位置，不用找\"大师\"。": {
+              "overview": {
+                "playCount": "7036",
+                "likeCount": "184",
+                "commentCount": "7",
+                "shareCount": "21",
+                "favoriteCount": "84",
+                "subscribeCount": "27",
+                "avgViewSecond": "24.1",
+                "completionRate": "1.6"
+              },
+              "traffic": {
+                "chapterAbstract": "通过用身体的直觉去感受，寻找家中最“旺”自己的位置：先避开背后无靠、明堂闭塞和动线直冲的格局，再从噪音方向、自然光与夜间照明入手调整空间。无需复杂工具，闭眼、呼吸、观察念头与身体反应，重新发现家的舒适节奏。",
+                "chapterClickRate": {
+                  "chapters": [
+                    {
+                      "timestamp": 0,
+                      "timestamp_display": "0:00",
+                      "desc": "引言",
+                      "detail": ""
+                    },
+                    {
+                      "timestamp": 30685,
+                      "timestamp_display": "0:30",
+                      "desc": "粉丝的家",
+                      "detail": ""
+                    },
+                    {
+                      "timestamp": 85391,
+                      "timestamp_display": "1:25",
+                      "desc": "如何找“旺”位",
+                      "detail": "凭直觉去找到能卸下疲惫、屏蔽喧嚣、安放情绪的专属旺位。"
+                    },
+                    {
+                      "timestamp": 137230,
+                      "timestamp_display": "2:17",
+                      "desc": "三大避雷要点",
+                      "detail": "避开三个空间雷区：排查背后无靠、明堂闭塞、动线直冲这些会让你感到不安和内耗的地方。"
+                    },
+                    {
+                      "timestamp": 215160,
+                      "timestamp_display": "3:35",
+                      "desc": "核心布局思维",
+                      "detail": "噪音、杂物和昏暗光线会与身体产生“频率共振”，诱发焦虑念头。"
+                    },
+                    {
+                      "timestamp": 266846,
+                      "timestamp_display": "4:26",
+                      "desc": "布局实操",
+                      "detail": "辨别左右两侧的噪音，用木质或金属乐器的声音进行平衡。"
+                    },
+                    {
+                      "timestamp": 346519,
+                      "timestamp_display": "5:46",
+                      "desc": "总结",
+                      "detail": "顺应自然规律调整空间，打造真正适合自己的生活方式。"
+                    }
+                  ],
+                  "top_chapters": []
+                }
+              },
+              "wordCloud": [],
+              "audience": {
+                "gender": {
+                  "male": 43,
+                  "female": 57
+                },
+                "age": [
+                  {
+                    "label": "<23",
+                    "pct": 14
+                  },
+                  {
+                    "label": "24-30",
+                    "pct": 35
+                  },
+                  {
+                    "label": "31-40",
+                    "pct": 43
+                  },
+                  {
+                    "label": "41-50",
+                    "pct": 6
+                  },
+                  {
+                    "label": ">50",
+                    "pct": 2
+                  }
+                ],
+                "province": [
+                  {
+                    "label": "广东",
+                    "pct": 12
+                  },
+                  {
+                    "label": "山东",
+                    "pct": 9
+                  },
+                  {
+                    "label": "江苏",
+                    "pct": 6
+                  },
+                  {
+                    "label": "河南",
+                    "pct": 6
+                  },
+                  {
+                    "label": "河北",
+                    "pct": 6
+                  },
+                  {
+                    "label": "四川",
+                    "pct": 5
+                  },
+                  {
+                    "label": "浙江",
+                    "pct": 5
+                  },
+                  {
+                    "label": "北京",
+                    "pct": 4
+                  }
+                ],
+                "city": [],
+                "career": [],
+                "active": [],
+                "similarAuthors": [],
+                "preferTopics": []
+              },
+              "suggestion": {
+                "verdict": "观察",
+                "action": "这条作为“家中旺位”系列开篇，后续优先补抓单篇观看来源和观众画像，再判断是选题承接问题还是首段留存问题。",
+                "issues": [
+                  {
+                    "label": "单篇来源/画像待补抓"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+(function applyDataRefresh(target, source) {
+  Object.keys(source).forEach(function(key) {
+    const value = source[key];
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      if (!target[key] || typeof target[key] !== "object" || Array.isArray(target[key])) target[key] = {};
+      applyDataRefresh(target[key], value);
+    } else { target[key] = value; }
+  });
+})(DASHBOARD_DATA, DATA_REFRESH_2026_07_07_ORDER_AND_DETAIL_FIX);
+/* === DATA_REFRESH_2026_07_07_ORDER_AND_DETAIL_FIX_END === */
