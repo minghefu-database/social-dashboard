@@ -1,1 +1,4 @@
 .DS_Store
+tools/.auth/
+tools/output/
+tools/auto-refresh/node_modules/

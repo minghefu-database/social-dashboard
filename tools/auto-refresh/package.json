@@ -1,0 +1,18 @@
+{
+  "name": "social-dashboard-auto-refresh",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-only collector for creator-center analytics data.",
+  "scripts": {
+    "check": "node --check src/collect.js && node --check src/config.js && node --check src/sanitize.js",
+    "collect": "node src/collect.js",
+    "collect:xhs": "node src/collect.js --platform=xhs",
+    "collect:dy": "node src/collect.js --platform=dy",
+    "login": "node src/collect.js --login-only"
+  },
+  "dependencies": {
+    "playwright": "^1.45.0"
+  },
+  "devDependencies": {}
+}
