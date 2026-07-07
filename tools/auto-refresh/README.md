@@ -30,6 +30,12 @@ npx playwright install chromium
 npm run collect
 ```
 
+或者在 Finder 里双击：
+
+```text
+update-dashboard.command
+```
+
 浏览器打开后，如果页面要求登录，请你自己扫码、验证码或确认登录。登录完成后回到终端按回车，采集器会继续监听接口数据。
 
 ## 只采集一个平台

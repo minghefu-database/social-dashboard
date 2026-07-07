@@ -22,7 +22,7 @@ social-dashboard/
 也可以试用本地一键更新器：
 
 ```
-tools/auto-refresh/更新数据库.command
+tools/auto-refresh/update-dashboard.command
 ```
 
 这个工具会打开本机浏览器采集创作者中心接口数据，当前试运行版只输出脱敏后的采集结果，不会自动覆盖线上看板。
