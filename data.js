@@ -59860,3 +59860,67 @@ const DATA_REFRESH_2026_07_08_LATEST = {
   });
 })(DASHBOARD_DATA, DATA_REFRESH_2026_07_08_LATEST);
 /* === DATA_REFRESH_2026_07_08_LATEST_END === */
+
+/* === DATA_REFRESH_2026_07_08_MANUAL_FIX_START === */
+const DATA_REFRESH_2026_07_08_MANUAL_FIX = {
+  "lastUpdate": "2026-07-08 02:02",
+  "data": {
+    "tingzhairen": {
+      "audience": {
+        "dy": {
+          "d7": {
+            "base": [
+              { "label": "总粉丝", "value": "16395", "sub": "近7日 +1024" },
+              { "label": "7日净增粉丝", "value": "1024", "sub": "取关 129" },
+              { "label": "7日点赞", "value": "2683", "sub": "" },
+              { "label": "7日分享", "value": "1796", "sub": "" },
+              { "label": "7日评论", "value": "201", "sub": "" }
+            ]
+          },
+          "d30": {
+            "base": [
+              { "label": "总粉丝", "value": "16395", "sub": "近30日 +16020" },
+              { "label": "30日净增粉丝", "value": "16020", "sub": "取关 870" },
+              { "label": "30日点赞", "value": "29413", "sub": "" },
+              { "label": "30日分享", "value": "12632", "sub": "" },
+              { "label": "30日评论", "value": "1182", "sub": "" }
+            ]
+          }
+        }
+      },
+      "flowAnalysis": {
+        "dy": {
+          "itemDetails": {
+            "找到家里最\"旺\"你的位置，不用找\"大师\"。": {
+              "audience": {
+                "preferTopics": [
+                  { "name": "随拍 25%" },
+                  { "name": "美食 10%" },
+                  { "name": "汽车 10%" },
+                  { "name": "时尚 10%" },
+                  { "name": "音乐 10%" },
+                  { "name": "教育校园 5%" },
+                  { "name": "体育 5%" },
+                  { "name": "电视剧 5%" },
+                  { "name": "文化 5%" },
+                  { "name": "二次元 5%" },
+                  { "name": "财经 5%" }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+(function applyDataRefresh(target, source) {
+  Object.keys(source).forEach(function(key) {
+    const value = source[key];
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      if (!target[key] || typeof target[key] !== "object" || Array.isArray(target[key])) target[key] = {};
+      applyDataRefresh(target[key], value);
+    } else { target[key] = value; }
+  });
+})(DASHBOARD_DATA, DATA_REFRESH_2026_07_08_MANUAL_FIX);
+/* === DATA_REFRESH_2026_07_08_MANUAL_FIX_END === */
