@@ -1009,6 +1009,9 @@ function showDetail(itemId, idx){
       html += `<span class="word-chip">${k.keyword} <b>${k.percent}%</b></span>`;
     });
     html += `</div>`;
+  } else if(tf.inspireSearchNote){
+    html += `<div class="sub-title" style="margin-top:10px">💡 启发搜索</div>
+      <div style="font-size:12px;color:var(--ink-3);padding:8px 10px;background:var(--bg);border-radius:8px">${tf.inspireSearchNote}</div>`;
   }
 
   html += `</div>`;
