@@ -1703,6 +1703,9 @@ function audienceBlock(pf, d){
   // 基础数据 + 粉丝增长
   const c1 = el(`<div class="card"></div>`);
   c1.appendChild(el(`<div class="sub-title">基础数据</div>`));
+  if(sub.note){
+    c1.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">${sub.note}</div>`));
+  }
   const bg = el(`<div class="base-grid"></div>`);
   sub.base.forEach(b=>bg.appendChild(el(`<div class="base-card">
     <div class="bc-label">${b.label}</div><div class="bc-value">${b.value}</div>
@@ -1886,10 +1889,10 @@ function renderInsight(acc){
   const wrap = el(`<div></div>`);
   
   if(curPlatform==="dy"){
-    wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。数据来自作品概览中的6篇作品。</div>`));
+    wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>抖音</b>口径（5秒完播率）。数据来自当前作品概览列表。</div>`));
     renderDyInsight(acc, wrap);
   } else {
-    wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>小红书</b>口径（封面点击率×阅读量×平均观看时长）。数据来自作品概览中的6篇笔记。</div>`));
+    wrap.appendChild(el(`<div class="insight-note" style="border:0;margin:0 0 10px">复盘洞察按<b>小红书</b>口径（封面点击率×阅读量×平均观看时长）。数据来自当前笔记概览列表。</div>`));
     renderXhsInsight(acc, wrap);
   }
   return wrap;
