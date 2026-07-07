@@ -43,6 +43,33 @@ export function sanitizeHeaders(headers) {
   return clean;
 }
 
+export function sanitizeUrl(rawUrl) {
+  let parsed;
+  try {
+    parsed = new URL(rawUrl);
+  } catch {
+    return rawUrl;
+  }
+
+  for (const [key, value] of parsed.searchParams.entries()) {
+    if (isSensitiveKey(key) || looksSensitiveString(value)) {
+      parsed.searchParams.set(key, "[REDACTED]");
+    }
+  }
+
+  parsed.hash = "";
+  return parsed.toString();
+}
+
+export function sanitizePostData(value) {
+  if (!value) return null;
+  try {
+    return sanitize(JSON.parse(value));
+  } catch {
+    return looksSensitiveString(value) ? "[REDACTED]" : value.slice(0, 20000);
+  }
+}
+
 export function isSensitiveKey(key) {
   return sensitiveKeyPatterns.some((pattern) => pattern.test(key));
 }

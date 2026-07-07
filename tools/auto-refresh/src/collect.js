@@ -1,11 +1,12 @@
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
 import path from "node:path";
 import process from "node:process";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { chromium } from "playwright";
 import { defaultCollectMs, paths, platforms } from "./config.js";
-import { sanitize, sanitizeHeaders } from "./sanitize.js";
+import { sanitize, sanitizeHeaders, sanitizePostData, sanitizeUrl } from "./sanitize.js";
 
 const args = parseArgs(process.argv.slice(2));
 const selectedPlatforms = resolvePlatforms(args.platform);
@@ -43,7 +44,11 @@ async function main() {
     for (const platformKey of selectedPlatforms) {
       const platform = platforms[platformKey];
       const page = await browserContext.newPage();
-      const records = [];
+      const captureState = {
+        records: [],
+        pending: new Set(),
+        nextIndex: 0,
+      };
       summary.platforms[platformKey] = {
         label: platform.label,
         startUrl: platform.startUrl,
@@ -55,7 +60,9 @@ async function main() {
       };
 
       page.on("response", async (response) => {
-        await captureResponse({ platformKey, platform, response, records, summary });
+        const task = captureResponse({ platformKey, platform, response, captureState, summary });
+        captureState.pending.add(task);
+        task.finally(() => captureState.pending.delete(task));
       });
 
       console.log(`\n[${platform.label}] 打开 ${platform.startUrl}`);
@@ -74,7 +81,8 @@ async function main() {
 
       console.log(`[${platform.label}] 开始监听 ${Math.round(collectMs / 1000)} 秒。你可以在浏览器里点开账号概览、作品列表、单篇作品分析、观众画像等页面。`);
       await page.waitForTimeout(collectMs);
-      console.log(`[${platform.label}] 监听结束，捕获 ${records.length} 条数据。`);
+      await Promise.allSettled([...captureState.pending]);
+      console.log(`[${platform.label}] 监听结束，捕获 ${captureState.records.length} 条数据。`);
       await page.close();
     }
 
@@ -87,7 +95,7 @@ async function main() {
   }
 }
 
-async function captureResponse({ platformKey, platform, response, records, summary }) {
+async function captureResponse({ platformKey, platform, response, captureState, summary }) {
   const url = response.url();
   if (!isRelevantUrl(platform, url)) {
     summary.platforms[platformKey].skipped += 1;
@@ -116,22 +124,26 @@ async function captureResponse({ platformKey, platform, response, records, summa
     platform: platformKey,
     platformLabel: platform.label,
     status: response.status(),
-    url: stripUrlSearch(url),
+    url: sanitizeUrl(url),
+    urlNoQuery: stripUrlSearch(url),
     method: response.request().method(),
+    requestHeaders: sanitizeHeaders(response.request().headers()),
+    requestPostData: sanitizePostData(response.request().postData()),
     responseHeaders: sanitizeHeaders(headers),
     tags,
     body: cleanBody,
   };
 
-  const index = records.length + 1;
-  const filename = `${String(index).padStart(3, "0")}-${slugify(tags[0] || "data")}-${Date.now()}.json`;
+  const index = ++captureState.nextIndex;
+  const urlHash = crypto.createHash("sha1").update(url).digest("hex").slice(0, 8);
+  const filename = `${String(index).padStart(3, "0")}-${slugify(tags[0] || "data")}-${urlHash}-${Date.now()}.json`;
   const platformDir = path.join(paths.latestRawDir, platformKey);
   const outputFile = path.join(platformDir, filename);
 
   await fs.mkdir(platformDir, { recursive: true });
   await fs.writeFile(outputFile, `${JSON.stringify(record, null, 2)}\n`, "utf8");
 
-  records.push(record);
+  captureState.records.push(record);
   summary.platforms[platformKey].captured += 1;
   summary.platforms[platformKey].files.push(path.relative(paths.repoRoot, outputFile));
   for (const tag of tags) {
