@@ -485,7 +485,10 @@ function renderOverview(acc){
 
   // 板块2 观看来源
   wrap.appendChild(sectionLabel("② 观看来源"));
-  wrap.appendChild(sourceBlock(curPlatform, acc.source[curPlatform][curPeriod]));
+  const sourceData = curPlatform === "dy"
+    ? (deriveDyAccountSource(curPeriod) || acc.source[curPlatform][curPeriod])
+    : acc.source[curPlatform][curPeriod];
+  wrap.appendChild(sourceBlock(curPlatform, sourceData));
 
   // 板块3 作品排行榜
   wrap.appendChild(sectionLabel("③ 作品排行榜 · 新增观看最多"));
@@ -501,6 +504,9 @@ function pfTitle(pf, extraHtml=""){
 function emptyCard(pf){
   return el(`<div class="platform-block">${pfTitle(pf)}
     <div class="card"><div class="empty"><div class="ei">📭</div>未更新最新数据</div></div></div>`);
+}
+function pendingDataNote(text="平台数据还未更新"){
+  return `<div style="font-size:12px;color:var(--ink-3);padding:8px 10px;background:var(--bg);border-radius:8px">${text}</div>`;
 }
 
 function overviewBlock(pf, d){
@@ -627,13 +633,82 @@ function drawOverviewTimeslot(id, data, pf="xhs"){
   }));
 }
 
+function normalizeDySourceLabel(label){
+  const map = {
+    homepage_hot:"推荐页", recommend:"推荐页", "推荐页":"推荐页",
+    search:"搜索", "搜索":"搜索",
+    homepage:"个人主页", personal_homepage:"个人主页", "个人主页":"个人主页",
+    follow:"关注", "关注":"关注",
+    other:"其他", "其他":"其他",
+    compilation:"合集", "合集":"合集",
+    message:"消息", "消息":"消息",
+    familiar:"熟人", "熟人":"熟人"
+  };
+  return map[label] || label || "其他";
+}
+function deriveDyAccountSource(periodKey){
+  const dayCount = periodKey === "d7" ? 7 : 30;
+  const endDate = new Date(`${D.updatedAt}T00:00:00Z`);
+  if(Number.isNaN(endDate.getTime())) return null;
+  const startDate = new Date(endDate);
+  startDate.setUTCDate(startDate.getUTCDate() - dayCount + 1);
+  const isoDate = date => date.toISOString().slice(0,10);
+  const shortDate = date => isoDate(date).slice(5);
+  const startIso = isoDate(startDate);
+  const endIso = isoDate(endDate);
+  const flow = D.data[curAccount]?.flowAnalysis?.dy;
+  const itemList = flow?.itemList || [];
+  const details = flow?.itemDetails || {};
+  const totals = new Map();
+  let totalWeight = 0;
+  let coveredWorks = 0;
+
+  itemList.forEach(item=>{
+    if(item.date < startIso || item.date > endIso) return;
+    const playSource = details[item.title]?.traffic?.playSource || [];
+    if(!playSource.length) return;
+    const sourceSum = playSource.reduce((sum, src)=>{
+      const pct = Number(src.pct);
+      return Number.isFinite(pct) && pct > 0 ? sum + pct : sum;
+    }, 0);
+    if(!sourceSum) return;
+    const weight = Math.max(parseNum(item.plays), 1);
+    playSource.forEach(src=>{
+      const pct = Number(src.pct);
+      if(!Number.isFinite(pct) || pct <= 0) return;
+      const label = normalizeDySourceLabel(src.key || src.label);
+      const normalizedPct = pct / sourceSum * 100;
+      totals.set(label, (totals.get(label) || 0) + normalizedPct * weight);
+    });
+    totalWeight += weight;
+    coveredWorks++;
+  });
+
+  if(!coveredWorks || !totalWeight) return null;
+  const items = Array.from(totals.entries())
+    .map(([label, value])=>({ label, pct:Number((value / totalWeight).toFixed(1)) }))
+    .sort((a,b)=>b.pct-a.pct)
+    .slice(0, 7);
+  return {
+    period:`${shortDate(startDate)} 至 ${shortDate(endDate)} · ${coveredWorks} 篇作品来源汇总`,
+    items,
+    derived:true
+  };
+}
+
 function sourceBlock(pf, d){
   if(!d) return emptyCard(pf);
   const staleHtml = d.stale ? STALE : "";
+  const derivedHtml = d.derived ? `<span class="est-tag" style="color:#2568c9;background:var(--dy-soft)">自动汇总</span>` : "";
   const periodTxt = d.period ? `<span style="font-size:11px;color:var(--ink-3);margin-left:auto">${d.period}</span>` : "";
-  const block = el(`<div class="platform-block">${pfTitle(pf, staleHtml+periodTxt)}</div>`);
+  const block = el(`<div class="platform-block">${pfTitle(pf, derivedHtml+staleHtml+periodTxt)}</div>`);
   const card = el(`<div class="card"></div>`);
   const bars = el(`<div class="bars"></div>`);
+  if(!d.items || !d.items.length){
+    card.appendChild(el(pendingDataNote()));
+    block.appendChild(card);
+    return block;
+  }
   const max = Math.max(...d.items.map(i=>i.pct));
   const colors = ["#5B9BFF","#22C9A0","#FFC83C","#FF8FB3"];
   d.items.forEach((it,i)=>{
@@ -963,6 +1038,7 @@ function showDetail(itemId, idx){
       "不要迷信了！寺庙的秘密被可视化了": { replay: "2:24-2:32", skip: "1:36-1:44" },
       "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨": { replay: "3:27-3:36", skip: "3:00-3:09" },
       "找到家里最\"旺\"你的位置，不用找\"大师\"。": { replay: "5:25-5:38", skip: "3:28-3:41" },
+      "卧室不动硬装的礼乐布局妙招": { replay: "3:40-3:51", skip: "3:07-3:18" },
     };
     const sd = skipMap[item.title];
     if(sd){
@@ -996,6 +1072,8 @@ function showDetail(itemId, idx){
     if(tf.boostFlow){
       html += `<div style="font-size:13px;color:var(--ink-2);margin-top:12px;padding:8px 12px;background:var(--candy-green-bg);border-radius:8px">🚀 ${tf.boostFlow}</div>`;
     }
+  } else if(tf.playSourceNote){
+    html += `<div class="sub-title" style="margin-top:14px">📊 观看来源</div>${pendingDataNote(tf.playSourceNote)}`;
   }
 
   // 搜索关键词
@@ -1005,6 +1083,8 @@ function showDetail(itemId, idx){
       html += `<span class="word-chip">${k.keyword} <b>${k.percent}%</b></span>`;
     });
     html += `</div>`;
+  } else if(tf.searchKeywordsNote){
+    html += `<div class="sub-title" style="margin-top:14px">🔑 搜索关键词</div>${pendingDataNote(tf.searchKeywordsNote)}`;
   }
 
   // 启发搜索
@@ -1015,8 +1095,7 @@ function showDetail(itemId, idx){
     });
     html += `</div>`;
   } else if(tf.inspireSearchNote){
-    html += `<div class="sub-title" style="margin-top:10px">💡 启发搜索</div>
-      <div style="font-size:12px;color:var(--ink-3);padding:8px 10px;background:var(--bg);border-radius:8px">${tf.inspireSearchNote}</div>`;
+    html += `<div class="sub-title" style="margin-top:10px">💡 启发搜索</div>${pendingDataNote(tf.inspireSearchNote)}`;
   }
 
   html += `</div>`;
@@ -1084,6 +1163,12 @@ function showDetail(itemId, idx){
       html += `<span class="word-chip" style="font-size:${size}px;font-weight:${w.score>1?700:400}">${w.word} <b>${w.score}</b></span>`;
     });
     html += `</div></div>`;
+  }
+
+  if(detail.bulletCount !== undefined){
+    html += `<div class="card"><div class="sub-title">💬 弹幕数据</div>
+      <div class="kpi-grid"><div class="kpi"><div class="k-label">弹幕数</div><div class="k-value">${detail.bulletCount}</div></div></div>
+    </div>`;
   }
 
   // === 板块5: 智能优化建议（始终位于详情最底部） ===
@@ -1850,10 +1935,11 @@ function renderNorthStar(){
   if(!ns || !ns.items || !ns.items.length) return null;
   const items = ns.items.filter(it=>it.pf===curPlatform);
   if(!items.length) return null;
+  const subHtml = ns.sub ? `<span class="ns-sub">${ns.sub}</span>` : "";
   const wrap = el(`<div class="northstar">
     <div class="ns-head"><span class="ns-star">⭐</span>
       <span class="ns-ttl">北极星指标 · ${ns.title}</span>
-      <span class="ns-sub">${ns.sub}</span></div>
+      ${subHtml}</div>
   </div>`);
   const grid = el(`<div class="ns-grid"></div>`);
   items.forEach(it=>{
