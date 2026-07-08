@@ -1264,8 +1264,10 @@ function showXhsDetail(title){
   modal.style.display = "block";
 
   // 渲染趋势图
-  if(trend && trend.daily && trend.daily.view && trend.daily.view.length){
-    renderXhsTrendCharts(trend, detail.leaveSummary, document.getElementById("xhsTrendAnchor"));
+  const hasXhsViewTrend = (trend?.daily?.view && trend.daily.view.length) ||
+    (trend?.hourly?.view && trend.hourly.view.length);
+  if(hasXhsViewTrend){
+    renderXhsTrendCharts(trend, trend.leaveSummary || detail.leaveSummary, document.getElementById("xhsTrendAnchor"));
   }
 }
 
