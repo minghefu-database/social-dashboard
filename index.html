@@ -986,11 +986,11 @@ function showDetail(itemId, idx){
 
   // 观看趋势图
   if(ov.viewTrend && ov.viewTrend.labels && ov.viewTrend.labels.length){
-    html += `<div class="section-label">观看趋势</div><div class="trend-wrap" style="height:180px"><canvas id="dtViewTrend"></canvas></div>`;
+    html += dyTrendCardHtml("dtViewTrend", "观看趋势", "view");
   }
   // 涨粉趋势图
   if(ov.subscribeTrend && ov.subscribeTrend.labels && ov.subscribeTrend.labels.length){
-    html += `<div class="section-label" style="margin-top:10px">涨粉趋势</div><div class="trend-wrap" style="height:180px"><canvas id="dtSubTrend"></canvas></div>`;
+    html += dyTrendCardHtml("dtSubTrend", "涨粉趋势", "rise");
   }
   html += `</div>`;
 
@@ -1178,25 +1178,134 @@ function showDetail(itemId, idx){
 
   // 绘制趋势图
   setTimeout(()=>{
-    const drawTrend = (id, trend, color) => {
-      const cvs = document.getElementById(id);
-      if(!cvs || !trend) return;
-      detailCharts.push(new Chart(cvs, {type:"line",
-        data:{ labels:trend.labels, datasets:[{ data:trend.values, borderColor:color,
-          backgroundColor:color+"18", borderWidth:2, fill:true, tension:.3, pointRadius:2, pointHoverRadius:5 }]},
-        options:{ responsive:true, maintainAspectRatio:false,
-          plugins:{legend:{display:false},
-            tooltip:{mode:"index",intersect:false,
-              callbacks:{ title:(items)=>items[0].label,
-                label:(ctx)=>`${ctx.parsed.y.toLocaleString()}` } } },
-          scales:{ x:{grid:{display:false},ticks:{font:{size:9},color:"#8f959e",maxTicksLimit:12,maxRotation:0}},
-                   y:{grid:{color:"#f2f3f5"},ticks:{font:{size:9},color:"#8f959e"},beginAtZero:true} } }
-      }));
-    };
-    if(ov.viewTrend) drawTrend("dtViewTrend", ov.viewTrend, "#4C8DFF");
-    if(ov.subscribeTrend) drawTrend("dtSubTrend", ov.subscribeTrend, "#22C9A0");
+    if(ov.viewTrend) drawDyTrend("dtViewTrend", ov.viewTrend, item.date, "#4C8DFF", "观看");
+    if(ov.subscribeTrend) drawDyTrend("dtSubTrend", ov.subscribeTrend, item.date, "#22C9A0", "涨粉");
   }, 100);
 };
+
+function dyTrendCardHtml(id, title, kind){
+  const color = kind === "rise" ? "var(--down)" : "var(--dy)";
+  return `<div class="section-label" style="margin-top:${kind === "rise" ? "10px" : "0"}">${title}
+      <span style="display:inline-flex;margin-left:10px;vertical-align:middle">
+        <button class="${id}-hour active" data-mode="hour" style="padding:2px 10px;font-size:11px;cursor:pointer;border:1px solid ${color};background:${color};color:#fff;border-radius:4px 0 0 4px">按小时</button>
+        <button class="${id}-day" data-mode="day" style="padding:2px 10px;font-size:11px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink-2);border-radius:0 4px 4px 0">按天数</button>
+      </span>
+    </div>
+    <div class="trend-wrap" style="height:180px"><canvas id="${id}"></canvas></div>
+    <div id="${id}Summary" style="font-size:12px;color:var(--ink-3);margin-top:6px"></div>
+    <div style="font-size:11px;color:var(--ink-3);margin-top:4px">作品发布14天后，每小时/天数数据不再更新</div>`;
+}
+
+function parseDyTrendLabel(label){
+  const text = String(label || "");
+  const match = text.match(/^(\d{4}-\d{2}-\d{2})(?:[ T](\d{1,2}):?(\d{2})?(?::\d{2})?)?/);
+  if(!match) return null;
+  const dateKey = match[1];
+  const hour = match[2] !== undefined ? Number(match[2]) : null;
+  const hourText = hour !== null && Number.isFinite(hour) ? `${String(hour).padStart(2,"0")}:00` : "";
+  return {
+    dateKey,
+    time: new Date(`${dateKey}T00:00:00`),
+    label: hourText ? `${dateKey.slice(5)} ${hourText}` : dateKey.slice(5)
+  };
+}
+
+function releaseWindow14Days(releaseDate){
+  const start = new Date(`${releaseDate}T00:00:00`);
+  if(Number.isNaN(start.getTime())) return null;
+  const end = new Date(start);
+  end.setDate(end.getDate() + 14);
+  return {start, end};
+}
+
+function dyTrendPointsFromSeries(labels, values, releaseDate, mode){
+  const window14 = releaseWindow14Days(releaseDate);
+  const points = [];
+  const count = Math.min(labels?.length || 0, values?.length || 0);
+  for(let i=0;i<count;i++){
+    const parsed = parseDyTrendLabel(labels[i]);
+    const value = Number(values[i]);
+    if(!parsed || !Number.isFinite(value)) continue;
+    if(window14 && (parsed.time < window14.start || parsed.time >= window14.end)) continue;
+    points.push({dateKey:parsed.dateKey, label:parsed.label, value});
+  }
+  if(mode === "day") return aggregateDyDailyPoints(points);
+  return points;
+}
+
+function aggregateDyDailyPoints(points){
+  const map = new Map();
+  points.forEach(point=>{
+    const cur = map.get(point.dateKey) || {dateKey:point.dateKey, label:point.dateKey.slice(5), value:0};
+    cur.value += point.value;
+    map.set(point.dateKey, cur);
+  });
+  return Array.from(map.values()).sort((a,b)=>a.dateKey.localeCompare(b.dateKey));
+}
+
+function dyDailyTrendPoints(trend, releaseDate){
+  const daily = trend?.daily || trend?.day || trend?.dailyNew;
+  if(daily?.labels && daily?.values){
+    return dyTrendPointsFromSeries(daily.labels, daily.values, releaseDate, "hour")
+      .map(point=>({...point, label:point.dateKey.slice(5)}));
+  }
+  return dyTrendPointsFromSeries(trend?.labels || [], trend?.values || [], releaseDate, "day");
+}
+
+function dyTrendSeries(trend, releaseDate){
+  return {
+    hour:dyTrendPointsFromSeries(trend?.labels || [], trend?.values || [], releaseDate, "hour"),
+    day:dyDailyTrendPoints(trend, releaseDate)
+  };
+}
+
+function drawDyTrend(id, trend, releaseDate, color, label){
+  const canvas = document.getElementById(id);
+  if(!canvas || !trend) return;
+  const series = dyTrendSeries(trend, releaseDate);
+  let chart = null;
+  const hourBtn = document.querySelector(`.${id}-hour`);
+  const dayBtn = document.querySelector(`.${id}-day`);
+  const summary = document.getElementById(`${id}Summary`);
+  const render = mode=>{
+    if(chart){
+      chart.destroy();
+      detailCharts = detailCharts.filter(item=>item !== chart);
+    }
+    const data = series[mode] || [];
+    if(!data.length){
+      if(summary) summary.textContent = "平台数据还未更新";
+      return;
+    }
+    chart = new Chart(canvas, {type:"line",
+      data:{ labels:data.map(point=>point.label), datasets:[{ data:data.map(point=>point.value), borderColor:color,
+        backgroundColor:color+"18", borderWidth:2, fill:true, tension:.3, pointRadius:2, pointHoverRadius:5 }]},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false},
+          tooltip:{mode:"index",intersect:false,
+            callbacks:{ title:(items)=>items[0].label,
+              label:(ctx)=>`${label} ${ctx.parsed.y.toLocaleString()}` } } },
+        scales:{ x:{grid:{display:false},ticks:{font:{size:9},color:"#8f959e",maxTicksLimit:mode==="hour"?12:14,maxRotation:0}},
+                 y:{grid:{color:"#f2f3f5"},ticks:{font:{size:9},color:"#8f959e"},beginAtZero:true} } }
+    });
+    detailCharts.push(chart);
+    const maxPoint = data.reduce((a,b)=>a.value>b.value?a:b);
+    if(summary) summary.textContent = `新增${label}峰值：${maxPoint.label}（${maxPoint.value.toLocaleString()}）`;
+    if(hourBtn && dayBtn){
+      const active = mode === "hour" ? hourBtn : dayBtn;
+      const inactive = mode === "hour" ? dayBtn : hourBtn;
+      active.style.background = color;
+      active.style.borderColor = color;
+      active.style.color = "#fff";
+      inactive.style.background = "var(--card)";
+      inactive.style.borderColor = "var(--line)";
+      inactive.style.color = "var(--ink-2)";
+    }
+  };
+  if(hourBtn) hourBtn.addEventListener("click",()=>render("hour"));
+  if(dayBtn) dayBtn.addEventListener("click",()=>render("day"));
+  render("hour");
+}
 
 function closeDetail(){
   document.getElementById("detailModal").style.display = "none";
