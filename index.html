@@ -963,10 +963,13 @@ function showDetail(itemId, idx){
   const tf = detail.traffic;
   const ad = detail.audience;
   const wc = detail.wordCloud || [];
+  const boostBadgeHtml = tf?.boostFlow
+    ? `<span class="ft-reward" style="margin-left:10px">🚀 ${tf.boostFlow}</span>`
+    : "";
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
     <span style="font-size:13px;color:var(--ink-3)">${item.date} 发布 · 播放 ${item.plays}</span>
-    ${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
+    ${boostBadgeHtml}${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
 
   // === 板块1: 单篇作品总览 ===
   html += `<div class="card"><div class="sub-title">📋 作品总览</div>`;
@@ -1068,10 +1071,6 @@ function showDetail(itemId, idx){
         <div class="b-val" style="font-size:13px"><b>${s.pct}%</b>${deltaStr}</div>
       </div>`;
     });
-    // 平台扶持流量
-    if(tf.boostFlow){
-      html += `<div style="font-size:13px;color:var(--ink-2);margin-top:12px;padding:8px 12px;background:var(--candy-green-bg);border-radius:8px">🚀 ${tf.boostFlow}</div>`;
-    }
   } else if(tf.playSourceNote){
     html += `<div class="sub-title" style="margin-top:14px">📊 观看来源</div>${pendingDataNote(tf.playSourceNote)}`;
   }
