@@ -1697,6 +1697,10 @@ function renderXhsTrendCharts(trend, leaveSummary, target){
   viewSummary.id = "viewSummary";
   viewSummary.style.cssText = "font-size:12px;color:var(--ink-3);margin-top:6px";
   viewCard.appendChild(viewSummary);
+  const viewUpdateNote = document.createElement("div");
+  viewUpdateNote.style.cssText = "font-size:11px;color:var(--ink-3);margin-top:4px";
+  viewUpdateNote.textContent = "作品发布14天后，每小时/天数数据不再更新";
+  viewCard.appendChild(viewUpdateNote);
   modal.appendChild(viewCard);
 
   // 画观看趋势图
@@ -1819,6 +1823,10 @@ function renderXhsTrendCharts(trend, leaveSummary, target){
   riseSummary.id = "riseSummary";
   riseSummary.style.cssText = "font-size:12px;color:var(--ink-3);margin-top:6px";
   riseCard.appendChild(riseSummary);
+  const riseUpdateNote = document.createElement("div");
+  riseUpdateNote.style.cssText = "font-size:11px;color:var(--ink-3);margin-top:4px";
+  riseUpdateNote.textContent = "作品发布14天后，每小时/天数数据不再更新";
+  riseCard.appendChild(riseUpdateNote);
   modal.appendChild(riseCard);
 
   // 画涨粉趋势图
