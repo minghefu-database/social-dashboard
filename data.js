@@ -63924,3 +63924,465 @@ const DATA_REFRESH_2026_07_08_ITEM_FIELD_COMPAT_FIX = {
   });
 })(DASHBOARD_DATA, DATA_REFRESH_2026_07_08_ITEM_FIELD_COMPAT_FIX);
 /* === DATA_REFRESH_2026_07_08_ITEM_FIELD_COMPAT_FIX_END === */
+
+
+/* === DATA_REFRESH_2026_07_08_SECOND_DETAIL_UI_FIX_START === */
+const DATA_REFRESH_2026_07_08_SECOND_DETAIL_UI_FIX = {
+  "data": {
+    "tingzhairen": {
+      "flowAnalysis": {
+        "xhs": {
+          "itemList": [
+            {
+              "id": "6a4c5d95000000000f030a21",
+              "title": "第2集｜卧室不动硬装的礼乐布局妙招💡",
+              "date": "2026-07-07",
+              "plays": "1099",
+              "likes": "29",
+              "comments": "3",
+              "saves": "17",
+              "shares": "4",
+              "avgDur": "74秒",
+              "fans": "7",
+              "click": 10.2,
+              "ctr": "10.2%",
+              "favs": "17"
+            },
+            {
+              "id": "6a479baa0000000011010c1a",
+              "title": "第1集｜找到家里最\"旺\"你的位置",
+              "date": "2026-07-04",
+              "plays": "2161",
+              "likes": "58",
+              "comments": "3",
+              "saves": "48",
+              "shares": "7",
+              "avgDur": "96秒",
+              "fans": "23",
+              "click": 9.5,
+              "ctr": "9.5%",
+              "favs": "48"
+            },
+            {
+              "id": "6a4261e900000000110157d4",
+              "title": "家中手办正在悄悄改变你的认知！🚨",
+              "date": "2026-06-30",
+              "plays": "2.52万",
+              "likes": "473",
+              "comments": "72",
+              "saves": "318",
+              "shares": "266",
+              "avgDur": "56秒",
+              "fans": "206",
+              "click": 10,
+              "ctr": "10%",
+              "favs": "318"
+            },
+            {
+              "id": "6a3df959000000000f028808",
+              "title": "酒店选房避雷指南, 国歌护体，睡稳心安。",
+              "date": "2026-06-26",
+              "plays": "1255",
+              "likes": "27",
+              "comments": "8",
+              "saves": "13",
+              "shares": "9",
+              "avgDur": "71秒",
+              "fans": "8",
+              "click": 11.3,
+              "ctr": "11.3%",
+              "favs": "13"
+            },
+            {
+              "id": "6a389304000000000f0330ca",
+              "title": "家居布局干货｜可能影响女性的格局",
+              "date": "2026-06-22",
+              "plays": "4.77万",
+              "likes": "2374",
+              "comments": "211",
+              "saves": "2579",
+              "shares": "423",
+              "avgDur": "99秒",
+              "fans": "2253",
+              "click": 14,
+              "ctr": "14%",
+              "favs": "2579"
+            },
+            {
+              "id": "6a3371b90000000011006ff1",
+              "title": "现代家中男尊女卑的实际理解, 很实用!",
+              "date": "2026-06-18",
+              "plays": "2521",
+              "likes": "72",
+              "comments": "17",
+              "saves": "37",
+              "shares": "10",
+              "avgDur": "91秒",
+              "fans": "40",
+              "click": 14.4,
+              "ctr": "14.4%",
+              "favs": "37"
+            },
+            {
+              "id": "6a2fde79000000000f01cd05",
+              "title": "容易提升成绩的位置，打造好的学习环境",
+              "date": "2026-06-15",
+              "plays": "4617",
+              "likes": "166",
+              "comments": "19",
+              "saves": "185",
+              "shares": "29",
+              "avgDur": "109秒",
+              "fans": "151",
+              "click": 15.1,
+              "ctr": "15.1%",
+              "favs": "185"
+            },
+            {
+              "id": "6a2a334f000000002202499b",
+              "title": "让你家拥有一个S型身材的家居布局",
+              "date": "2026-06-11",
+              "plays": "25.8万",
+              "likes": "3570",
+              "comments": "228",
+              "saves": "2029",
+              "shares": "482",
+              "avgDur": "89秒",
+              "fans": "4546",
+              "click": 10.2,
+              "ctr": "10.2%",
+              "favs": "2029"
+            },
+            {
+              "id": "6a250d08000000001702e8fa",
+              "title": "不要迷信了！寺庙的秘密被可视化了",
+              "date": "2026-06-07",
+              "plays": "3203",
+              "likes": "87",
+              "comments": "4",
+              "saves": "50",
+              "shares": "21",
+              "avgDur": "68秒",
+              "fans": "62",
+              "click": 12.5,
+              "ctr": "12.5%",
+              "favs": "50"
+            }
+          ],
+          "itemDetails": {
+            "第2集｜卧室不动硬装的礼乐布局妙招💡": {
+              "portrait": {
+                "gender": {
+                  "male": 13,
+                  "female": 87
+                },
+                "age": {
+                  "items": [
+                    {
+                      "label": "<18",
+                      "pct": 1
+                    },
+                    {
+                      "label": "18-24",
+                      "pct": 9
+                    },
+                    {
+                      "label": "25-34",
+                      "pct": 47
+                    },
+                    {
+                      "label": "35-44",
+                      "pct": 32
+                    },
+                    {
+                      "label": ">44",
+                      "pct": 11
+                    }
+                  ]
+                },
+                "city": {
+                  "items": [
+                    {
+                      "label": "北京",
+                      "pct": 6
+                    },
+                    {
+                      "label": "海外",
+                      "pct": 6
+                    },
+                    {
+                      "label": "上海",
+                      "pct": 5
+                    },
+                    {
+                      "label": "深圳",
+                      "pct": 5
+                    },
+                    {
+                      "label": "广州",
+                      "pct": 3
+                    },
+                    {
+                      "label": "天津",
+                      "pct": 2
+                    },
+                    {
+                      "label": "成都",
+                      "pct": 1
+                    },
+                    {
+                      "label": "杭州",
+                      "pct": 1
+                    }
+                  ]
+                },
+                "interest": {
+                  "items": [
+                    {
+                      "label": "娱乐",
+                      "pct": 13
+                    },
+                    {
+                      "label": "生活记录",
+                      "pct": 12
+                    },
+                    {
+                      "label": "影视",
+                      "pct": 11
+                    },
+                    {
+                      "label": "家居家装",
+                      "pct": 10
+                    },
+                    {
+                      "label": "美食",
+                      "pct": 7
+                    },
+                    {
+                      "label": "宠物",
+                      "pct": 5
+                    },
+                    {
+                      "label": "时尚",
+                      "pct": 4
+                    },
+                    {
+                      "label": "情感",
+                      "pct": 3
+                    }
+                  ]
+                }
+              },
+              "overview": {
+                "trend": {
+                  "daily": {
+                    "view": [
+                      {
+                        "t": "07-07",
+                        "v": 876,
+                        "vd": 876
+                      },
+                      {
+                        "t": "07-08",
+                        "v": 184,
+                        "vd": 184
+                      }
+                    ],
+                    "rise_fans": [
+                      {
+                        "t": "07-07",
+                        "v": 13,
+                        "vd": 13
+                      },
+                      {
+                        "t": "07-08",
+                        "v": 3,
+                        "vd": 3
+                      }
+                    ],
+                    "exit_view2s": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "dy": {
+          "itemList": [
+            {
+              "id": "7659601597508699259",
+              "title": "卧室不动硬装的礼乐布局妙招",
+              "date": "2026-07-07",
+              "plays": "9775",
+              "avgDur": "28秒",
+              "click": 100,
+              "finish5": 48.5,
+              "bounce2": 27.9,
+              "likes": "139",
+              "shares": "26",
+              "clickRate": "100%",
+              "finishRate5s": "48.5%",
+              "bounce2s": "27.9%",
+              "like": "139",
+              "share": "26"
+            },
+            {
+              "id": "7658276437728391281",
+              "title": "找到家里最\"旺\"你的位置，不用找\"大师\"。",
+              "date": "2026-07-04",
+              "plays": "7177",
+              "avgDur": "25秒",
+              "click": 100,
+              "finish5": 41.8,
+              "bounce2": 29.4,
+              "likes": "190",
+              "shares": "22",
+              "clickRate": "100%",
+              "finishRate5s": "41.8%",
+              "bounce2s": "29.4%",
+              "like": "190",
+              "share": "22"
+            },
+            {
+              "id": "7656787757771445349",
+              "title": "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨",
+              "date": "2026-06-30",
+              "plays": "9.32万",
+              "avgDur": "34秒",
+              "click": 100,
+              "finish5": 49.1,
+              "bounce2": 27.9,
+              "likes": "1533",
+              "shares": "1717",
+              "clickRate": "100%",
+              "finishRate5s": "49.1%",
+              "bounce2s": "27.9%",
+              "like": "1533",
+              "share": "1717"
+            },
+            {
+              "id": "7655548439049549669",
+              "title": "酒店选房避雷指南, 国歌护体，睡稳心安。",
+              "date": "2026-06-26",
+              "plays": "7123",
+              "avgDur": "29秒",
+              "click": 100,
+              "finish5": 44.7,
+              "bounce2": 26.1,
+              "likes": "157",
+              "shares": "56",
+              "clickRate": "100%",
+              "finishRate5s": "44.7%",
+              "bounce2s": "26.1%",
+              "like": "157",
+              "share": "56"
+            },
+            {
+              "id": "7654027606584993701",
+              "title": "不利家中女性的格局, 三招解决！",
+              "date": "2026-06-22",
+              "plays": "4.87万",
+              "avgDur": "27秒",
+              "click": 46.5,
+              "finish5": 47.9,
+              "bounce2": 32.7,
+              "likes": "1262",
+              "shares": "322",
+              "clickRate": "46.5%",
+              "finishRate5s": "47.9%",
+              "bounce2s": "32.7%",
+              "like": "1262",
+              "share": "322"
+            },
+            {
+              "id": "7652581925735312633",
+              "title": "现代家中男尊女卑的实际理解, 很实用!",
+              "date": "2026-06-18",
+              "plays": "18.3万",
+              "avgDur": "25秒",
+              "click": 100,
+              "finish5": 44.6,
+              "bounce2": 32.9,
+              "likes": "4039",
+              "shares": "1017",
+              "clickRate": "100%",
+              "finishRate5s": "44.6%",
+              "bounce2s": "32.9%",
+              "like": "4039",
+              "share": "1017"
+            },
+            {
+              "id": "7651578818137783675",
+              "title": "容易提升成绩的位置，打造好的学习环境",
+              "date": "2026-06-15",
+              "plays": "8950",
+              "avgDur": "42秒",
+              "click": 100,
+              "finish5": 44.7,
+              "bounce2": 32.8,
+              "likes": "216",
+              "shares": "58",
+              "clickRate": "100%",
+              "finishRate5s": "44.7%",
+              "bounce2s": "32.8%",
+              "like": "216",
+              "share": "58"
+            },
+            {
+              "id": "7649980868819643877",
+              "title": "让你家拥有一个S型身材的家居布局",
+              "date": "2026-06-11",
+              "plays": "137.4万",
+              "avgDur": "35秒",
+              "click": 56.5,
+              "finish5": 54.5,
+              "bounce2": 27.7,
+              "likes": "2.27万",
+              "shares": "9884",
+              "clickRate": "56.5%",
+              "finishRate5s": "54.5%",
+              "bounce2s": "27.7%",
+              "like": "2.27万",
+              "share": "9884"
+            },
+            {
+              "id": "7649243282254738609",
+              "title": "不要迷信了！寺庙的秘密被可视化了",
+              "date": "2026-06-09",
+              "plays": "3.09万",
+              "avgDur": "33秒",
+              "click": 100,
+              "finish5": 44.8,
+              "bounce2": 28.6,
+              "likes": "594",
+              "shares": "131",
+              "clickRate": "100%",
+              "finishRate5s": "44.8%",
+              "bounce2s": "28.6%",
+              "like": "594",
+              "share": "131"
+            }
+          ],
+          "itemDetails": {
+            "卧室不动硬装的礼乐布局妙招": {
+              "showBulletData": false,
+              "traffic": {
+                "boostFlow": "平台扶持流量 2922次播放"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+(function applyDataRefresh(target, source) {
+  Object.keys(source).forEach(function(key) {
+    const value = source[key];
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      if (!target[key] || typeof target[key] !== "object" || Array.isArray(target[key])) target[key] = {};
+      applyDataRefresh(target[key], value);
+    } else { target[key] = value; }
+  });
+})(DASHBOARD_DATA, DATA_REFRESH_2026_07_08_SECOND_DETAIL_UI_FIX);
+/* === DATA_REFRESH_2026_07_08_SECOND_DETAIL_UI_FIX_END === */

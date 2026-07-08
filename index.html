@@ -1165,7 +1165,7 @@ function showDetail(itemId, idx){
     html += `</div></div>`;
   }
 
-  if(detail.bulletCount !== undefined){
+  if(detail.bulletCount !== undefined && detail.showBulletData !== false){
     html += `<div class="card"><div class="sub-title">💬 弹幕数据</div>
       <div class="kpi-grid"><div class="kpi"><div class="k-label">弹幕数</div><div class="k-value">${detail.bulletCount}</div></div></div>
     </div>`;
