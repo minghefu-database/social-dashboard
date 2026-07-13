@@ -5,14 +5,16 @@ import { paths } from "./config.js";
 import { sanitize, sanitizeHeaders, sanitizePostData, sanitizeUrl } from "./sanitize.js";
 
 const targetNotes = [
-  { id: "6a250d08000000001702e8fa", title: "不要迷信了! 寺庙的秘密被可视化了" },
-  { id: "6a2a334f000000002202499b", title: "让你家拥有一个S型身材的家居布局" },
-  { id: "6a2fde79000000000f01cd05", title: "容易提升成绩的位置，打造好的学习环境" },
-  { id: "6a3371b90000000011006ff1", title: "现代家中男尊女卑的实际理解, 很实用!" },
-  { id: "6a389304000000000f0330ca", title: "家居布局干货｜可能影响女性的格局" },
-  { id: "6a3df959000000000f028808", title: "酒店选房避雷指南, 国歌护体，睡稳心安。" },
-  { id: "6a4261e900000000110157d4", title: "家中手办正在悄悄改变你的认知！🚨" },
+  { id: "6a509af20000000011016bf5", title: "3类人的财富布局💰｜中式美学下的器物搭配" },
+  { id: "6a4c5d95000000000f030a21", title: "第2集｜卧室不动硬装的礼乐布局妙招💡" },
   { id: "6a479baa0000000011010c1a", title: "第1集｜找到家里最\"旺\"你的位置" },
+  { id: "6a4261e900000000110157d4", title: "家中手办正在悄悄改变你的认知！🚨" },
+  { id: "6a3df959000000000f028808", title: "酒店选房避雷指南, 国歌护体，睡稳心安。" },
+  { id: "6a389304000000000f0330ca", title: "家居布局干货｜可能影响女性的格局" },
+  { id: "6a3371b90000000011006ff1", title: "现代家中男尊女卑的实际理解, 很实用!" },
+  { id: "6a2fde79000000000f01cd05", title: "容易提升成绩的位置，打造好的学习环境" },
+  { id: "6a2a334f000000002202499b", title: "让你家拥有一个S型身材的家居布局" },
+  { id: "6a250d08000000001702e8fa", title: "不要迷信了! 寺庙的秘密被可视化了" },
 ];
 
 await main();
@@ -23,6 +25,7 @@ async function main() {
   await fs.mkdir(outputDir, { recursive: true });
 
   const context = await chromium.launchPersistentContext(paths.authDir, {
+    channel: "chrome",
     headless: false,
     viewport: { width: 1440, height: 960 },
     locale: "zh-CN",

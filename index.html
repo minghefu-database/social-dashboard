@@ -295,7 +295,7 @@
   </main>
 </div>
 
-<script src="data.js?v=20260702-2027"></script>
+<script src="data.js?v=20260714-0155-datafix2"></script>
 <script>
 /* ===================== 状态 ===================== */
 const D = DASHBOARD_DATA;
@@ -785,13 +785,36 @@ function rankBlock(pf, d){
 
 /* 通用: 水平条形列表 */
 function barListHtml(items, color){
-  const max = Math.max(...items.map(i=>i.pct));
-  return `<div class="bars">` + items.map(it=>{
-    const w = (it.pct/max*100).toFixed(1);
+  const list = normalizeBarItems(items);
+  if(!list.length) return `<div class="empty" style="padding:12px 0">平台数据还未更新</div>`;
+  const max = Math.max(...list.map(i=>Number(i.pct) || 0), 1);
+  return `<div class="bars">` + list.map(it=>{
+    const pct = Number(it.pct) || 0;
+    const w = (pct/max*100).toFixed(1);
     return `<div class="bar-row"><div class="b-label">${it.label}</div>
       <div class="bar-track"><div class="bar-fill" style="width:${w}%;background:${color}"></div></div>
-      <div class="b-val"><b>${it.pct}%</b></div></div>`;
+      <div class="b-val"><b>${pct}%</b></div></div>`;
   }).join("") + `</div>`;
+}
+function normalizeBarItems(value){
+  const raw = Array.isArray(value) ? value : (value && Array.isArray(value.items) ? value.items : []);
+  return raw.map(item=>({
+    label:item.label || item.title || item.name || item.key || "未命名",
+    pct:item.pct ?? item.value ?? item.count ?? 0
+  })).filter(item=>item.label);
+}
+function normalizeGender(value){
+  if(!value) return null;
+  if(!Array.isArray(value)) return value;
+  const find = patterns=>{
+    const item = value.find(g=>patterns.some(p=>String(g.label || g.title || g.key || "").toLowerCase().includes(p)));
+    return item ? Number(item.pct ?? item.value ?? item.count ?? 0) : 0;
+  };
+  return {male:find(["男","male"]), female:find(["女","female"])};
+}
+function normalizeWords(value){
+  if(!Array.isArray(value)) return [];
+  return value.map(w=>typeof w==="string" ? {word:w} : w).filter(w=>w && w.word);
 }
 /* 通用: 某平台无数据占位 */
 function emptyPlatform(pf, txt){
@@ -1042,6 +1065,7 @@ function showDetail(itemId, idx){
       "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨": { replay: "3:27-3:36", skip: "3:00-3:09" },
       "找到家里最\"旺\"你的位置，不用找\"大师\"。": { replay: "5:25-5:38", skip: "3:28-3:41" },
       "卧室不动硬装的礼乐布局妙招": { replay: "3:40-3:51", skip: "3:07-3:18" },
+      "3类人的财富布局💰｜中式美学下的器物搭配": { replay: "1:59-2:06", skip: "2:13-2:20" },
     };
     const sd = skipMap[item.title];
     if(sd){
@@ -1162,12 +1186,6 @@ function showDetail(itemId, idx){
       html += `<span class="word-chip" style="font-size:${size}px;font-weight:${w.score>1?700:400}">${w.word} <b>${w.score}</b></span>`;
     });
     html += `</div></div>`;
-  }
-
-  if(detail.bulletCount !== undefined && detail.showBulletData !== false){
-    html += `<div class="card"><div class="sub-title">💬 弹幕数据</div>
-      <div class="kpi-grid"><div class="kpi"><div class="k-label">弹幕数</div><div class="k-value">${detail.bulletCount}</div></div></div>
-    </div>`;
   }
 
   // === 板块5: 智能优化建议（始终位于详情最底部） ===
@@ -1956,17 +1974,18 @@ function audienceBlock(pf, d){
     const p = sub.portrait;
     const c3 = el(`<div class="card"></div>`);
     if(p.conclusion) c3.appendChild(el(`<div class="conclusion">📌 ${p.conclusion}</div>`));
-    if(p.gender){
+    const gender = normalizeGender(p.gender);
+    if(gender){
       c3.appendChild(el(`<div class="sub-title">性别</div>`));
       c3.appendChild(el(`<div class="gender-bar">
-        <div class="male" style="width:${p.gender.male}%">男 ${p.gender.male}%</div>
-        <div class="female" style="width:${p.gender.female}%">女 ${p.gender.female}%</div></div>`));
+        <div class="male" style="width:${gender.male}%">男 ${gender.male}%</div>
+        <div class="female" style="width:${gender.female}%">女 ${gender.female}%</div></div>`));
     }
     const parts = [];
-    if(p.age)    parts.push(`<div><div class="sub-title">年龄 ${p.age.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.age.items, C)}</div>`);
-    if(p.active) parts.push(`<div><div class="sub-title">活跃度</div>${barListHtml(p.active.items, C)}</div>`);
-    if(p.city)   parts.push(`<div><div class="sub-title">城市 ${p.city.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.city.items, C)}</div>`);
-    if(p.device) parts.push(`<div><div class="sub-title">设备 ${p.device.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.device.items, C)}</div>`);
+    if(p.age)    parts.push(`<div><div class="sub-title">年龄 ${p.age.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.age, C)}</div>`);
+    if(p.active) parts.push(`<div><div class="sub-title">活跃度</div>${barListHtml(p.active, C)}</div>`);
+    if(p.city)   parts.push(`<div><div class="sub-title">城市 ${p.city.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.city, C)}</div>`);
+    if(p.device) parts.push(`<div><div class="sub-title">设备 ${p.device.estimated?'<span class="est-tag">估算</span>':''}</div>${barListHtml(p.device, C)}</div>`);
     if(parts.length){
       const grid = el(`<div class="grid-2" style="margin-top:6px"></div>`);
       parts.forEach(h=>grid.appendChild(el(h)));
@@ -1980,11 +1999,11 @@ function audienceBlock(pf, d){
     const it = sub.interest;
     const c4 = el(`<div class="card"></div>`);
     if(it.conclusion) c4.appendChild(el(`<div class="conclusion">📌 ${it.conclusion}</div>`));
-    if(it.dist) c4.appendChild(el(`<div class="sub-title">兴趣分布 <span class="est-tag">估算</span></div>${barListHtml(it.dist.items, C)}`));
+    if(it.dist) c4.appendChild(el(`<div><div class="sub-title">兴趣分布 <span class="est-tag">估算</span></div>${barListHtml(it.dist, C)}</div>`));
     if(it.words){
       c4.appendChild(el(`<div class="sub-title">常搜的词</div>`));
       const chips = el(`<div class="word-chips"></div>`);
-      it.words.forEach(w=>chips.appendChild(el(`<div class="word-chip">${w.word}${w.heat?`<b>${w.heat}</b>`:""}</div>`)));
+      normalizeWords(it.words).forEach(w=>chips.appendChild(el(`<div class="word-chip">${w.word}${w.heat?`<b>${w.heat}</b>`:""}</div>`)));
       c4.appendChild(chips);
     }
     block.appendChild(c4);
