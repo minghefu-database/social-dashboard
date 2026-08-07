@@ -296,7 +296,7 @@
   </main>
 </div>
 
-<script src="data.js?v=20260801-0322"></script>
+<script src="data.js?v=20260807-1033"></script>
 <script>
 /* ===================== 状态 ===================== */
 const D = DASHBOARD_DATA;
@@ -555,7 +555,9 @@ function overviewBlock(pf, d){
 
 function deriveDyViewingTimeslot(periodKey){
   const values = Array(24).fill(0);
-  const details = D.data[curAccount]?.flowAnalysis?.dy?.itemDetails || {};
+  const accountData = D.data[curAccount] || {};
+  const details = accountData.flowAnalysis?.dy?.itemDetails || {};
+  const range = dyDateRangeForPeriod(periodKey, accountData);
   let coveredWorks = 0;
   let coveredPoints = 0;
 
@@ -570,6 +572,7 @@ function deriveDyViewingTimeslot(periodKey){
       const match = String(labels[i]).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{1,2}):/);
       const value = Number(trendValues[i]);
       if(!match || !Number.isFinite(value) || value < 0) continue;
+      if(range && (match[1] < range.start || match[1] > range.end)) continue;
       const hour = Number(match[2]);
       if(hour < 0 || hour > 23) continue;
       values[hour] += value;
@@ -580,13 +583,43 @@ function deriveDyViewingTimeslot(periodKey){
   });
 
   return {
-    period:periodKey === "d7" ? "近7天口径 · 有小时趋势作品聚合" : "近30天口径 · 有小时趋势作品聚合",
+    period:range
+      ? `${range.label} · 有小时趋势作品聚合`
+      : (periodKey === "d7" ? "近7天口径 · 有小时趋势作品聚合" : "近30天口径 · 有小时趋势作品聚合"),
     labels:Array.from({length:24},(_,hour)=>String(hour)),
     values,
     coveredWorks,
     coveredPoints,
     derived:true
   };
+}
+
+function dyDateRangeForPeriod(periodKey, accountData){
+  const text = accountData?.ranking?.dy?.[periodKey]?.period
+    || accountData?.overview?.dy?.[periodKey]?.period
+    || "";
+  const match = String(text).match(/(\d{2})-(\d{2})\s*至\s*(\d{2})-(\d{2})/);
+  if(match){
+    const year = Number(String(D.updatedAt || new Date().getFullYear()).slice(0,4)) || new Date().getFullYear();
+    let start = `${year}-${match[1]}-${match[2]}`;
+    let end = `${year}-${match[3]}-${match[4]}`;
+    if(start > end) start = `${year - 1}-${match[1]}-${match[2]}`;
+    return { start, end, label:`${match[1]}-${match[2]} 至 ${match[3]}-${match[4]}` };
+  }
+  const days = periodKey === "d7" ? 7 : 30;
+  const endDate = new Date(`${D.updatedAt || new Date().toISOString().slice(0,10)}T00:00:00`);
+  if(Number.isNaN(endDate.getTime())) return null;
+  const startDate = new Date(endDate);
+  startDate.setDate(startDate.getDate() - days + 1);
+  const fmt = date => {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  };
+  const start = fmt(startDate);
+  const end = fmt(endDate);
+  return { start, end, label:`${start.slice(5)} 至 ${end.slice(5)}` };
 }
 
 function drawTrend(id, t, pf){
@@ -1039,6 +1072,7 @@ function showDetail(itemId, idx){
   // 跳过率 & 回看率
   (function(){
     const skipMap = {
+      "西北位的难题到我这可以停止了": { replay: "5:08-5:22", skip: "2:48-3:02" },
       "掌握家旺人旺的底层代码": { replay: "3:12-3:24", skip: "3:24-3:36" },
       "酒店尾房不可怕，6个步骤让你安稳入住": { replay: "5:12-5:24", skip: "3:00-3:12" },
       "家居布局方法，让他心甘情愿给你买包！": { replay: "3:40-3:50", skip: "3:20-3:30" },
