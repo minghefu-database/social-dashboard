@@ -296,7 +296,7 @@
   </main>
 </div>
 
-<script src="data.js?v=20260807-1033"></script>
+<script src="data.js?v=20260813-1527"></script>
 <script>
 /* ===================== 状态 ===================== */
 const D = DASHBOARD_DATA;
@@ -1072,6 +1072,8 @@ function showDetail(itemId, idx){
   // 跳过率 & 回看率
   (function(){
     const skipMap = {
+      "自救指南｜让母亲归位，你值得被好好对待": { replay: "9:12-9:35", skip: "4:36-4:59" },
+      "如何分辨谁是偷走家运的“元凶”": { replay: "2:45-2:56", skip: "2:45-2:56" },
       "西北位的难题到我这可以停止了": { replay: "5:08-5:22", skip: "2:48-3:02" },
       "掌握家旺人旺的底层代码": { replay: "3:12-3:24", skip: "3:24-3:36" },
       "酒店尾房不可怕，6个步骤让你安稳入住": { replay: "5:12-5:24", skip: "3:00-3:12" },
@@ -1788,7 +1790,7 @@ function renderXhsTrendCharts(trend, leaveSummary, target){
     // 总结
     const maxItem = data.reduce(function(a,b){ return a.v>b.v?a:b; });
     document.getElementById("viewSummary").textContent =
-      "\\uD83C\\uDFC6 观看峰值：" + maxItem.t + "（" + (maxItem.v>=10000?(maxItem.v/10000).toFixed(1)+"\\u4e07":maxItem.v) + "次观看）";
+      "观看峰值：" + maxItem.t + "（" + (maxItem.v>=10000?(maxItem.v/10000).toFixed(1)+"万":maxItem.v) + "次观看）";
   }
   drawViewChart(true);
   setTimeout(function(){
@@ -1913,7 +1915,7 @@ function renderXhsTrendCharts(trend, leaveSummary, target){
     detailCharts.push(riseChart);
     const maxItem = data.reduce(function(a,b){ return a.v>b.v?a:b; });
     document.getElementById("riseSummary").textContent =
-      "\\uD83C\\uDFC6 涨粉峰值：" + maxItem.t + "（" + (maxItem.v>=10000?(maxItem.v/10000).toFixed(1)+"\\u4e07":maxItem.v) + "个新粉丝）";
+      "涨粉峰值：" + maxItem.t + "（" + (maxItem.v>=10000?(maxItem.v/10000).toFixed(1)+"万":maxItem.v) + "个新粉丝）";
   }
   drawRiseChart(true);
   setTimeout(function(){
