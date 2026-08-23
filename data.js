@@ -64388,8 +64388,8 @@ const DATA_REFRESH_2026_07_08_SECOND_DETAIL_UI_FIX = {
 /* === DATA_REFRESH_2026_07_08_SECOND_DETAIL_UI_FIX_END === */
 /* === DATA_REFRESH_2026_07_19_FULL_START === */
 const DATA_REFRESH_2026_07_19_FULL = {
-  "updatedAt": "2026-08-19",
-  "lastUpdate": "2026-08-19 15:22",
+  "updatedAt": "2026-08-23",
+  "lastUpdate": "2026-08-23 20:25",
   "playbook": {
     "northStar": {
       "title": "留存质量",
@@ -64398,7 +64398,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
         {
           "pf": "dy",
           "label": "抖音条均5秒完播率",
-          "value": 44.1,
+          "value": 43.7,
           "unit": "%",
           "peer": null,
           "peerLabel": null,
@@ -64412,12 +64412,12 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             {
               "label": "条均2秒跳出率",
-              "value": 30.8,
+              "value": 31.3,
               "unit": "%"
             },
             {
               "label": "条均播放时长",
-              "value": 31.6,
+              "value": 31.1,
               "unit": "秒"
             }
           ]
@@ -64425,7 +64425,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
         {
           "pf": "xhs",
           "label": "小红书完播率",
-          "value": 6.6,
+          "value": 8.7,
           "unit": "%",
           "peer": null,
           "peerLabel": null,
@@ -64434,7 +64434,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
           "references": [
             {
               "label": "封面点击率",
-              "value": 18.2,
+              "value": 17.6,
               "unit": "%"
             },
             {
@@ -64444,7 +64444,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             {
               "label": "观看数",
-              "value": 0.7,
+              "value": 0.8,
               "unit": "万"
             }
           ]
@@ -64458,21 +64458,21 @@ const DATA_REFRESH_2026_07_19_FULL = {
         "northStar": {
           "dy": {
             "label": "抖音条均5秒完播率",
-            "value": "44.1%",
+            "value": "43.7%",
             "eval": "需优化开头承接",
-            "reference": "完整完播率均值 3.8%，2秒跳出率均值 30.8%"
+            "reference": "完整完播率均值 3.8%，2秒跳出率均值 31.3%"
           },
           "xhs": {
             "label": "小红书视频完播率",
-            "value": "6.6%",
+            "value": "8.7%",
             "eval": "封面点击稳定，完播和观看时长需继续前置信息密度",
-            "reference": "封面点击率 18.2%，平均观看时长 1.4分钟，7日观看数 6,531"
+            "reference": "封面点击率 17.6%，平均观看时长 1.4分钟，7日观看数 7,526"
           }
         }
       },
       "diagnosis": {
         "xhs": {
-          "period": "08-12 至 08-18",
+          "period": "08-16 至 08-22",
           "percentileStale": false,
           "note": "红线=你的数据，半径为「超过同类百分位」，标签为真实值",
           "axes": [
@@ -64480,19 +64480,19 @@ const DATA_REFRESH_2026_07_19_FULL = {
               "label": "观看数",
               "value": 95,
               "percentile": 95,
-              "text": "6,531 · 超过95%同类"
+              "text": "7,526 · 超过95%同类"
             },
             {
               "label": "涨粉数",
               "value": 99,
               "percentile": 99,
-              "text": "47 · 超过99%同类"
+              "text": "77 · 超过99%同类"
             },
             {
               "label": "主页访客",
               "value": 96,
               "percentile": 96,
-              "text": "229 · 超过96%同类"
+              "text": "248 · 超过96%同类"
             },
             {
               "label": "发布数",
@@ -64504,33 +64504,33 @@ const DATA_REFRESH_2026_07_19_FULL = {
               "label": "互动数",
               "value": 96,
               "percentile": 96,
-              "text": "300 · 超过96%同类"
+              "text": "380 · 超过96%同类"
             }
           ]
         },
         "dy": {
-          "period": "08-12 至 08-18",
+          "period": "08-16 至 08-22",
           "note": "同类作者为固定参考阈值；账号级同行新版明细本次接口未返回",
           "axes": [
             {
               "label": "播放量",
-              "mine": 104413,
+              "mine": 124819,
               "peer": 36,
-              "mineText": "10.4万",
+              "mineText": "12.5万",
               "peerText": "36"
             },
             {
               "label": "5秒完播率",
-              "mine": 44.1,
+              "mine": 43.7,
               "peer": 16.7,
-              "mineText": "44.1%",
+              "mineText": "43.7%",
               "peerText": "16.7%"
             },
             {
               "label": "粉丝净增",
-              "mine": 762,
+              "mine": 1218,
               "peer": 448,
-              "mineText": "762",
+              "mineText": "1,218",
               "peerText": "448"
             },
             {
@@ -64542,9 +64542,9 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             {
               "label": "互动率",
-              "mine": 2.7,
+              "mine": 3.2,
               "peer": 6.2,
-              "mineText": "2.7%",
+              "mineText": "3.2%",
               "peerText": "6.2%"
             }
           ]
@@ -64553,124 +64553,124 @@ const DATA_REFRESH_2026_07_19_FULL = {
       "overview": {
         "xhs": {
           "d7": {
-            "period": "08-12 至 08-18",
+            "period": "08-16 至 08-22",
             "cards": [
               {
                 "label": "曝光数",
-                "value": "2.6",
+                "value": "2.8",
                 "unit": "万",
-                "delta": -29
+                "delta": 0
               },
               {
                 "label": "观看数",
-                "value": "6,531",
+                "value": "7,526",
                 "unit": "",
-                "delta": -16
+                "delta": 11
               },
               {
                 "label": "封面点击率",
-                "value": 18.2,
+                "value": 17.6,
                 "unit": "%",
-                "delta": 18
+                "delta": 1
               },
               {
                 "label": "平均观看时长",
                 "value": 1.4,
                 "unit": "分钟",
-                "delta": -6
+                "delta": -9
               },
               {
                 "label": "观看总时长",
-                "value": 96.1,
+                "value": 115.1,
                 "unit": "小时",
-                "delta": -38
+                "delta": 2
               },
               {
                 "label": "视频完播率",
-                "value": 6.6,
+                "value": 8.7,
                 "unit": "%",
-                "delta": -11
+                "delta": 20
               },
               {
                 "label": "点赞数",
-                "value": "140",
+                "value": "182",
                 "unit": "",
-                "delta": -41
+                "delta": 5
               },
               {
                 "label": "评论数",
-                "value": "17",
+                "value": "21",
                 "unit": "",
-                "delta": 6
+                "delta": 31
               },
               {
                 "label": "收藏数",
-                "value": "117",
+                "value": "148",
                 "unit": "",
-                "delta": -46
+                "delta": 0
               },
               {
                 "label": "分享数",
-                "value": "26",
+                "value": "29",
                 "unit": "",
-                "delta": -53
+                "delta": -17
               },
               {
                 "label": "净增粉丝",
-                "value": "46",
+                "value": "77",
                 "unit": "",
-                "delta": -53
+                "delta": 42
               },
               {
                 "label": "新增关注",
-                "value": "62",
+                "value": "92",
                 "unit": "",
-                "delta": -44
+                "delta": 33
               },
               {
                 "label": "取关粉丝",
-                "value": "16",
+                "value": "15",
                 "unit": "",
-                "delta": -5
+                "delta": -6
               },
               {
                 "label": "主页访客",
-                "value": "229",
+                "value": "248",
                 "unit": "",
-                "delta": -31
+                "delta": -6
               },
               {
                 "label": "总粉丝量",
-                "value": "8,675",
+                "value": "8,727",
                 "unit": "",
                 "delta": null
               }
             ],
-            "flowTotalHours": "96.1",
+            "flowTotalHours": "115.1",
             "trend": {
               "real": true,
-              "unitText": "浏览量 · 08-12 至 08-18 · 真实后台数据",
+              "unitText": "浏览量 · 08-16 至 08-22 · 真实后台数据",
               "labels": [
-                "08-12",
-                "08-13",
-                "08-14",
-                "08-15",
                 "08-16",
                 "08-17",
-                "08-18"
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                743,
-                1130,
-                1040,
-                791,
                 786,
                 1039,
-                1002
+                1002,
+                742,
+                793,
+                1731,
+                1433
               ]
             },
             "timeslot": {
-              "period": "08-12 至 08-18",
+              "period": "08-16 至 08-22",
               "labels": [
                 "0",
                 "1",
@@ -64698,135 +64698,131 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "23"
               ],
               "values": [
-                579,
-                360,
-                217,
-                154,
-                105,
-                92,
-                121,
-                198,
-                208,
-                260,
-                199,
+                637,
                 381,
-                244,
-                233,
-                272,
-                225,
+                275,
+                213,
+                120,
+                127,
+                172,
+                301,
+                236,
+                238,
+                348,
+                402,
+                265,
+                270,
+                258,
+                242,
+                214,
+                224,
+                219,
                 182,
-                392,
-                230,
-                194,
-                264,
-                369,
-                462,
-                590
+                301,
+                414,
+                603,
+                884
               ]
             }
           },
           "d30": {
-            "period": "07-20 至 08-18",
+            "period": "07-24 至 08-22",
             "cards": [
               {
                 "label": "曝光数",
-                "value": "13",
+                "value": "12.8",
                 "unit": "万",
-                "delta": -72
+                "delta": -65
               },
               {
                 "label": "观看数",
-                "value": "3.7",
+                "value": "3.4",
                 "unit": "万",
-                "delta": -70
+                "delta": -64
               },
               {
                 "label": "封面点击率",
-                "value": 16.1,
+                "value": 16.5,
                 "unit": "%",
-                "delta": 12
+                "delta": 18
               },
               {
                 "label": "平均观看时长",
                 "value": 1.3,
                 "unit": "分钟",
-                "delta": 11
+                "delta": 9
               },
               {
                 "label": "观看总时长",
-                "value": 592,
+                "value": 557.9,
                 "unit": "小时"
               },
               {
                 "label": "视频完播率",
-                "value": 6.1,
+                "value": 6.7,
                 "unit": "%",
-                "delta": -46
+                "delta": -40
               },
               {
                 "label": "点赞数",
-                "value": "908",
+                "value": "857",
                 "unit": "",
-                "delta": -77
+                "delta": -71
               },
               {
                 "label": "评论数",
-                "value": "110",
+                "value": "103",
                 "unit": "",
-                "delta": -73
+                "delta": -67
               },
               {
                 "label": "收藏数",
-                "value": "785",
+                "value": "761",
                 "unit": "",
-                "delta": -79
+                "delta": -72
               },
               {
                 "label": "分享数",
-                "value": "191",
+                "value": "157",
                 "unit": "",
                 "delta": -81
               },
               {
                 "label": "净增粉丝",
-                "value": "351",
+                "value": "320",
                 "unit": "",
-                "delta": -90
+                "delta": -86
               },
               {
                 "label": "新增关注",
-                "value": "442",
+                "value": "401",
                 "unit": "",
-                "delta": -88
+                "delta": -83
               },
               {
                 "label": "取关粉丝",
-                "value": "91",
+                "value": "81",
                 "unit": "",
-                "delta": -41
+                "delta": -42
               },
               {
                 "label": "主页访客",
-                "value": "1,305",
+                "value": "1,188",
                 "unit": "",
-                "delta": -80
+                "delta": -75
               },
               {
                 "label": "总粉丝量",
-                "value": "8,675",
+                "value": "8,727",
                 "unit": "",
                 "delta": null
               }
             ],
-            "flowTotalHours": "592",
+            "flowTotalHours": "557.9",
             "trend": {
               "real": true,
-              "unitText": "浏览量 · 07-20 至 08-18 · 真实后台数据",
+              "unitText": "浏览量 · 07-24 至 08-22 · 真实后台数据",
               "labels": [
-                "07-20",
-                "07-21",
-                "07-22",
-                "07-23",
                 "07-24",
                 "07-25",
                 "07-26",
@@ -64852,13 +64848,13 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "08-15",
                 "08-16",
                 "08-17",
-                "08-18"
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                871,
-                2291,
-                2884,
-                975,
                 1276,
                 869,
                 625,
@@ -64884,11 +64880,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 791,
                 786,
                 1039,
-                1002
+                1002,
+                742,
+                793,
+                1731,
+                1433
               ]
             },
             "timeslot": {
-              "period": "07-20 至 08-18",
+              "period": "07-24 至 08-22",
               "labels": [
                 "0",
                 "1",
@@ -64916,37 +64916,37 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "23"
               ],
               "values": [
-                2374,
-                1685,
-                1081,
-                811,
-                772,
-                628,
-                839,
-                1053,
-                1199,
-                1229,
-                1161,
-                1504,
-                2093,
-                1677,
-                1723,
-                1641,
-                1504,
-                1556,
-                1223,
-                1370,
-                1601,
-                2038,
-                3016,
-                2839
+                2438,
+                1638,
+                1039,
+                764,
+                524,
+                462,
+                644,
+                923,
+                1055,
+                1070,
+                1220,
+                1442,
+                2033,
+                1628,
+                1488,
+                1600,
+                1476,
+                1433,
+                1168,
+                1207,
+                1518,
+                1827,
+                2674,
+                3024
               ]
             }
           }
         },
         "dy": {
           "d7": {
-            "period": "08-12 至 08-18",
+            "period": "08-16 至 08-22",
             "cards": [
               {
                 "label": "投稿数",
@@ -64956,119 +64956,119 @@ const DATA_REFRESH_2026_07_19_FULL = {
               },
               {
                 "label": "播放量",
-                "value": "10.4",
+                "value": "12.5",
                 "unit": "万",
                 "delta": null
               },
               {
                 "label": "点赞量",
-                "value": "1,995",
+                "value": "2,916",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "分享量",
-                "value": "642",
+                "value": "889",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "评论量",
-                "value": "143",
+                "value": "176",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "净增粉丝",
-                "value": "762",
+                "value": "1,218",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "取关粉丝",
-                "value": "141",
+                "value": "149",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "总粉丝量",
-                "value": "20,447",
+                "value": "21,353",
                 "unit": "",
                 "delta": null
               }
             ],
             "trend": {
               "real": true,
-              "unitText": "播放量 · 08-12 至 08-18 · 真实后台数据",
+              "unitText": "播放量 · 08-16 至 08-22 · 真实后台数据",
               "labels": [
-                "08-12",
-                "08-13",
-                "08-14",
-                "08-15",
                 "08-16",
                 "08-17",
-                "08-18"
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                11048,
-                18028,
-                13115,
-                12702,
                 17531,
                 18083,
-                13906
+                13906,
+                17200,
+                28635,
+                17170,
+                12294
               ]
             }
           },
           "d30": {
-            "period": "当前21篇作品累计 · 单篇真实后台汇总",
+            "period": "当前22篇作品累计 · 单篇真实后台汇总",
             "cards": [
               {
                 "label": "投稿数",
-                "value": "21",
+                "value": "22",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "播放量",
-                "value": "224.8",
+                "value": "232.5",
                 "unit": "万",
                 "delta": null
               },
               {
                 "label": "点赞量",
-                "value": "41,523",
+                "value": "43,474",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "分享量",
-                "value": "16,696",
+                "value": "17,301",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "评论量",
-                "value": "2,042",
+                "value": "2,156",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "净增粉丝",
-                "value": "20,620",
+                "value": "21,649",
                 "unit": "",
                 "delta": null
               },
               {
                 "label": "总粉丝量",
-                "value": "20,447",
+                "value": "21,353",
                 "unit": "",
                 "delta": null
               }
             ],
             "trend": {
               "real": true,
-              "unitText": "播放量 · 当前21篇作品按天汇总",
+              "unitText": "播放量 · 当前22篇作品按天汇总",
               "labels": [
                 "06-09",
                 "06-10",
@@ -65140,7 +65140,10 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "08-16",
                 "08-17",
                 "08-18",
-                "08-19"
+                "08-19",
+                "08-21",
+                "08-22",
+                "08-23"
               ],
               "values": [
                 2367,
@@ -65213,7 +65216,10 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 220,
                 3143,
                 728,
-                330
+                330,
+                4465,
+                501,
+                243
               ]
             }
           }
@@ -65222,48 +65228,48 @@ const DATA_REFRESH_2026_07_19_FULL = {
       "source": {
         "xhs": {
           "d7": {
-            "period": "08-12 至 08-18 · 真实后台",
+            "period": "08-16 至 08-22 · 真实后台",
             "items": [
               {
                 "label": "搜索",
-                "pct": 47
+                "pct": 41
               },
               {
                 "label": "视频推荐",
-                "pct": 31
+                "pct": 39
               },
               {
                 "label": "首页推荐",
-                "pct": 12
-              },
-              {
-                "label": "关注页面",
-                "pct": 3
+                "pct": 11
               },
               {
                 "label": "个人主页",
+                "pct": 3
+              },
+              {
+                "label": "关注页面",
                 "pct": 2
               },
               {
                 "label": "其他来源",
-                "pct": 5
+                "pct": 4
               }
             ]
           },
           "d30": {
-            "period": "07-20 至 08-18 · 真实后台",
+            "period": "07-24 至 08-22 · 真实后台",
             "items": [
               {
                 "label": "视频推荐",
-                "pct": 48
+                "pct": 43
               },
               {
                 "label": "搜索",
-                "pct": 30
+                "pct": 34
               },
               {
                 "label": "首页推荐",
-                "pct": 13
+                "pct": 14
               },
               {
                 "label": "个人主页",
@@ -65288,24 +65294,24 @@ const DATA_REFRESH_2026_07_19_FULL = {
       "ranking": {
         "xhs": {
           "d7": {
-            "period": "08-12 至 08-18 · 周期内发布作品按最新阅读排序",
+            "period": "08-16 至 08-22 · 周期内发布作品按最新阅读排序",
             "items": [
               {
                 "rank": 1,
-                "title": "这两种家的格局，容易在感情中迷失自己",
-                "date": "2026-08-13",
+                "title": "走出低谷期的布局方法",
+                "date": "2026-08-21",
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "939"
+                    "value": "1,667"
                   },
                   {
                     "label": "点赞",
-                    "value": "30"
+                    "value": "58"
                   },
                   {
                     "label": "评论",
-                    "value": "3"
+                    "value": "5"
                   }
                 ]
               },
@@ -65316,22 +65322,22 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "583"
+                    "value": "763"
                   },
                   {
                     "label": "点赞",
-                    "value": "15"
+                    "value": "20"
                   },
                   {
                     "label": "评论",
-                    "value": "3"
+                    "value": "4"
                   }
                 ]
               }
             ]
           },
           "d30": {
-            "period": "07-20 至 08-18 · 周期内发布作品按最新阅读排序",
+            "period": "07-24 至 08-22 · 周期内发布作品按最新阅读排序",
             "items": [
               {
                 "rank": 1,
@@ -65340,34 +65346,34 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "9,340"
+                    "value": "1万"
                   },
                   {
                     "label": "点赞",
-                    "value": "334"
+                    "value": "367"
                   },
                   {
                     "label": "评论",
-                    "value": "15"
+                    "value": "21"
                   }
                 ]
               },
               {
                 "rank": 2,
-                "title": "亲历者总结,留学生租房3大避坑法则",
-                "date": "2026-07-21",
+                "title": "走出低谷期的布局方法",
+                "date": "2026-08-21",
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "7,084"
+                    "value": "1,667"
                   },
                   {
                     "label": "点赞",
-                    "value": "138"
+                    "value": "58"
                   },
                   {
                     "label": "评论",
-                    "value": "20"
+                    "value": "5"
                   }
                 ]
               },
@@ -65378,11 +65384,11 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "1,415"
+                    "value": "1,461"
                   },
                   {
                     "label": "点赞",
-                    "value": "40"
+                    "value": "42"
                   },
                   {
                     "label": "评论",
@@ -65397,11 +65403,11 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "939"
+                    "value": "999"
                   },
                   {
                     "label": "点赞",
-                    "value": "30"
+                    "value": "31"
                   },
                   {
                     "label": "评论",
@@ -65416,7 +65422,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "阅读",
-                    "value": "899"
+                    "value": "923"
                   },
                   {
                     "label": "点赞",
@@ -65433,24 +65439,24 @@ const DATA_REFRESH_2026_07_19_FULL = {
         },
         "dy": {
           "d7": {
-            "period": "08-12 至 08-18 · 周期内发布作品按最新播放排序",
+            "period": "08-16 至 08-22 · 周期内发布作品按最新播放排序",
             "items": [
               {
                 "rank": 1,
-                "title": "这两种家的格局，容易在感情中迷失自己",
-                "date": "2026-08-13",
+                "title": "走出低谷期的布局方法",
+                "date": "2026-08-21",
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "4,930"
+                    "value": "5,212"
                   },
                   {
                     "label": "5秒完播",
-                    "value": "38.9%"
+                    "value": "26.2%"
                   },
                   {
                     "label": "涨粉",
-                    "value": "25"
+                    "value": "38"
                   }
                 ]
               },
@@ -65461,22 +65467,22 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "3,523"
+                    "value": "4,446"
                   },
                   {
                     "label": "5秒完播",
-                    "value": "39.1%"
+                    "value": "40.8%"
                   },
                   {
                     "label": "涨粉",
-                    "value": "14"
+                    "value": "16"
                   }
                 ]
               }
             ]
           },
           "d30": {
-            "period": "07-20 至 08-18 · 周期内发布作品按最新播放排序",
+            "period": "07-24 至 08-22 · 周期内发布作品按最新播放排序",
             "items": [
               {
                 "rank": 1,
@@ -65485,15 +65491,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "5.6万"
+                    "value": "6.7万"
                   },
                   {
                     "label": "5秒完播",
-                    "value": "51.7%"
+                    "value": "51.9%"
                   },
                   {
                     "label": "涨粉",
-                    "value": "621"
+                    "value": "739"
                   }
                 ]
               },
@@ -65504,15 +65510,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "1.3万"
+                    "value": "3.2万"
                   },
                   {
                     "label": "5秒完播",
-                    "value": "36.8%"
+                    "value": "42.8%"
                   },
                   {
                     "label": "涨粉",
-                    "value": "141"
+                    "value": "567"
                   }
                 ]
               },
@@ -65523,7 +65529,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "1.1万"
+                    "value": "1.2万"
                   },
                   {
                     "label": "5秒完播",
@@ -65531,7 +65537,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "涨粉",
-                    "value": "66"
+                    "value": "75"
                   }
                 ]
               },
@@ -65542,7 +65548,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "8,579"
+                    "value": "8,799"
                   },
                   {
                     "label": "5秒完播",
@@ -65550,26 +65556,26 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "涨粉",
-                    "value": "12"
+                    "value": "13"
                   }
                 ]
               },
               {
                 "rank": 5,
-                "title": "亲历者总结,留学生租房3大避坑法则",
-                "date": "2026-07-21",
+                "title": "如何分辨谁是偷走家运的“元凶”",
+                "date": "2026-08-07",
                 "stats": [
                   {
                     "label": "播放",
-                    "value": "8,369"
+                    "value": "6,114"
                   },
                   {
                     "label": "5秒完播",
-                    "value": "40.7%"
+                    "value": "33.5%"
                   },
                   {
                     "label": "涨粉",
-                    "value": "28"
+                    "value": "57"
                   }
                 ]
               }
@@ -65580,47 +65586,47 @@ const DATA_REFRESH_2026_07_19_FULL = {
       "audience": {
         "xhs": {
           "d7": {
-            "note": "粉丝数据 · 08-12 至 08-18 · 数据更新至 2026-08-19",
+            "note": "粉丝数据 · 08-16 至 08-22 · 数据更新至 2026-08-23",
             "base": [
               {
                 "label": "总粉丝量",
-                "value": "8,675",
+                "value": "8,727",
                 "sub": "粉丝数据接口"
               },
               {
                 "label": "7日涨粉",
-                "value": "62",
+                "value": "92",
                 "sub": "新增关注"
               },
               {
                 "label": "7日取关",
-                "value": "16",
+                "value": "15",
                 "sub": "取消关注"
               },
               {
                 "label": "净增粉丝",
-                "value": "46",
+                "value": "77",
                 "sub": "涨粉-取关"
               }
             ],
             "growth": {
               "labels": [
-                "08-11",
-                "08-12",
-                "08-13",
-                "08-14",
-                "08-15",
                 "08-16",
-                "08-17"
+                "08-17",
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                8624,
-                8630,
-                8635,
-                8642,
-                8646,
                 8656,
-                8661
+                8661,
+                8671,
+                8678,
+                8684,
+                8708,
+                8723
               ]
             },
             "followSource": {
@@ -65639,42 +65645,38 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 },
                 {
                   "label": "其他来源",
-                  "pct": 5
+                  "pct": 7
                 },
                 {
                   "label": "个人主页",
                   "pct": 2
                 }
               ],
-              "period": "粉丝来源 · 数据更新至 2026-08-19"
+              "period": "粉丝来源 · 数据更新至 2026-08-23"
             },
             "topFans": [
+              {
+                "name": "偶麦咖",
+                "idx": 11
+              },
+              {
+                "name": "青禾焰嘉嘉",
+                "idx": 6
+              },
               {
                 "name": "不卷养生局",
                 "idx": 6
               },
               {
                 "name": "快乐的海鸥",
-                "idx": 6
-              },
-              {
-                "name": "安娜娜",
                 "idx": 4
               },
               {
-                "name": "希顺",
-                "idx": 4
-              },
-              {
-                "name": "偶麦咖",
-                "idx": 4
-              },
-              {
-                "name": "仙仙在这",
+                "name": "协律郎（太常寺）",
                 "idx": 3
               },
               {
-                "name": "Lalananana",
+                "name": "Vivi熙",
                 "idx": 3
               },
               {
@@ -65682,7 +65684,11 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "idx": 2
               },
               {
-                "name": "Vivi熙",
+                "name": "Neliell",
+                "idx": 2
+              },
+              {
+                "name": "L姽婳",
                 "idx": 2
               },
               {
@@ -65712,7 +65718,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "35-44",
-                    "pct": 40
+                    "pct": 39
                   },
                   {
                     "label": ">44",
@@ -65795,36 +65801,31 @@ const DATA_REFRESH_2026_07_19_FULL = {
             }
           },
           "d30": {
-            "note": "粉丝数据 · 07-20 至 08-18 · 数据更新至 2026-08-19",
+            "note": "粉丝数据 · 07-24 至 08-22 · 数据更新至 2026-08-23",
             "base": [
               {
                 "label": "总粉丝量",
-                "value": "8,675",
+                "value": "8,727",
                 "sub": "粉丝数据接口"
               },
               {
                 "label": "30日涨粉",
-                "value": "442",
+                "value": "401",
                 "sub": "新增关注"
               },
               {
                 "label": "30日取关",
-                "value": "91",
+                "value": "81",
                 "sub": "取消关注"
               },
               {
                 "label": "净增粉丝",
-                "value": "351",
+                "value": "320",
                 "sub": "涨粉-取关"
               }
             ],
             "growth": {
               "labels": [
-                "07-19",
-                "07-20",
-                "07-21",
-                "07-22",
-                "07-23",
                 "07-24",
                 "07-25",
                 "07-26",
@@ -65849,14 +65850,14 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "08-14",
                 "08-15",
                 "08-16",
-                "08-17"
+                "08-17",
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                8326,
-                8347,
-                8371,
-                8388,
-                8400,
                 8403,
                 8408,
                 8406,
@@ -65881,7 +65882,12 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 8642,
                 8646,
                 8656,
-                8661
+                8661,
+                8671,
+                8678,
+                8684,
+                8708,
+                8723
               ]
             },
             "followSource": {
@@ -65900,35 +65906,39 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 },
                 {
                   "label": "其他来源",
-                  "pct": 5
+                  "pct": 7
                 },
                 {
                   "label": "个人主页",
                   "pct": 2
                 }
               ],
-              "period": "粉丝来源 · 数据更新至 2026-08-19"
+              "period": "粉丝来源 · 数据更新至 2026-08-23"
             },
             "topFans": [
               {
                 "name": "不卷养生局",
-                "idx": 24
-              },
-              {
-                "name": "快乐的海鸥",
-                "idx": 20
+                "idx": 25
               },
               {
                 "name": "Vivi熙",
                 "idx": 20
               },
               {
+                "name": "快乐的海鸥",
+                "idx": 18
+              },
+              {
                 "name": "悟",
                 "idx": 18
               },
               {
+                "name": "偶麦咖",
+                "idx": 16
+              },
+              {
                 "name": "协律郎（太常寺）",
-                "idx": 15
+                "idx": 14
               },
               {
                 "name": "Momo的家居好物",
@@ -65936,19 +65946,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
               },
               {
                 "name": "饼干饼干",
-                "idx": 11
-              },
-              {
-                "name": "育儿路上不孤单",
-                "idx": 8
-              },
-              {
-                "name": "偶麦咖",
-                "idx": 7
+                "idx": 9
               },
               {
                 "name": "倒要看看",
                 "idx": 7
+              },
+              {
+                "name": "安娜娜",
+                "idx": 6
               }
             ],
             "portrait": {
@@ -65973,7 +65979,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "35-44",
-                    "pct": 40
+                    "pct": 39
                   },
                   {
                     "label": ">44",
@@ -66058,54 +66064,54 @@ const DATA_REFRESH_2026_07_19_FULL = {
         },
         "dy": {
           "d7": {
-            "note": "粉丝数据 · 08-12 至 08-18 · 数据更新至 2026-08-19",
+            "note": "粉丝数据 · 08-16 至 08-22 · 数据更新至 2026-08-23",
             "base": [
               {
                 "label": "总粉丝量",
-                "value": "20,447",
+                "value": "21,353",
                 "sub": "粉丝数据接口"
               },
               {
                 "label": "7日净增粉丝",
-                "value": "762",
+                "value": "1,218",
                 "sub": "新增-取关"
               },
               {
                 "label": "7日取关",
-                "value": "141",
+                "value": "149",
                 "sub": "取消关注"
               },
               {
                 "label": "主页访客粉丝",
-                "value": "455",
+                "value": "722",
                 "sub": "粉丝页接口"
               }
             ],
             "growth": {
               "labels": [
-                "08-12",
-                "08-13",
-                "08-14",
-                "08-15",
                 "08-16",
                 "08-17",
-                "08-18"
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                108,
-                127,
-                97,
-                106,
                 174,
                 158,
-                133
+                133,
+                182,
+                427,
+                173,
+                120
               ]
             },
             "portrait": {
               "conclusion": "抖音粉丝以女性略高、24-40岁、重度活跃用户为主。",
               "gender": {
-                "male": 45,
-                "female": 55
+                "male": 44,
+                "female": 56
               },
               "age": {
                 "items": [
@@ -66154,11 +66160,11 @@ const DATA_REFRESH_2026_07_19_FULL = {
                     "pct": 6
                   },
                   {
-                    "label": "四川",
+                    "label": "浙江",
                     "pct": 5
                   },
                   {
-                    "label": "浙江",
+                    "label": "四川",
                     "pct": 5
                   },
                   {
@@ -66167,10 +66173,10 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "陕西",
-                    "pct": 4
+                    "pct": 3
                   },
                   {
-                    "label": "上海",
+                    "label": "山西",
                     "pct": 3
                   }
                 ]
@@ -66246,7 +66252,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "亲子",
-                    "pct": 10
+                    "pct": 11
                   },
                   {
                     "label": "社会时政",
@@ -66254,7 +66260,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "体育",
-                    "pct": 7
+                    "pct": 6
                   },
                   {
                     "label": "时尚",
@@ -66281,35 +66287,31 @@ const DATA_REFRESH_2026_07_19_FULL = {
             }
           },
           "d30": {
-            "note": "粉丝数据 · 07-20 至 08-18 · 数据更新至 2026-08-19",
+            "note": "粉丝数据 · 07-24 至 08-22 · 数据更新至 2026-08-23",
             "base": [
               {
                 "label": "总粉丝量",
-                "value": "20,447",
+                "value": "21,353",
                 "sub": "粉丝数据接口"
               },
               {
                 "label": "30日净增粉丝",
-                "value": "2,442",
+                "value": "2,997",
                 "sub": "新增-取关"
               },
               {
                 "label": "30日取关",
-                "value": "510",
+                "value": "532",
                 "sub": "取消关注"
               },
               {
                 "label": "主页访客粉丝",
-                "value": "2,315",
+                "value": "2,569",
                 "sub": "粉丝页接口"
               }
             ],
             "growth": {
               "labels": [
-                "07-20",
-                "07-21",
-                "07-22",
-                "07-23",
                 "07-24",
                 "07-25",
                 "07-26",
@@ -66335,13 +66337,13 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 "08-15",
                 "08-16",
                 "08-17",
-                "08-18"
+                "08-18",
+                "08-19",
+                "08-20",
+                "08-21",
+                "08-22"
               ],
               "values": [
-                86,
-                104,
-                88,
-                47,
                 81,
                 114,
                 89,
@@ -66367,14 +66369,18 @@ const DATA_REFRESH_2026_07_19_FULL = {
                 106,
                 174,
                 158,
-                133
+                133,
+                182,
+                427,
+                173,
+                120
               ]
             },
             "portrait": {
               "conclusion": "抖音粉丝以女性略高、24-40岁、重度活跃用户为主。",
               "gender": {
-                "male": 45,
-                "female": 55
+                "male": 44,
+                "female": 56
               },
               "age": {
                 "items": [
@@ -66423,11 +66429,11 @@ const DATA_REFRESH_2026_07_19_FULL = {
                     "pct": 6
                   },
                   {
-                    "label": "四川",
+                    "label": "浙江",
                     "pct": 5
                   },
                   {
-                    "label": "浙江",
+                    "label": "四川",
                     "pct": 5
                   },
                   {
@@ -66436,10 +66442,10 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "陕西",
-                    "pct": 4
+                    "pct": 3
                   },
                   {
-                    "label": "上海",
+                    "label": "山西",
                     "pct": 3
                   }
                 ]
@@ -66515,7 +66521,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "亲子",
-                    "pct": 10
+                    "pct": 11
                   },
                   {
                     "label": "社会时政",
@@ -66523,7 +66529,7 @@ const DATA_REFRESH_2026_07_19_FULL = {
                   },
                   {
                     "label": "体育",
-                    "pct": 7
+                    "pct": 6
                   },
                   {
                     "label": "时尚",
@@ -66553,9 +66559,25 @@ const DATA_REFRESH_2026_07_19_FULL = {
       },
       "flowAnalysis": {
         "xhs": {
-          "period": "单篇详情 · 数据更新至 2026-08-19",
+          "period": "单篇详情 · 数据更新至 2026-08-23",
           "note": "小红书创作者中心官方接口",
           "itemList": [
+            {
+              "id": "6a8716920000000016018923",
+              "title": "走出低谷期的布局方法",
+              "date": "2026-08-21",
+              "plays": "1,667",
+              "likes": "58",
+              "comments": "5",
+              "favs": "51",
+              "shares": "8",
+              "fans": "24",
+              "ctr": "9.6%",
+              "clickRate": "9.6%",
+              "finishRate5s": "42.6%",
+              "fullViewRate": "9.8%",
+              "avgDur": "44.7秒"
+            },
             {
               "id": "6a81903600000000220116e5",
               "title": "住什么样的房子🏠决定你的家庭“弟”位",
@@ -66894,6 +66916,1377 @@ const DATA_REFRESH_2026_07_19_FULL = {
             }
           ],
           "itemDetails": {
+            "走出低谷期的布局方法": {
+              "overview": {
+                "impl_count": "2,318",
+                "view_count": "1,667",
+                "like_count": "58",
+                "comment_count": "5",
+                "collect_count": "51",
+                "share_count": "8",
+                "rise_fans_count": "24",
+                "view_time_avg": 44.7,
+                "cover_click_rate": 9.6,
+                "finish5s_rate": 42.6,
+                "full_view_rate": 9.8,
+                "exit_view2s_rate": 28.7,
+                "fans": {
+                  "impl": 31.1,
+                  "view": 25.3,
+                  "like": 55.4,
+                  "comment": 80,
+                  "collect": 35.3,
+                  "share": 12.5,
+                  "coverClick": 10.2,
+                  "viewTime": 62.4,
+                  "finish5s": 46.4,
+                  "fullView": 13.3,
+                  "exit2s": 29.5
+                },
+                "trend": {
+                  "hourly": {
+                    "view": [
+                      {
+                        "t": "08-21 11:00",
+                        "v": 28,
+                        "vd": 28
+                      },
+                      {
+                        "t": "08-21 12:00",
+                        "v": 23,
+                        "vd": 23
+                      },
+                      {
+                        "t": "08-21 13:00",
+                        "v": 29,
+                        "vd": 29
+                      },
+                      {
+                        "t": "08-21 14:00",
+                        "v": 15,
+                        "vd": 15
+                      },
+                      {
+                        "t": "08-21 15:00",
+                        "v": 19,
+                        "vd": 19
+                      },
+                      {
+                        "t": "08-21 16:00",
+                        "v": 23,
+                        "vd": 23
+                      },
+                      {
+                        "t": "08-21 17:00",
+                        "v": 23,
+                        "vd": 23
+                      },
+                      {
+                        "t": "08-21 18:00",
+                        "v": 22,
+                        "vd": 22
+                      },
+                      {
+                        "t": "08-21 19:00",
+                        "v": 31,
+                        "vd": 31
+                      },
+                      {
+                        "t": "08-21 20:00",
+                        "v": 58,
+                        "vd": 58
+                      },
+                      {
+                        "t": "08-21 21:00",
+                        "v": 81,
+                        "vd": 81
+                      },
+                      {
+                        "t": "08-21 22:00",
+                        "v": 204,
+                        "vd": 204
+                      },
+                      {
+                        "t": "08-21 23:00",
+                        "v": 305,
+                        "vd": 305
+                      },
+                      {
+                        "t": "08-22 00:00",
+                        "v": 96,
+                        "vd": 96
+                      },
+                      {
+                        "t": "08-22 01:00",
+                        "v": 30,
+                        "vd": 30
+                      },
+                      {
+                        "t": "08-22 02:00",
+                        "v": 70,
+                        "vd": 70
+                      },
+                      {
+                        "t": "08-22 03:00",
+                        "v": 34,
+                        "vd": 34
+                      },
+                      {
+                        "t": "08-22 04:00",
+                        "v": 8,
+                        "vd": 8
+                      },
+                      {
+                        "t": "08-22 05:00",
+                        "v": 32,
+                        "vd": 32
+                      },
+                      {
+                        "t": "08-22 06:00",
+                        "v": 58,
+                        "vd": 58
+                      },
+                      {
+                        "t": "08-22 07:00",
+                        "v": 78,
+                        "vd": 78
+                      },
+                      {
+                        "t": "08-22 08:00",
+                        "v": 25,
+                        "vd": 25
+                      },
+                      {
+                        "t": "08-22 09:00",
+                        "v": 25,
+                        "vd": 25
+                      },
+                      {
+                        "t": "08-22 10:00",
+                        "v": 22,
+                        "vd": 22
+                      },
+                      {
+                        "t": "08-22 11:00",
+                        "v": 13,
+                        "vd": 13
+                      },
+                      {
+                        "t": "08-22 12:00",
+                        "v": 13,
+                        "vd": 13
+                      },
+                      {
+                        "t": "08-22 13:00",
+                        "v": 16,
+                        "vd": 16
+                      },
+                      {
+                        "t": "08-22 14:00",
+                        "v": 13,
+                        "vd": 13
+                      },
+                      {
+                        "t": "08-22 15:00",
+                        "v": 7,
+                        "vd": 7
+                      },
+                      {
+                        "t": "08-22 16:00",
+                        "v": 10,
+                        "vd": 10
+                      },
+                      {
+                        "t": "08-22 17:00",
+                        "v": 6,
+                        "vd": 6
+                      },
+                      {
+                        "t": "08-22 18:00",
+                        "v": 10,
+                        "vd": 10
+                      },
+                      {
+                        "t": "08-22 19:00",
+                        "v": 10,
+                        "vd": 10
+                      },
+                      {
+                        "t": "08-22 20:00",
+                        "v": 5,
+                        "vd": 5
+                      },
+                      {
+                        "t": "08-22 21:00",
+                        "v": 10,
+                        "vd": 10
+                      },
+                      {
+                        "t": "08-22 22:00",
+                        "v": 13,
+                        "vd": 13
+                      },
+                      {
+                        "t": "08-22 23:00",
+                        "v": 10,
+                        "vd": 10
+                      },
+                      {
+                        "t": "08-23 00:00",
+                        "v": 14,
+                        "vd": 14
+                      },
+                      {
+                        "t": "08-23 01:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-23 02:00",
+                        "v": 2,
+                        "vd": 2
+                      },
+                      {
+                        "t": "08-23 03:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-23 04:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-23 05:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-23 06:00",
+                        "v": 4,
+                        "vd": 4
+                      },
+                      {
+                        "t": "08-23 07:00",
+                        "v": 2,
+                        "vd": 2
+                      },
+                      {
+                        "t": "08-23 08:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-23 09:00",
+                        "v": 5,
+                        "vd": 5
+                      },
+                      {
+                        "t": "08-23 10:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-23 11:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 12:00",
+                        "v": 5,
+                        "vd": 5
+                      },
+                      {
+                        "t": "08-23 13:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-23 14:00",
+                        "v": 2,
+                        "vd": 2
+                      },
+                      {
+                        "t": "08-23 15:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-23 16:00",
+                        "v": 4,
+                        "vd": 4
+                      },
+                      {
+                        "t": "08-23 17:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-23 18:00",
+                        "v": 3,
+                        "vd": 3
+                      }
+                    ],
+                    "rise_fans": [
+                      {
+                        "t": "08-21 11:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 12:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 13:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 14:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 15:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 16:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 17:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 18:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-21 19:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-21 20:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-21 21:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-21 22:00",
+                        "v": 2,
+                        "vd": 2
+                      },
+                      {
+                        "t": "08-21 23:00",
+                        "v": 7,
+                        "vd": 7
+                      },
+                      {
+                        "t": "08-22 00:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-22 01:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 02:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 03:00",
+                        "v": 2,
+                        "vd": 2
+                      },
+                      {
+                        "t": "08-22 04:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 05:00",
+                        "v": 2,
+                        "vd": 2
+                      },
+                      {
+                        "t": "08-22 06:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-22 07:00",
+                        "v": 3,
+                        "vd": 3
+                      },
+                      {
+                        "t": "08-22 08:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-22 09:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 10:00",
+                        "v": 1,
+                        "vd": 1
+                      },
+                      {
+                        "t": "08-22 11:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 12:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 13:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 14:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 15:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 16:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 17:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 18:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 19:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 20:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 21:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 22:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-22 23:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 00:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 01:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 02:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 03:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 04:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 05:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 06:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 07:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 08:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 09:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 10:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 11:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 12:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 13:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 14:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 15:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 16:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 17:00",
+                        "v": 0,
+                        "vd": 0
+                      },
+                      {
+                        "t": "08-23 18:00",
+                        "v": 0,
+                        "vd": 0
+                      }
+                    ],
+                    "exit_view2s": []
+                  },
+                  "daily": {
+                    "view": [
+                      {
+                        "t": "08-21",
+                        "v": 987,
+                        "vd": 987
+                      },
+                      {
+                        "t": "08-22",
+                        "v": 614,
+                        "vd": 614
+                      }
+                    ],
+                    "rise_fans": [
+                      {
+                        "t": "08-21",
+                        "v": 13,
+                        "vd": 13
+                      },
+                      {
+                        "t": "08-22",
+                        "v": 11,
+                        "vd": 11
+                      }
+                    ],
+                    "exit_view2s": [
+                      {
+                        "t": "08-21",
+                        "v": 29,
+                        "vd": 30
+                      },
+                      {
+                        "t": "08-22",
+                        "v": 26,
+                        "vd": 26.6
+                      }
+                    ]
+                  },
+                  "leaveSummary": "超过 60% 的用户在5秒内离开。"
+                }
+              },
+              "trend": {
+                "hourly": {
+                  "view": [
+                    {
+                      "t": "08-21 11:00",
+                      "v": 28,
+                      "vd": 28
+                    },
+                    {
+                      "t": "08-21 12:00",
+                      "v": 23,
+                      "vd": 23
+                    },
+                    {
+                      "t": "08-21 13:00",
+                      "v": 29,
+                      "vd": 29
+                    },
+                    {
+                      "t": "08-21 14:00",
+                      "v": 15,
+                      "vd": 15
+                    },
+                    {
+                      "t": "08-21 15:00",
+                      "v": 19,
+                      "vd": 19
+                    },
+                    {
+                      "t": "08-21 16:00",
+                      "v": 23,
+                      "vd": 23
+                    },
+                    {
+                      "t": "08-21 17:00",
+                      "v": 23,
+                      "vd": 23
+                    },
+                    {
+                      "t": "08-21 18:00",
+                      "v": 22,
+                      "vd": 22
+                    },
+                    {
+                      "t": "08-21 19:00",
+                      "v": 31,
+                      "vd": 31
+                    },
+                    {
+                      "t": "08-21 20:00",
+                      "v": 58,
+                      "vd": 58
+                    },
+                    {
+                      "t": "08-21 21:00",
+                      "v": 81,
+                      "vd": 81
+                    },
+                    {
+                      "t": "08-21 22:00",
+                      "v": 204,
+                      "vd": 204
+                    },
+                    {
+                      "t": "08-21 23:00",
+                      "v": 305,
+                      "vd": 305
+                    },
+                    {
+                      "t": "08-22 00:00",
+                      "v": 96,
+                      "vd": 96
+                    },
+                    {
+                      "t": "08-22 01:00",
+                      "v": 30,
+                      "vd": 30
+                    },
+                    {
+                      "t": "08-22 02:00",
+                      "v": 70,
+                      "vd": 70
+                    },
+                    {
+                      "t": "08-22 03:00",
+                      "v": 34,
+                      "vd": 34
+                    },
+                    {
+                      "t": "08-22 04:00",
+                      "v": 8,
+                      "vd": 8
+                    },
+                    {
+                      "t": "08-22 05:00",
+                      "v": 32,
+                      "vd": 32
+                    },
+                    {
+                      "t": "08-22 06:00",
+                      "v": 58,
+                      "vd": 58
+                    },
+                    {
+                      "t": "08-22 07:00",
+                      "v": 78,
+                      "vd": 78
+                    },
+                    {
+                      "t": "08-22 08:00",
+                      "v": 25,
+                      "vd": 25
+                    },
+                    {
+                      "t": "08-22 09:00",
+                      "v": 25,
+                      "vd": 25
+                    },
+                    {
+                      "t": "08-22 10:00",
+                      "v": 22,
+                      "vd": 22
+                    },
+                    {
+                      "t": "08-22 11:00",
+                      "v": 13,
+                      "vd": 13
+                    },
+                    {
+                      "t": "08-22 12:00",
+                      "v": 13,
+                      "vd": 13
+                    },
+                    {
+                      "t": "08-22 13:00",
+                      "v": 16,
+                      "vd": 16
+                    },
+                    {
+                      "t": "08-22 14:00",
+                      "v": 13,
+                      "vd": 13
+                    },
+                    {
+                      "t": "08-22 15:00",
+                      "v": 7,
+                      "vd": 7
+                    },
+                    {
+                      "t": "08-22 16:00",
+                      "v": 10,
+                      "vd": 10
+                    },
+                    {
+                      "t": "08-22 17:00",
+                      "v": 6,
+                      "vd": 6
+                    },
+                    {
+                      "t": "08-22 18:00",
+                      "v": 10,
+                      "vd": 10
+                    },
+                    {
+                      "t": "08-22 19:00",
+                      "v": 10,
+                      "vd": 10
+                    },
+                    {
+                      "t": "08-22 20:00",
+                      "v": 5,
+                      "vd": 5
+                    },
+                    {
+                      "t": "08-22 21:00",
+                      "v": 10,
+                      "vd": 10
+                    },
+                    {
+                      "t": "08-22 22:00",
+                      "v": 13,
+                      "vd": 13
+                    },
+                    {
+                      "t": "08-22 23:00",
+                      "v": 10,
+                      "vd": 10
+                    },
+                    {
+                      "t": "08-23 00:00",
+                      "v": 14,
+                      "vd": 14
+                    },
+                    {
+                      "t": "08-23 01:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-23 02:00",
+                      "v": 2,
+                      "vd": 2
+                    },
+                    {
+                      "t": "08-23 03:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-23 04:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-23 05:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-23 06:00",
+                      "v": 4,
+                      "vd": 4
+                    },
+                    {
+                      "t": "08-23 07:00",
+                      "v": 2,
+                      "vd": 2
+                    },
+                    {
+                      "t": "08-23 08:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-23 09:00",
+                      "v": 5,
+                      "vd": 5
+                    },
+                    {
+                      "t": "08-23 10:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-23 11:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 12:00",
+                      "v": 5,
+                      "vd": 5
+                    },
+                    {
+                      "t": "08-23 13:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-23 14:00",
+                      "v": 2,
+                      "vd": 2
+                    },
+                    {
+                      "t": "08-23 15:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-23 16:00",
+                      "v": 4,
+                      "vd": 4
+                    },
+                    {
+                      "t": "08-23 17:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-23 18:00",
+                      "v": 3,
+                      "vd": 3
+                    }
+                  ],
+                  "rise_fans": [
+                    {
+                      "t": "08-21 11:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 12:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 13:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 14:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 15:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 16:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 17:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 18:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-21 19:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-21 20:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-21 21:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-21 22:00",
+                      "v": 2,
+                      "vd": 2
+                    },
+                    {
+                      "t": "08-21 23:00",
+                      "v": 7,
+                      "vd": 7
+                    },
+                    {
+                      "t": "08-22 00:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-22 01:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 02:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 03:00",
+                      "v": 2,
+                      "vd": 2
+                    },
+                    {
+                      "t": "08-22 04:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 05:00",
+                      "v": 2,
+                      "vd": 2
+                    },
+                    {
+                      "t": "08-22 06:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-22 07:00",
+                      "v": 3,
+                      "vd": 3
+                    },
+                    {
+                      "t": "08-22 08:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-22 09:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 10:00",
+                      "v": 1,
+                      "vd": 1
+                    },
+                    {
+                      "t": "08-22 11:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 12:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 13:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 14:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 15:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 16:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 17:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 18:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 19:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 20:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 21:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 22:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-22 23:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 00:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 01:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 02:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 03:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 04:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 05:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 06:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 07:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 08:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 09:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 10:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 11:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 12:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 13:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 14:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 15:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 16:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 17:00",
+                      "v": 0,
+                      "vd": 0
+                    },
+                    {
+                      "t": "08-23 18:00",
+                      "v": 0,
+                      "vd": 0
+                    }
+                  ],
+                  "exit_view2s": []
+                },
+                "daily": {
+                  "view": [
+                    {
+                      "t": "08-21",
+                      "v": 987,
+                      "vd": 987
+                    },
+                    {
+                      "t": "08-22",
+                      "v": 614,
+                      "vd": 614
+                    }
+                  ],
+                  "rise_fans": [
+                    {
+                      "t": "08-21",
+                      "v": 13,
+                      "vd": 13
+                    },
+                    {
+                      "t": "08-22",
+                      "v": 11,
+                      "vd": 11
+                    }
+                  ],
+                  "exit_view2s": [
+                    {
+                      "t": "08-21",
+                      "v": 29,
+                      "vd": 30
+                    },
+                    {
+                      "t": "08-22",
+                      "v": 26,
+                      "vd": 26.6
+                    }
+                  ]
+                },
+                "leaveSummary": "超过 60% 的用户在5秒内离开。"
+              },
+              "playSource": [
+                {
+                  "label": "视频推荐",
+                  "pct": 94.2
+                },
+                {
+                  "label": "首页推荐",
+                  "pct": 2.2
+                },
+                {
+                  "label": "个人主页",
+                  "pct": 1.1
+                },
+                {
+                  "label": "关注页面",
+                  "pct": 0.7
+                },
+                {
+                  "label": "其他来源",
+                  "pct": 1.8
+                }
+              ],
+              "playSourceNote": "",
+              "portrait": {
+                "gender": {
+                  "male": 16,
+                  "female": 84
+                },
+                "age": {
+                  "items": [
+                    {
+                      "label": "<18",
+                      "pct": 1
+                    },
+                    {
+                      "label": "18-24",
+                      "pct": 4
+                    },
+                    {
+                      "label": "25-34",
+                      "pct": 26
+                    },
+                    {
+                      "label": "35-44",
+                      "pct": 52
+                    },
+                    {
+                      "label": ">44",
+                      "pct": 17
+                    }
+                  ]
+                },
+                "city": {
+                  "items": [
+                    {
+                      "label": "海外",
+                      "pct": 9
+                    },
+                    {
+                      "label": "上海",
+                      "pct": 7
+                    },
+                    {
+                      "label": "北京",
+                      "pct": 6
+                    },
+                    {
+                      "label": "广州",
+                      "pct": 4
+                    },
+                    {
+                      "label": "深圳",
+                      "pct": 3
+                    },
+                    {
+                      "label": "成都",
+                      "pct": 2
+                    },
+                    {
+                      "label": "天津",
+                      "pct": 1
+                    },
+                    {
+                      "label": "南京",
+                      "pct": 1
+                    }
+                  ]
+                },
+                "interest": {
+                  "items": [
+                    {
+                      "label": "影视",
+                      "pct": 15
+                    },
+                    {
+                      "label": "娱乐",
+                      "pct": 14
+                    },
+                    {
+                      "label": "生活记录",
+                      "pct": 11
+                    },
+                    {
+                      "label": "美食",
+                      "pct": 6
+                    },
+                    {
+                      "label": "家居家装",
+                      "pct": 6
+                    },
+                    {
+                      "label": "宠物",
+                      "pct": 4
+                    },
+                    {
+                      "label": "星座命理",
+                      "pct": 4
+                    },
+                    {
+                      "label": "社科",
+                      "pct": 4
+                    }
+                  ]
+                }
+              },
+              "leaveSummary": "超过 60% 的用户在5秒内离开。"
+            },
             "住什么样的房子🏠决定你的家庭“弟”位": {
               "overview": {
                 "impl_count": "1,332",
@@ -101232,201 +102625,218 @@ const DATA_REFRESH_2026_07_19_FULL = {
           }
         },
         "dy": {
-          "period": "单篇详情 · 数据更新至 2026-08-19",
+          "period": "单篇详情 · 数据更新至 2026-08-23",
           "summary": {
             "cards": [
               {
                 "label": "平均播放量",
-                "value": "10.7万",
+                "value": "10.6万",
                 "unit": ""
               },
               {
                 "label": "平均5秒完播率",
-                "value": 44.1,
+                "value": 43.7,
                 "unit": "%"
               },
               {
                 "label": "平均2秒跳出率",
-                "value": 30.8,
+                "value": 31.3,
                 "unit": "%"
               },
               {
                 "label": "平均播放时长",
-                "value": 31.6,
+                "value": 31.1,
                 "unit": "秒"
               }
             ]
           },
           "itemList": [
             {
+              "id": "7676121472914310011",
+              "title": "走出低谷期的布局方法",
+              "date": "2026-08-21",
+              "plays": "5,212",
+              "avgDur": "16秒",
+              "click": 88.5,
+              "finish5": 26.2,
+              "bounce2": 43.7,
+              "likes": "156",
+              "shares": "27",
+              "clickRate": "88.5%",
+              "finishRate5s": "26.2%",
+              "bounce2s": "43.7%",
+              "like": "156",
+              "share": "27"
+            },
+            {
               "id": "7674569378440526565",
               "title": "住什么样的房子🏠决定你的家庭“弟”位",
               "date": "2026-08-17",
-              "plays": "3,523",
-              "avgDur": "21秒",
+              "plays": "4,446",
+              "avgDur": "23秒",
               "click": 100,
-              "finish5": 39.1,
-              "bounce2": 30.2,
-              "likes": "80",
-              "shares": "20",
+              "finish5": 40.8,
+              "bounce2": 29.8,
+              "likes": "90",
+              "shares": "22",
               "clickRate": "100%",
-              "finishRate5s": "39.1%",
-              "bounce2s": "30.2%",
-              "like": "80",
-              "share": "20"
+              "finishRate5s": "40.8%",
+              "bounce2s": "29.8%",
+              "like": "90",
+              "share": "22"
             },
             {
               "id": "7673444730272988921",
               "title": "这两种家的格局，容易在感情中迷失自己",
               "date": "2026-08-13",
-              "plays": "4,930",
-              "avgDur": "16秒",
+              "plays": "5,633",
+              "avgDur": "17秒",
               "click": 100,
-              "finish5": 38.9,
-              "bounce2": 33.6,
-              "likes": "76",
-              "shares": "21",
+              "finish5": 39.1,
+              "bounce2": 32,
+              "likes": "94",
+              "shares": "22",
               "clickRate": "100%",
-              "finishRate5s": "38.9%",
-              "bounce2s": "33.6%",
-              "like": "76",
-              "share": "21"
+              "finishRate5s": "39.1%",
+              "bounce2s": "32%",
+              "like": "94",
+              "share": "22"
             },
             {
               "id": "7672257293384058277",
               "title": "自救指南｜让母亲归位，你值得被好好对待",
               "date": "2026-08-10",
-              "plays": "5,467",
-              "avgDur": "37秒",
-              "click": 42.4,
-              "finish5": 37.2,
-              "bounce2": 38,
+              "plays": "5,785",
+              "avgDur": "36秒",
+              "click": 45.5,
+              "finish5": 37.1,
+              "bounce2": 38.4,
               "likes": "103",
-              "shares": "24",
-              "clickRate": "42.4%",
-              "finishRate5s": "37.2%",
-              "bounce2s": "38%",
+              "shares": "27",
+              "clickRate": "45.5%",
+              "finishRate5s": "37.1%",
+              "bounce2s": "38.4%",
               "like": "103",
-              "share": "24"
+              "share": "27"
             },
             {
               "id": "7671117818881281189",
               "title": "如何分辨谁是偷走家运的“元凶”",
               "date": "2026-08-07",
-              "plays": "5,701",
-              "avgDur": "22秒",
-              "click": 100,
-              "finish5": 32.8,
-              "bounce2": 40,
-              "likes": "159",
-              "shares": "30",
-              "clickRate": "100%",
-              "finishRate5s": "32.8%",
-              "bounce2s": "40%",
-              "like": "159",
-              "share": "30"
+              "plays": "6,114",
+              "avgDur": "23秒",
+              "click": 96.9,
+              "finish5": 33.5,
+              "bounce2": 39.7,
+              "likes": "165",
+              "shares": "32",
+              "clickRate": "96.9%",
+              "finishRate5s": "33.5%",
+              "bounce2s": "39.7%",
+              "like": "165",
+              "share": "32"
             },
             {
               "id": "7669634591561299429",
               "title": "西北位的难题到我这可以停止了",
               "date": "2026-08-03",
-              "plays": "5.6万",
+              "plays": "6.7万",
               "avgDur": "52秒",
-              "click": 20.7,
-              "finish5": 51.7,
-              "bounce2": 27.9,
-              "likes": "1,615",
-              "shares": "323",
-              "clickRate": "20.7%",
-              "finishRate5s": "51.7%",
-              "bounce2s": "27.9%",
-              "like": "1,615",
-              "share": "323"
+              "click": 22.3,
+              "finish5": 51.9,
+              "bounce2": 28,
+              "likes": "1,891",
+              "shares": "386",
+              "clickRate": "22.3%",
+              "finishRate5s": "51.9%",
+              "bounce2s": "28%",
+              "like": "1,891",
+              "share": "386"
             },
             {
               "id": "7668221739549176185",
               "title": "掌握家旺人旺的底层代码",
               "date": "2026-07-30",
-              "plays": "1.1万",
-              "avgDur": "36秒",
-              "click": 48.1,
+              "plays": "1.2万",
+              "avgDur": "37秒",
+              "click": 48.6,
               "finish5": 43.1,
-              "bounce2": 30.5,
-              "likes": "347",
-              "shares": "58",
-              "clickRate": "48.1%",
+              "bounce2": 30.7,
+              "likes": "358",
+              "shares": "60",
+              "clickRate": "48.6%",
               "finishRate5s": "43.1%",
-              "bounce2s": "30.5%",
-              "like": "347",
-              "share": "58"
+              "bounce2s": "30.7%",
+              "like": "358",
+              "share": "60"
             },
             {
               "id": "7667053719117542137",
               "title": "酒店尾房不可怕，6个步骤让你安稳入住",
               "date": "2026-07-27",
-              "plays": "8,579",
+              "plays": "8,799",
               "avgDur": "32秒",
               "click": 100,
               "finish5": 51.7,
               "bounce2": 26.7,
-              "likes": "158",
-              "shares": "36",
+              "likes": "165",
+              "shares": "42",
               "clickRate": "100%",
               "finishRate5s": "51.7%",
               "bounce2s": "26.7%",
-              "like": "158",
-              "share": "36"
+              "like": "165",
+              "share": "42"
             },
             {
               "id": "7665816369941752825",
               "title": "家居布局方法，让他心甘情愿给你买包！",
               "date": "2026-07-24",
-              "plays": "1.3万",
-              "avgDur": "28秒",
-              "click": 72.7,
-              "finish5": 36.8,
-              "bounce2": 29.9,
-              "likes": "451",
-              "shares": "73",
-              "clickRate": "72.7%",
-              "finishRate5s": "36.8%",
-              "bounce2s": "29.9%",
-              "like": "451",
-              "share": "73"
+              "plays": "3.2万",
+              "avgDur": "27秒",
+              "click": 68.8,
+              "finish5": 42.8,
+              "bounce2": 29.7,
+              "likes": "1,210",
+              "shares": "348",
+              "clickRate": "68.8%",
+              "finishRate5s": "42.8%",
+              "bounce2s": "29.7%",
+              "like": "1,210",
+              "share": "348"
             },
             {
               "id": "7664855914147479781",
               "title": "亲历者总结,留学生租房3大避坑法则",
               "date": "2026-07-21",
-              "plays": "8,369",
+              "plays": "8,496",
               "avgDur": "30秒",
-              "click": 52.6,
-              "finish5": 40.7,
-              "bounce2": 27.1,
-              "likes": "177",
-              "shares": "35",
-              "clickRate": "52.6%",
-              "finishRate5s": "40.7%",
-              "bounce2s": "27.1%",
-              "like": "177",
-              "share": "35"
+              "click": 48.8,
+              "finish5": 40.8,
+              "bounce2": 27.2,
+              "likes": "180",
+              "shares": "36",
+              "clickRate": "48.8%",
+              "finishRate5s": "40.8%",
+              "bounce2s": "27.2%",
+              "like": "180",
+              "share": "36"
             },
             {
               "id": "7663538586662452859",
               "title": "三伏天养宅三部曲，结尾有彩蛋哦！",
               "date": "2026-07-18",
-              "plays": "3,545",
+              "plays": "3,643",
               "avgDur": "37秒",
-              "click": 65.7,
-              "finish5": 36.6,
-              "bounce2": 30.4,
-              "likes": "95",
-              "shares": "20",
-              "clickRate": "65.7%",
-              "finishRate5s": "36.6%",
-              "bounce2s": "30.4%",
-              "like": "95",
-              "share": "20"
+              "click": 61,
+              "finish5": 36.5,
+              "bounce2": 30.8,
+              "likes": "96",
+              "shares": "21",
+              "clickRate": "61%",
+              "finishRate5s": "36.5%",
+              "bounce2s": "30.8%",
+              "like": "96",
+              "share": "21"
             },
             {
               "id": "7662601502464841701",
@@ -101451,67 +102861,67 @@ const DATA_REFRESH_2026_07_19_FULL = {
               "date": "2026-07-10",
               "plays": "1.1万",
               "avgDur": "28秒",
-              "click": 95.6,
-              "finish5": 42.6,
-              "bounce2": 38,
-              "likes": "380",
-              "shares": "74",
-              "clickRate": "95.6%",
-              "finishRate5s": "42.6%",
-              "bounce2s": "38%",
-              "like": "380",
-              "share": "74"
+              "click": 97,
+              "finish5": 42.9,
+              "bounce2": 37.8,
+              "likes": "386",
+              "shares": "79",
+              "clickRate": "97%",
+              "finishRate5s": "42.9%",
+              "bounce2s": "37.8%",
+              "like": "386",
+              "share": "79"
             },
             {
               "id": "7659601597508699259",
               "title": "卧室不动硬装的礼乐布局妙招",
               "date": "2026-07-07",
-              "plays": "1.5万",
+              "plays": "1.6万",
               "avgDur": "37秒",
               "click": 100,
-              "finish5": 50.9,
+              "finish5": 51.2,
               "bounce2": 27.5,
-              "likes": "259",
-              "shares": "44",
+              "likes": "270",
+              "shares": "48",
               "clickRate": "100%",
-              "finishRate5s": "50.9%",
+              "finishRate5s": "51.2%",
               "bounce2s": "27.5%",
-              "like": "259",
-              "share": "44"
+              "like": "270",
+              "share": "48"
             },
             {
               "id": "7658276437728391281",
               "title": "找到家里最\"旺\"你的位置，不用找\"大师\"。",
               "date": "2026-07-04",
-              "plays": "9,439",
+              "plays": "9,634",
               "avgDur": "33秒",
-              "click": 99.8,
-              "finish5": 44.8,
+              "click": 99.4,
+              "finish5": 45.1,
               "bounce2": 28.5,
-              "likes": "252",
-              "shares": "35",
-              "clickRate": "99.8%",
-              "finishRate5s": "44.8%",
+              "likes": "257",
+              "shares": "36",
+              "clickRate": "99.4%",
+              "finishRate5s": "45.1%",
               "bounce2s": "28.5%",
-              "like": "252",
-              "share": "35"
+              "like": "257",
+              "share": "36"
             },
             {
               "id": "7656787757771445349",
               "title": "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨",
               "date": "2026-06-30",
-              "plays": "12.3万",
+              "plays": "12.6万",
               "avgDur": "35秒",
-              "click": 64.8,
-              "finish5": 50,
+              "click": 65.3,
+              "finish5": 50.1,
               "bounce2": 27.6,
-              "likes": "2,081",
-              "shares": "2,497",
-              "clickRate": "64.8%",
-              "finishRate5s": "50%",
+              "likes": "2,115",
+              "shares": "2,546",
+              "clickRate": "65.3%",
+              "finishRate5s": "50.1%",
               "bounce2s": "27.6%",
-              "like": "2,081",
-              "share": "2,497"
+              "like": "2,115",
+              "share": "2,546"
             },
             {
               "id": "7655548439049549669",
@@ -101534,35 +102944,35 @@ const DATA_REFRESH_2026_07_19_FULL = {
               "id": "7654027606584993701",
               "title": "不利家中女性的格局, 三招解决！",
               "date": "2026-06-22",
-              "plays": "9.1万",
-              "avgDur": "29秒",
-              "click": 34.2,
+              "plays": "9.5万",
+              "avgDur": "28秒",
+              "click": 37.2,
               "finish5": 50.2,
-              "bounce2": 30.6,
-              "likes": "2,422",
-              "shares": "643",
-              "clickRate": "34.2%",
+              "bounce2": 30.5,
+              "likes": "2,533",
+              "shares": "662",
+              "clickRate": "37.2%",
               "finishRate5s": "50.2%",
-              "bounce2s": "30.6%",
-              "like": "2,422",
-              "share": "643"
+              "bounce2s": "30.5%",
+              "like": "2,533",
+              "share": "662"
             },
             {
               "id": "7652581925735312633",
               "title": "现代家中男尊女卑的实际理解, 很实用!",
               "date": "2026-06-18",
-              "plays": "19.4万",
+              "plays": "19.5万",
               "avgDur": "26秒",
               "click": 100,
               "finish5": 45,
               "bounce2": 32.7,
-              "likes": "4,307",
-              "shares": "1,110",
+              "likes": "4,343",
+              "shares": "1,114",
               "clickRate": "100%",
               "finishRate5s": "45%",
               "bounce2s": "32.7%",
-              "like": "4,307",
-              "share": "1,110"
+              "like": "4,343",
+              "share": "1,114"
             },
             {
               "id": "7651578818137783675",
@@ -101571,32 +102981,32 @@ const DATA_REFRESH_2026_07_19_FULL = {
               "plays": "1.2万",
               "avgDur": "44秒",
               "click": 100,
-              "finish5": 46.4,
-              "bounce2": 31.8,
-              "likes": "326",
-              "shares": "81",
+              "finish5": 46.6,
+              "bounce2": 31.7,
+              "likes": "334",
+              "shares": "84",
               "clickRate": "100%",
-              "finishRate5s": "46.4%",
-              "bounce2s": "31.8%",
-              "like": "326",
-              "share": "81"
+              "finishRate5s": "46.6%",
+              "bounce2s": "31.7%",
+              "like": "334",
+              "share": "84"
             },
             {
               "id": "7649980868819643877",
               "title": "让你家拥有一个S型身材的家居布局",
               "date": "2026-06-11",
-              "plays": "163.8万",
+              "plays": "166.8万",
               "avgDur": "36秒",
-              "click": 54.1,
+              "click": 54.9,
               "finish5": 54.6,
               "bounce2": 27.8,
-              "likes": "27,389",
-              "shares": "11,367",
-              "clickRate": "54.1%",
+              "likes": "27,881",
+              "shares": "11,504",
+              "clickRate": "54.9%",
               "finishRate5s": "54.6%",
               "bounce2s": "27.8%",
-              "like": "27,389",
-              "share": "11,367"
+              "like": "27,881",
+              "share": "11,504"
             },
             {
               "id": "7649243282254738609",
@@ -101607,28 +103017,858 @@ const DATA_REFRESH_2026_07_19_FULL = {
               "click": 100,
               "finish5": 44.9,
               "bounce2": 28.7,
-              "likes": "624",
+              "likes": "625",
               "shares": "139",
               "clickRate": "100%",
               "finishRate5s": "44.9%",
               "bounce2s": "28.7%",
-              "like": "624",
+              "like": "625",
               "share": "139"
             }
           ],
           "itemDetails": {
+            "走出低谷期的布局方法": {
+              "overview": {
+                "playCount": "5,212",
+                "likeCount": "156",
+                "commentCount": "13",
+                "shareCount": "27",
+                "favoriteCount": "57",
+                "subscribeCount": "38",
+                "avgViewSecond": 15.5,
+                "completionRate": 2.3,
+                "completion5sRate": 26.2,
+                "bounce2sRate": 43.7,
+                "viewTrend": {
+                  "labels": [
+                    "2026-08-21 10:00:00",
+                    "2026-08-21 11:00:00",
+                    "2026-08-21 12:00:00",
+                    "2026-08-21 13:00:00",
+                    "2026-08-21 14:00:00",
+                    "2026-08-21 15:00:00",
+                    "2026-08-21 16:00:00",
+                    "2026-08-21 17:00:00",
+                    "2026-08-21 18:00:00",
+                    "2026-08-21 19:00:00",
+                    "2026-08-21 20:00:00",
+                    "2026-08-21 21:00:00",
+                    "2026-08-21 22:00:00",
+                    "2026-08-21 23:00:00",
+                    "2026-08-22 00:00:00",
+                    "2026-08-22 01:00:00",
+                    "2026-08-22 02:00:00",
+                    "2026-08-22 03:00:00",
+                    "2026-08-22 04:00:00",
+                    "2026-08-22 05:00:00",
+                    "2026-08-22 06:00:00",
+                    "2026-08-22 07:00:00",
+                    "2026-08-22 08:00:00",
+                    "2026-08-22 09:00:00",
+                    "2026-08-22 10:00:00",
+                    "2026-08-22 11:00:00",
+                    "2026-08-22 12:00:00",
+                    "2026-08-22 13:00:00",
+                    "2026-08-22 14:00:00",
+                    "2026-08-22 15:00:00",
+                    "2026-08-22 16:00:00",
+                    "2026-08-22 17:00:00",
+                    "2026-08-22 18:00:00",
+                    "2026-08-22 19:00:00",
+                    "2026-08-22 20:00:00",
+                    "2026-08-22 21:00:00",
+                    "2026-08-22 22:00:00",
+                    "2026-08-22 23:00:00",
+                    "2026-08-23 00:00:00",
+                    "2026-08-23 01:00:00",
+                    "2026-08-23 02:00:00",
+                    "2026-08-23 03:00:00",
+                    "2026-08-23 04:00:00",
+                    "2026-08-23 05:00:00",
+                    "2026-08-23 06:00:00",
+                    "2026-08-23 07:00:00",
+                    "2026-08-23 08:00:00",
+                    "2026-08-23 09:00:00",
+                    "2026-08-23 10:00:00",
+                    "2026-08-23 11:00:00",
+                    "2026-08-23 12:00:00",
+                    "2026-08-23 13:00:00",
+                    "2026-08-23 14:00:00",
+                    "2026-08-23 15:00:00",
+                    "2026-08-23 16:00:00",
+                    "2026-08-23 17:00:00",
+                    "2026-08-23 18:00:00",
+                    "2026-08-23 19:00:00",
+                    "2026-08-23 20:00:00"
+                  ],
+                  "values": [
+                    396,
+                    2673,
+                    250,
+                    119,
+                    437,
+                    88,
+                    62,
+                    41,
+                    63,
+                    68,
+                    48,
+                    70,
+                    78,
+                    72,
+                    46,
+                    25,
+                    19,
+                    10,
+                    9,
+                    10,
+                    11,
+                    22,
+                    29,
+                    40,
+                    37,
+                    18,
+                    21,
+                    10,
+                    9,
+                    12,
+                    17,
+                    17,
+                    24,
+                    16,
+                    19,
+                    15,
+                    43,
+                    22,
+                    19,
+                    12,
+                    7,
+                    6,
+                    3,
+                    3,
+                    5,
+                    9,
+                    18,
+                    19,
+                    19,
+                    10,
+                    10,
+                    14,
+                    18,
+                    16,
+                    20,
+                    14,
+                    7,
+                    12,
+                    2
+                  ],
+                  "daily": {
+                    "labels": [
+                      "2026-08-21",
+                      "2026-08-22",
+                      "2026-08-23"
+                    ],
+                    "values": [
+                      4465,
+                      501,
+                      243
+                    ]
+                  }
+                },
+                "subscribeTrend": {
+                  "labels": [
+                    "2026-08-21 10:00:00",
+                    "2026-08-21 11:00:00",
+                    "2026-08-21 12:00:00",
+                    "2026-08-21 13:00:00",
+                    "2026-08-21 14:00:00",
+                    "2026-08-21 15:00:00",
+                    "2026-08-21 16:00:00",
+                    "2026-08-21 17:00:00",
+                    "2026-08-21 18:00:00",
+                    "2026-08-21 19:00:00",
+                    "2026-08-21 20:00:00",
+                    "2026-08-21 21:00:00",
+                    "2026-08-21 22:00:00",
+                    "2026-08-21 23:00:00",
+                    "2026-08-22 00:00:00",
+                    "2026-08-22 01:00:00",
+                    "2026-08-22 02:00:00",
+                    "2026-08-22 03:00:00",
+                    "2026-08-22 04:00:00",
+                    "2026-08-22 05:00:00",
+                    "2026-08-22 06:00:00",
+                    "2026-08-22 07:00:00",
+                    "2026-08-22 08:00:00",
+                    "2026-08-22 09:00:00",
+                    "2026-08-22 10:00:00",
+                    "2026-08-22 11:00:00",
+                    "2026-08-22 12:00:00",
+                    "2026-08-22 13:00:00",
+                    "2026-08-22 14:00:00",
+                    "2026-08-22 15:00:00",
+                    "2026-08-22 16:00:00",
+                    "2026-08-22 17:00:00",
+                    "2026-08-22 18:00:00",
+                    "2026-08-22 19:00:00",
+                    "2026-08-22 20:00:00",
+                    "2026-08-22 21:00:00",
+                    "2026-08-22 22:00:00",
+                    "2026-08-22 23:00:00",
+                    "2026-08-23 00:00:00",
+                    "2026-08-23 01:00:00",
+                    "2026-08-23 02:00:00",
+                    "2026-08-23 03:00:00",
+                    "2026-08-23 04:00:00",
+                    "2026-08-23 05:00:00",
+                    "2026-08-23 06:00:00",
+                    "2026-08-23 07:00:00",
+                    "2026-08-23 08:00:00",
+                    "2026-08-23 09:00:00",
+                    "2026-08-23 10:00:00",
+                    "2026-08-23 11:00:00",
+                    "2026-08-23 12:00:00",
+                    "2026-08-23 13:00:00",
+                    "2026-08-23 14:00:00",
+                    "2026-08-23 15:00:00",
+                    "2026-08-23 16:00:00",
+                    "2026-08-23 17:00:00",
+                    "2026-08-23 18:00:00",
+                    "2026-08-23 19:00:00",
+                    "2026-08-23 20:00:00"
+                  ],
+                  "values": [
+                    5,
+                    18,
+                    1,
+                    1,
+                    3,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    2,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "daily": {
+                    "labels": [
+                      "2026-08-21",
+                      "2026-08-22",
+                      "2026-08-23"
+                    ],
+                    "values": [
+                      31,
+                      7,
+                      0
+                    ]
+                  }
+                }
+              },
+              "traffic": {
+                "chapterClickRate": {
+                  "chapters": [
+                    {
+                      "timestamp": 0,
+                      "timestamp_display": "0:00",
+                      "desc": "引言",
+                      "detail": ""
+                    },
+                    {
+                      "timestamp": 23570,
+                      "timestamp_display": "0:23",
+                      "desc": "低谷期的状态",
+                      "detail": "低谷期是由外部环境引起的失频状态，改变环境无法改变频率。"
+                    },
+                    {
+                      "timestamp": 64083,
+                      "timestamp_display": "1:04",
+                      "desc": "人生剧本",
+                      "detail": "礼乐文化中，乐是调理气场的媒介，与天文地理同源，秩序源于星宿斗转星移。"
+                    },
+                    {
+                      "timestamp": 103929,
+                      "timestamp_display": "1:43",
+                      "desc": "因果关系",
+                      "detail": "家宅空间秩序影响人的情绪，改变频率可回到有序状态。"
+                    },
+                    {
+                      "timestamp": 147737,
+                      "timestamp_display": "2:27",
+                      "desc": "复卦的频率",
+                      "detail": "走出低谷期的频率取复卦德，具象频率为角音，播放音乐的方位为正北子位。"
+                    },
+                    {
+                      "timestamp": 185102,
+                      "timestamp_display": "3:05",
+                      "desc": "结语",
+                      "detail": ""
+                    }
+                  ],
+                  "top_chapters": [
+                    {
+                      "timestamp": 23570,
+                      "timestamp_display": "0:23",
+                      "desc": "低谷期的状态",
+                      "detail": "低谷期是由外部环境引起的失频状态，改变环境无法改变频率。",
+                      "clickRate": 56.3
+                    },
+                    {
+                      "timestamp": 0,
+                      "timestamp_display": "0:00",
+                      "desc": "引言",
+                      "detail": "",
+                      "clickRate": 21.9
+                    },
+                    {
+                      "timestamp": 147737,
+                      "timestamp_display": "2:27",
+                      "desc": "复卦的频率",
+                      "detail": "走出低谷期的频率取复卦德，具象频率为角音，播放音乐的方位为正北子位。",
+                      "clickRate": 8.3
+                    },
+                    {
+                      "timestamp": 64083,
+                      "timestamp_display": "1:04",
+                      "desc": "人生剧本",
+                      "detail": "礼乐文化中，乐是调理气场的媒介，与天文地理同源，秩序源于星宿斗转星移。",
+                      "clickRate": 5.2
+                    },
+                    {
+                      "timestamp": 103929,
+                      "timestamp_display": "1:43",
+                      "desc": "因果关系",
+                      "detail": "家宅空间秩序影响人的情绪，改变频率可回到有序状态。",
+                      "clickRate": 5.2
+                    },
+                    {
+                      "timestamp": 185102,
+                      "timestamp_display": "3:05",
+                      "desc": "结语",
+                      "detail": "",
+                      "clickRate": 3.1
+                    }
+                  ]
+                },
+                "playSource": [
+                  {
+                    "key": "homepage_hot",
+                    "label": "推荐页",
+                    "pct": 88.5,
+                    "delta": 46.4
+                  },
+                  {
+                    "key": "follow",
+                    "label": "关注",
+                    "pct": 4,
+                    "delta": 3.3
+                  },
+                  {
+                    "key": "homepage",
+                    "label": "个人主页",
+                    "pct": 3.5,
+                    "delta": -2.2
+                  },
+                  {
+                    "key": "other",
+                    "label": "其他",
+                    "pct": 2.1,
+                    "delta": -0.1
+                  },
+                  {
+                    "key": "search",
+                    "label": "搜索",
+                    "pct": 1,
+                    "delta": -47.3
+                  },
+                  {
+                    "key": "message",
+                    "label": "消息",
+                    "pct": 0.8,
+                    "delta": 0.1
+                  }
+                ],
+                "playSourceNote": "",
+                "searchKeywords": [
+                  {
+                    "keyword": "#论自学人居环境学的优点",
+                    "percent": 30
+                  },
+                  {
+                    "keyword": "#家居环境学",
+                    "percent": 20
+                  },
+                  {
+                    "keyword": "听宅人的作品",
+                    "percent": 20
+                  },
+                  {
+                    "keyword": "听宅人",
+                    "percent": 15
+                  },
+                  {
+                    "keyword": "环境布局",
+                    "percent": 15
+                  }
+                ],
+                "searchKeywordsNote": "",
+                "inspireSearch": [
+                  {
+                    "keyword": "古琴五音疗法",
+                    "percent": 66.7
+                  },
+                  {
+                    "keyword": "古琴曲",
+                    "percent": 33.3
+                  }
+                ],
+                "inspireSearchNote": ""
+              },
+              "audience": {
+                "gender": {
+                  "female": 30.2,
+                  "male": 69.8
+                },
+                "age": [
+                  {
+                    "label": "31-40",
+                    "pct": 47.7
+                  },
+                  {
+                    "label": "24-30",
+                    "pct": 32.7
+                  },
+                  {
+                    "label": "41-50",
+                    "pct": 11.4
+                  },
+                  {
+                    "label": "18-23",
+                    "pct": 6
+                  },
+                  {
+                    "label": "50岁以上",
+                    "pct": 1.6
+                  },
+                  {
+                    "label": "18岁以下",
+                    "pct": 0.5
+                  }
+                ],
+                "province": [
+                  {
+                    "label": "广东",
+                    "pct": 14
+                  },
+                  {
+                    "label": "山东",
+                    "pct": 9
+                  },
+                  {
+                    "label": "江苏",
+                    "pct": 6.1
+                  },
+                  {
+                    "label": "河北",
+                    "pct": 5.8
+                  },
+                  {
+                    "label": "浙江",
+                    "pct": 5.8
+                  },
+                  {
+                    "label": "河南",
+                    "pct": 5.2
+                  },
+                  {
+                    "label": "四川",
+                    "pct": 4.9
+                  },
+                  {
+                    "label": "云南",
+                    "pct": 4.1
+                  },
+                  {
+                    "label": "陕西",
+                    "pct": 3.8
+                  },
+                  {
+                    "label": "上海",
+                    "pct": 3.3
+                  },
+                  {
+                    "label": "湖北",
+                    "pct": 3.3
+                  },
+                  {
+                    "label": "山西",
+                    "pct": 3.2
+                  },
+                  {
+                    "label": "辽宁",
+                    "pct": 3
+                  },
+                  {
+                    "label": "福建",
+                    "pct": 3
+                  },
+                  {
+                    "label": "安徽",
+                    "pct": 2.7
+                  },
+                  {
+                    "label": "广西",
+                    "pct": 2.5
+                  },
+                  {
+                    "label": "湖南",
+                    "pct": 2.4
+                  },
+                  {
+                    "label": "内蒙古",
+                    "pct": 2
+                  },
+                  {
+                    "label": "天津",
+                    "pct": 2
+                  },
+                  {
+                    "label": "贵州",
+                    "pct": 1.8
+                  },
+                  {
+                    "label": "黑龙江",
+                    "pct": 1.8
+                  },
+                  {
+                    "label": "重庆",
+                    "pct": 1.6
+                  },
+                  {
+                    "label": "吉林",
+                    "pct": 1.6
+                  },
+                  {
+                    "label": "江西",
+                    "pct": 1.4
+                  },
+                  {
+                    "label": "甘肃",
+                    "pct": 1.2
+                  },
+                  {
+                    "label": "北京",
+                    "pct": 1
+                  },
+                  {
+                    "label": "新疆",
+                    "pct": 1
+                  },
+                  {
+                    "label": "海南",
+                    "pct": 0.9
+                  },
+                  {
+                    "label": "宁夏",
+                    "pct": 0.5
+                  },
+                  {
+                    "label": "青海",
+                    "pct": 0.4
+                  },
+                  {
+                    "label": "台湾",
+                    "pct": 0.3
+                  },
+                  {
+                    "label": "西藏",
+                    "pct": 0.2
+                  },
+                  {
+                    "label": "香港",
+                    "pct": 0.2
+                  },
+                  {
+                    "label": "澳门",
+                    "pct": 0.1
+                  }
+                ],
+                "city": [
+                  {
+                    "label": "新一线",
+                    "pct": 24.1
+                  },
+                  {
+                    "label": "二线",
+                    "pct": 21.3
+                  },
+                  {
+                    "label": "三线",
+                    "pct": 20.1
+                  },
+                  {
+                    "label": "四线",
+                    "pct": 14.2
+                  },
+                  {
+                    "label": "一线",
+                    "pct": 10.4
+                  },
+                  {
+                    "label": "五线",
+                    "pct": 8.7
+                  },
+                  {
+                    "label": "六线及以下",
+                    "pct": 0.9
+                  },
+                  {
+                    "label": "特区",
+                    "pct": 0.2
+                  }
+                ],
+                "career": [
+                  {
+                    "label": "白领",
+                    "pct": 24.8
+                  },
+                  {
+                    "label": "服务业蓝领",
+                    "pct": 20.6
+                  },
+                  {
+                    "label": "工业蓝领",
+                    "pct": 15.2
+                  },
+                  {
+                    "label": "学生",
+                    "pct": 12.8
+                  },
+                  {
+                    "label": "公务员",
+                    "pct": 4.4
+                  },
+                  {
+                    "label": "餐饮",
+                    "pct": 3.8
+                  },
+                  {
+                    "label": "零售",
+                    "pct": 2.7
+                  },
+                  {
+                    "label": "暂未工作",
+                    "pct": 2.5
+                  }
+                ],
+                "active": [
+                  {
+                    "label": "重度",
+                    "pct": 85.7
+                  },
+                  {
+                    "label": "高活跃",
+                    "pct": 9.5
+                  },
+                  {
+                    "label": "低活跃",
+                    "pct": 3.4
+                  },
+                  {
+                    "label": "中度",
+                    "pct": 1.3
+                  },
+                  {
+                    "label": "浅层",
+                    "pct": 0.2
+                  }
+                ],
+                "similarAuthors": [
+                  {
+                    "name": "温义飞的急救财经",
+                    "followers": 10042298
+                  },
+                  {
+                    "name": "卢克文工作室",
+                    "followers": 9284395
+                  },
+                  {
+                    "name": "艾维奇Vic",
+                    "followers": 8015627
+                  },
+                  {
+                    "name": "直男财经",
+                    "followers": 23104175
+                  },
+                  {
+                    "name": "无穷小亮的科普日常",
+                    "followers": 24564716
+                  },
+                  {
+                    "name": "听泉赏宝",
+                    "followers": 34330175
+                  },
+                  {
+                    "name": "南翔",
+                    "followers": 27714980
+                  },
+                  {
+                    "name": "胡说老王",
+                    "followers": 7062805
+                  },
+                  {
+                    "name": "混子哥边画边讲",
+                    "followers": 17688752
+                  },
+                  {
+                    "name": "小Lin说",
+                    "followers": 10908756
+                  }
+                ],
+                "preferTopics": []
+              },
+              "wordCloud": [
+                {
+                  "word": "音乐",
+                  "score": 3
+                },
+                {
+                  "word": "老师",
+                  "score": 2
+                },
+                {
+                  "word": "期待",
+                  "score": 2
+                },
+                {
+                  "word": "人的",
+                  "score": 1
+                },
+                {
+                  "word": "很舒服",
+                  "score": 1
+                },
+                {
+                  "word": "身心",
+                  "score": 1
+                },
+                {
+                  "word": "同频",
+                  "score": 1
+                },
+                {
+                  "word": "共振",
+                  "score": 1
+                },
+                {
+                  "word": "走出",
+                  "score": 1
+                },
+                {
+                  "word": "低谷",
+                  "score": 1
+                },
+                {
+                  "word": "这首",
+                  "score": 1
+                },
+                {
+                  "word": "支持",
+                  "score": 1
+                },
+                {
+                  "word": "古琴曲",
+                  "score": 1
+                },
+                {
+                  "word": "怎么能",
+                  "score": 1
+                },
+                {
+                  "word": "帮我们",
+                  "score": 1
+                },
+                {
+                  "word": "穿堂",
+                  "score": 1
+                },
+                {
+                  "word": "家宅",
+                  "score": 1
+                },
+                {
+                  "word": "一种",
+                  "score": 1
+                },
+                {
+                  "word": "深度",
+                  "score": 1
+                },
+                {
+                  "word": "角音",
+                  "score": 1
+                }
+              ]
+            },
             "住什么样的房子🏠决定你的家庭“弟”位": {
               "overview": {
-                "playCount": "3,523",
-                "likeCount": "80",
-                "commentCount": "8",
-                "shareCount": "20",
-                "favoriteCount": "30",
-                "subscribeCount": "14",
-                "avgViewSecond": 20.5,
-                "completionRate": 2.9,
-                "completion5sRate": 39.1,
-                "bounce2sRate": 30.2,
+                "playCount": "4,446",
+                "likeCount": "90",
+                "commentCount": "11",
+                "shareCount": "22",
+                "favoriteCount": "39",
+                "subscribeCount": "16",
+                "avgViewSecond": 23,
+                "completionRate": 3.3,
+                "completion5sRate": 40.8,
+                "bounce2sRate": 29.8,
                 "viewTrend": {
                   "labels": [
                     "2026-08-17 11:00:00",
@@ -102393,16 +104633,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "这两种家的格局，容易在感情中迷失自己": {
               "overview": {
-                "playCount": "4,930",
-                "likeCount": "76",
+                "playCount": "5,633",
+                "likeCount": "94",
                 "commentCount": "7",
-                "shareCount": "21",
-                "favoriteCount": "38",
-                "subscribeCount": "25",
-                "avgViewSecond": 15.8,
+                "shareCount": "22",
+                "favoriteCount": "49",
+                "subscribeCount": "35",
+                "avgViewSecond": 16.9,
                 "completionRate": 1.8,
-                "completion5sRate": 38.9,
-                "bounce2sRate": 33.6,
+                "completion5sRate": 39.1,
+                "bounce2sRate": 32,
                 "viewTrend": {
                   "labels": [
                     "2026-08-13 17:00:00",
@@ -103576,16 +105816,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "自救指南｜让母亲归位，你值得被好好对待": {
               "overview": {
-                "playCount": "5,467",
+                "playCount": "5,785",
                 "likeCount": "103",
-                "commentCount": "7",
-                "shareCount": "24",
-                "favoriteCount": "57",
-                "subscribeCount": "10",
+                "commentCount": "8",
+                "shareCount": "27",
+                "favoriteCount": "62",
+                "subscribeCount": "17",
                 "avgViewSecond": 36.5,
                 "completionRate": 1.9,
-                "completion5sRate": 37.2,
-                "bounce2sRate": 38,
+                "completion5sRate": 37.1,
+                "bounce2sRate": 38.4,
                 "viewTrend": {
                   "labels": [
                     "2026-08-10 12:00:00",
@@ -104531,16 +106771,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "如何分辨谁是偷走家运的“元凶”": {
               "overview": {
-                "playCount": "5,701",
-                "likeCount": "159",
+                "playCount": "6,114",
+                "likeCount": "165",
                 "commentCount": "5",
-                "shareCount": "30",
-                "favoriteCount": "61",
-                "subscribeCount": "50",
-                "avgViewSecond": 22.2,
-                "completionRate": 3.1,
-                "completion5sRate": 32.8,
-                "bounce2sRate": 40,
+                "shareCount": "32",
+                "favoriteCount": "64",
+                "subscribeCount": "57",
+                "avgViewSecond": 22.6,
+                "completionRate": 3.2,
+                "completion5sRate": 33.5,
+                "bounce2sRate": 39.7,
                 "viewTrend": {
                   "labels": [
                     "2026-08-07 12:00:00",
@@ -105730,16 +107970,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "西北位的难题到我这可以停止了": {
               "overview": {
-                "playCount": "55,842",
-                "likeCount": "1,615",
-                "commentCount": "76",
-                "shareCount": "323",
-                "favoriteCount": "1,161",
-                "subscribeCount": "621",
-                "avgViewSecond": 51.9,
+                "playCount": "66,946",
+                "likeCount": "1,891",
+                "commentCount": "89",
+                "shareCount": "386",
+                "favoriteCount": "1,415",
+                "subscribeCount": "739",
+                "avgViewSecond": 51.6,
                 "completionRate": 3,
-                "completion5sRate": 51.7,
-                "bounce2sRate": 27.9,
+                "completion5sRate": 51.9,
+                "bounce2sRate": 28,
                 "viewTrend": {
                   "labels": [
                     "2026-08-03 10:00:00",
@@ -106787,16 +109027,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "掌握家旺人旺的底层代码": {
               "overview": {
-                "playCount": "10,996",
-                "likeCount": "347",
-                "commentCount": "9",
-                "shareCount": "58",
-                "favoriteCount": "187",
-                "subscribeCount": "66",
-                "avgViewSecond": 35.8,
+                "playCount": "11,554",
+                "likeCount": "358",
+                "commentCount": "10",
+                "shareCount": "60",
+                "favoriteCount": "194",
+                "subscribeCount": "75",
+                "avgViewSecond": 36.6,
                 "completionRate": 4,
                 "completion5sRate": 43.1,
-                "bounce2sRate": 30.5,
+                "bounce2sRate": 30.7,
                 "viewTrend": {
                   "labels": [
                     "2026-07-30 15:00:00",
@@ -107503,14 +109743,14 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "酒店尾房不可怕，6个步骤让你安稳入住": {
               "overview": {
-                "playCount": "8,579",
-                "likeCount": "158",
+                "playCount": "8,799",
+                "likeCount": "165",
                 "commentCount": "18",
-                "shareCount": "36",
-                "favoriteCount": "54",
-                "subscribeCount": "12",
-                "avgViewSecond": 31.8,
-                "completionRate": 2.9,
+                "shareCount": "42",
+                "favoriteCount": "56",
+                "subscribeCount": "13",
+                "avgViewSecond": 32.3,
+                "completionRate": 3,
                 "completion5sRate": 51.7,
                 "bounce2sRate": 26.7,
                 "viewTrend": {
@@ -108611,16 +110851,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "家居布局方法，让他心甘情愿给你买包！": {
               "overview": {
-                "playCount": "13,469",
-                "likeCount": "451",
-                "commentCount": "29",
-                "shareCount": "73",
-                "favoriteCount": "277",
-                "subscribeCount": "141",
-                "avgViewSecond": 28.5,
-                "completionRate": 4.4,
-                "completion5sRate": 36.8,
-                "bounce2sRate": 29.9,
+                "playCount": "31,575",
+                "likeCount": "1,210",
+                "commentCount": "55",
+                "shareCount": "348",
+                "favoriteCount": "869",
+                "subscribeCount": "567",
+                "avgViewSecond": 27.1,
+                "completionRate": 4.7,
+                "completion5sRate": 42.8,
+                "bounce2sRate": 29.7,
                 "viewTrend": {
                   "labels": [
                     "2026-07-24 12:00:00",
@@ -109369,16 +111609,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "亲历者总结,留学生租房3大避坑法则": {
               "overview": {
-                "playCount": "8,369",
-                "likeCount": "177",
+                "playCount": "8,496",
+                "likeCount": "180",
                 "commentCount": "4",
-                "shareCount": "35",
-                "favoriteCount": "58",
-                "subscribeCount": "28",
-                "avgViewSecond": 29.9,
-                "completionRate": 2.3,
-                "completion5sRate": 40.7,
-                "bounce2sRate": 27.1,
+                "shareCount": "36",
+                "favoriteCount": "59",
+                "subscribeCount": "29",
+                "avgViewSecond": 30.2,
+                "completionRate": 2.4,
+                "completion5sRate": 40.8,
+                "bounce2sRate": 27.2,
                 "viewTrend": {
                   "labels": [
                     "2026-07-21 13:00:00",
@@ -110092,16 +112332,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "三伏天养宅三部曲，结尾有彩蛋哦！": {
               "overview": {
-                "playCount": "3,545",
-                "likeCount": "95",
+                "playCount": "3,643",
+                "likeCount": "96",
                 "commentCount": "13",
-                "shareCount": "20",
+                "shareCount": "21",
                 "favoriteCount": "31",
                 "subscribeCount": "15",
-                "avgViewSecond": 37.1,
+                "avgViewSecond": 36.8,
                 "completionRate": 5.6,
-                "completion5sRate": 36.6,
-                "bounce2sRate": 30.4,
+                "completion5sRate": 36.5,
+                "bounce2sRate": 30.8,
                 "viewTrend": {
                   "labels": [
                     "2026-07-18 10:00:00",
@@ -110865,16 +113105,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "3类人的财富布局💰｜中式美学下的器物搭配": {
               "overview": {
-                "playCount": "11,005",
-                "likeCount": "380",
-                "commentCount": "16",
-                "shareCount": "74",
-                "favoriteCount": "218",
-                "subscribeCount": "106",
-                "avgViewSecond": 27.8,
-                "completionRate": 3.9,
-                "completion5sRate": 42.6,
-                "bounce2sRate": 38,
+                "playCount": "11,306",
+                "likeCount": "386",
+                "commentCount": "17",
+                "shareCount": "79",
+                "favoriteCount": "234",
+                "subscribeCount": "110",
+                "avgViewSecond": 27.9,
+                "completionRate": 4,
+                "completion5sRate": 42.9,
+                "bounce2sRate": 37.8,
                 "viewTrend": {
                   "labels": [
                     "2026-07-10 15:00:00",
@@ -112505,15 +114745,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "卧室不动硬装的礼乐布局妙招": {
               "overview": {
-                "playCount": "15,164",
-                "likeCount": "259",
+                "playCount": "15,731",
+                "likeCount": "270",
                 "commentCount": "15",
-                "shareCount": "44",
-                "favoriteCount": "115",
-                "subscribeCount": "86",
-                "avgViewSecond": 36.6,
+                "shareCount": "48",
+                "favoriteCount": "124",
+                "subscribeCount": "94",
+                "avgViewSecond": 37,
                 "completionRate": 3.5,
-                "completion5sRate": 50.9,
+                "completion5sRate": 51.2,
                 "bounce2sRate": 27.5,
                 "viewTrend": {
                   "labels": [
@@ -114416,15 +116656,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "找到家里最\"旺\"你的位置，不用找\"大师\"。": {
               "overview": {
-                "playCount": "9,439",
-                "likeCount": "252",
+                "playCount": "9,634",
+                "likeCount": "257",
                 "commentCount": "9",
-                "shareCount": "35",
-                "favoriteCount": "130",
-                "subscribeCount": "41",
-                "avgViewSecond": 32.5,
+                "shareCount": "36",
+                "favoriteCount": "134",
+                "subscribeCount": "43",
+                "avgViewSecond": 33.1,
                 "completionRate": 2.5,
-                "completion5sRate": 44.8,
+                "completion5sRate": 45.1,
                 "bounce2sRate": 28.5,
                 "viewTrend": {
                   "labels": [
@@ -116487,15 +118727,15 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨": {
               "overview": {
-                "playCount": "122,979",
-                "likeCount": "2,081",
-                "commentCount": "198",
-                "shareCount": "2,497",
-                "favoriteCount": "1,220",
-                "subscribeCount": "493",
+                "playCount": "125,680",
+                "likeCount": "2,115",
+                "commentCount": "203",
+                "shareCount": "2,546",
+                "favoriteCount": "1,240",
+                "subscribeCount": "506",
                 "avgViewSecond": 34.9,
                 "completionRate": 5.7,
-                "completion5sRate": 50,
+                "completion5sRate": 50.1,
                 "bounce2sRate": 27.6,
                 "viewTrend": {
                   "labels": [
@@ -120372,16 +122612,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "不利家中女性的格局, 三招解决！": {
               "overview": {
-                "playCount": "90,662",
-                "likeCount": "2,422",
-                "commentCount": "175",
-                "shareCount": "643",
-                "favoriteCount": "1,877",
-                "subscribeCount": "1,114",
-                "avgViewSecond": 28.7,
+                "playCount": "94,869",
+                "likeCount": "2,533",
+                "commentCount": "187",
+                "shareCount": "662",
+                "favoriteCount": "1,966",
+                "subscribeCount": "1,157",
+                "avgViewSecond": 28.5,
                 "completionRate": 4.6,
                 "completion5sRate": 50.2,
-                "bounce2sRate": 30.6,
+                "bounce2sRate": 30.5,
                 "viewTrend": {
                   "labels": [
                     "2026-06-22 12:00:00",
@@ -122423,12 +124663,12 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "现代家中男尊女卑的实际理解, 很实用!": {
               "overview": {
-                "playCount": "193,800",
-                "likeCount": "4,307",
+                "playCount": "195,362",
+                "likeCount": "4,343",
                 "commentCount": "92",
-                "shareCount": "1,110",
-                "favoriteCount": "2,356",
-                "subscribeCount": "1,807",
+                "shareCount": "1,114",
+                "favoriteCount": "2,377",
+                "subscribeCount": "1,825",
                 "avgViewSecond": 25.9,
                 "completionRate": 3.8,
                 "completion5sRate": 45,
@@ -124476,16 +126716,16 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "容易提升成绩的位置，打造好的学习环境": {
               "overview": {
-                "playCount": "12,090",
-                "likeCount": "326",
+                "playCount": "12,395",
+                "likeCount": "334",
                 "commentCount": "14",
-                "shareCount": "81",
-                "favoriteCount": "214",
-                "subscribeCount": "210",
-                "avgViewSecond": 44.2,
-                "completionRate": 6.5,
-                "completion5sRate": 46.4,
-                "bounce2sRate": 31.8,
+                "shareCount": "84",
+                "favoriteCount": "220",
+                "subscribeCount": "211",
+                "avgViewSecond": 44.1,
+                "completionRate": 6.4,
+                "completion5sRate": 46.6,
+                "bounce2sRate": 31.7,
                 "viewTrend": {
                   "labels": [
                     "2026-06-15 19:00:00",
@@ -126508,13 +128748,13 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "让你家拥有一个S型身材的家居布局": {
               "overview": {
-                "playCount": "1,638,469",
-                "likeCount": "27,389",
-                "commentCount": "1,302",
-                "shareCount": "11,367",
-                "favoriteCount": "10,921",
-                "subscribeCount": "15,383",
-                "avgViewSecond": 35.7,
+                "playCount": "1,667,676",
+                "likeCount": "27,881",
+                "commentCount": "1,341",
+                "shareCount": "11,504",
+                "favoriteCount": "11,166",
+                "subscribeCount": "15,704",
+                "avgViewSecond": 35.8,
                 "completionRate": 4.3,
                 "completion5sRate": 54.6,
                 "bounce2sRate": 27.8,
@@ -128586,8 +130826,8 @@ const DATA_REFRESH_2026_07_19_FULL = {
             },
             "不要迷信了！寺庙的秘密被可视化了": {
               "overview": {
-                "playCount": "32,011",
-                "likeCount": "624",
+                "playCount": "32,114",
+                "likeCount": "625",
                 "commentCount": "25",
                 "shareCount": "139",
                 "favoriteCount": "308",
