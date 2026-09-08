@@ -142830,3 +142830,130 @@ const DATA_REFRESH_2026_07_19_FULL = {
   });
 })(DASHBOARD_DATA, DATA_REFRESH_2026_07_19_FULL);
 /* === DATA_REFRESH_2026_07_19_FULL_END === */
+
+/* 平台作品列表中的真实发布时间；同一作品在两端可能相差数分钟。 */
+const PUBLISH_TIMES_2026_09_08 = {
+  xhs: {
+    "房屋缺角系列①｜西北缺角": "2026-09-04 12:13",
+    "如何成为一个积福之家": "2026-08-31 10:00",
+    "客人从家走后必做的两个动作": "2026-08-28 10:00",
+    "盘点市面上常见但无用的凤氺摆件": "2026-08-25 12:01",
+    "走出低谷期的布局方法": "2026-08-21 10:00",
+    "住什么样的房子🏠决定你的家庭“弟”位": "2026-08-17 11:00",
+    "这两种家的格局，容易在感情中迷失自己": "2026-08-13 17:24",
+    "母爱不存在，但你值得被好好对待": "2026-08-10 12:22",
+    "如何分辨谁是偷走家运的“元凶”": "2026-08-07 12:02",
+    "西北位的难题到我这可以停止了": "2026-08-03 10:52",
+    "掌握家旺人旺的底层代码": "2026-07-30 16:12",
+    "酒店尾房不可怕，6个步骤让你安稳入住": "2026-07-27 12:00",
+    "家居布局方法，让他心甘情愿给你买包！": "2026-07-24 12:01",
+    "亲历者总结,留学生租房3大避坑法则": "2026-07-21 14:05",
+    "三伏天养宅三部曲，结尾有彩蛋哦！": "2026-07-18 10:01",
+    "破除无知言论, 夺回你的生活主权!": "2026-07-15 12:01",
+    "3类人的财富布局💰｜中式美学下的器物搭配": "2026-07-10 15:10",
+    "第2集｜卧室不动硬装的礼乐布局妙招💡": "2026-07-07 09:59",
+    "第1集｜找到家里最\"旺\"你的位置": "2026-07-04 10:00",
+    "家中手办正在悄悄改变你的认知！🚨": "2026-06-30 15:00",
+    "酒店选房避雷指南, 国歌护体，睡稳心安。": "2026-06-26 12:00",
+    "家居布局干货｜可能影响女性的格局": "2026-06-22 12:01",
+    "现代家中男尊女卑的实际理解, 很实用!": "2026-06-18 12:19",
+    "容易提升成绩的位置，打造好的学习环境": "2026-06-15 19:14",
+    "让你家拥有一个S型身材的家居布局": "2026-06-11 12:02",
+    "不要迷信了! 寺庙的秘密被可视化了": "2026-06-07 21:06"
+  },
+  dy: {
+    "房屋缺角系列①｜西北缺角，六个维度的连锁反应": "2026-09-04 12:16",
+    "如何成为一个积福之家": "2026-08-31 10:00",
+    "客人从家走后必做的两个动作": "2026-08-28 10:00",
+    "盘点市面上常见但无用的凤氺摆件": "2026-08-25 12:00",
+    "走出低谷期的布局方法": "2026-08-21 10:00",
+    "住什么样的房子🏠决定你的家庭“弟”位": "2026-08-17 11:00",
+    "这两种家的格局，容易在感情中迷失自己": "2026-08-13 17:24",
+    "自救指南｜让母亲归位，你值得被好好对待": "2026-08-10 12:36",
+    "如何分辨谁是偷走家运的“元凶”": "2026-08-07 12:00",
+    "西北位的难题到我这可以停止了": "2026-08-03 10:59",
+    "掌握家旺人旺的底层代码": "2026-07-30 15:36",
+    "酒店尾房不可怕，6个步骤让你安稳入住": "2026-07-27 12:04",
+    "家居布局方法，让他心甘情愿给你买包！": "2026-07-24 12:00",
+    "亲历者总结,留学生租房3大避坑法则": "2026-07-21 13:55",
+    "三伏天养宅三部曲，结尾有彩蛋哦！": "2026-07-18 10:00",
+    "破除无知言论, 夺回你的生活主权!": "2026-07-15 12:07",
+    "3类人的财富布局💰｜中式美学下的器物搭配": "2026-07-10 15:05",
+    "卧室不动硬装的礼乐布局妙招": "2026-07-07 10:06",
+    "找到家里最\"旺\"你的位置，不用找\"大师\"。": "2026-07-04 10:00",
+    "全网首发揭秘：家中手办，正在悄悄改变你的认知！🚨": "2026-06-30 15:00",
+    "酒店选房避雷指南, 国歌护体，睡稳心安。": "2026-06-26 11:57",
+    "不利家中女性的格局, 三招解决！": "2026-06-22 12:00",
+    "现代家中男尊女卑的实际理解, 很实用!": "2026-06-18 12:06",
+    "容易提升成绩的位置，打造好的学习环境": "2026-06-15 19:13",
+    "让你家拥有一个S型身材的家居布局": "2026-06-11 11:52",
+    "不要迷信了！寺庙的秘密被可视化了": "2026-06-09 12:10"
+  }
+};
+
+Object.entries(PUBLISH_TIMES_2026_09_08).forEach(([platform, times]) => {
+  const items = DASHBOARD_DATA.data.tingzhairen.flowAnalysis[platform].itemList;
+  items.forEach(item => {
+    if(times[item.title]) item.publishedAt = times[item.title];
+  });
+});
+
+/* 三篇重新推流作品仅覆盖最新累计指标，保留 09-06 版的趋势与全部深度分析。 */
+const REPUSH_REFRESH_2026_09_08 = {
+  xhs: {
+    "房屋缺角系列①｜西北缺角": {
+      item: { plays:"11,078", likes:"326", comments:"46", favs:"452", shares:"56", fans:"331", ctr:"9.4%", clickRate:"9.4%", fullViewRate:"3.4%", avgDur:"64秒" },
+      overview: {
+        impl_count:"23,286", view_count:"11,078", like_count:"326", comment_count:"46", collect_count:"452", share_count:"56", rise_fans_count:"331",
+        view_time_avg:64, cover_click_rate:9.4, full_view_rate:3.4, exit_view2s_rate:33.7,
+        fans:{ impl:10.8, view:14.7, like:38.7, comment:37.2, collect:35.5, share:42.6, coverClick:16.9, viewTime:113.2, fullView:6.9, exit2s:25.3 }
+      }
+    },
+    "客人从家走后必做的两个动作": {
+      item: { plays:"3,661", likes:"104", comments:"5", favs:"98", shares:"20", fans:"45", ctr:"11.5%", clickRate:"11.5%", fullViewRate:"22%", avgDur:"80.4秒" },
+      overview: {
+        impl_count:"7,560", view_count:"3,661", like_count:"104", comment_count:"5", collect_count:"98", share_count:"20", rise_fans_count:"45",
+        view_time_avg:80.4, cover_click_rate:11.5, full_view_rate:22, exit_view2s_rate:21.5,
+        fans:{ impl:37.7, view:32.9, like:50, comment:80, collect:44.3, share:35, coverClick:12.1, viewTime:63, fullView:9.4, exit2s:18.6 }
+      }
+    },
+    "盘点市面上常见但无用的凤氺摆件": {
+      item: { plays:"8,576", likes:"206", comments:"24", favs:"165", shares:"29", fans:"140", ctr:"11.6%", clickRate:"11.6%", fullViewRate:"12.9%", avgDur:"81.4秒" },
+      overview: {
+        impl_count:"58,888", view_count:"8,576", like_count:"206", comment_count:"24", collect_count:"165", share_count:"29", rise_fans_count:"140",
+        view_time_avg:81.4, cover_click_rate:11.6, full_view_rate:12.9, exit_view2s_rate:19.5,
+        fans:{ impl:5, view:14, like:31.4, comment:40, collect:27.7, share:18.8, coverClick:20.1, viewTime:110, fullView:17.5, exit2s:23.2 }
+      }
+    }
+  },
+  dy: {
+    "房屋缺角系列①｜西北缺角，六个维度的连锁反应": {
+      item: { plays:"20.1万", avgDur:"35秒", click:30.18, finish5:39.2, bounce2:33.18, likes:"4,929", shares:"1,568", clickRate:"30.18%", finishRate5s:"39.2%", bounce2s:"33.18%", like:"4,929", share:"1,568" },
+      overview: { playCount:"20.1万", likeCount:"4,929", commentCount:"758", shareCount:"1,568", favoriteCount:"4,006", subscribeCount:"3,824", avgViewSecond:35, completionRate:2.79, completion5sRate:39.2, bounce2sRate:33.18 }
+    },
+    "客人从家走后必做的两个动作": {
+      item: { plays:"1.67万", avgDur:"35秒", click:73.85, finish5:50.76, bounce2:27.26, likes:"450", shares:"140", clickRate:"73.85%", finishRate5s:"50.76%", bounce2s:"27.26%", like:"450", share:"140" },
+      overview: { playCount:"1.67万", likeCount:"450", commentCount:"16", shareCount:"140", favoriteCount:"290", subscribeCount:"76", avgViewSecond:35, completionRate:4.6, completion5sRate:50.76, bounce2sRate:27.26 }
+    },
+    "盘点市面上常见但无用的凤氺摆件": {
+      item: { plays:"1.37万", avgDur:"56秒", click:18.76, finish5:40.42, bounce2:33.64, likes:"289", shares:"50", clickRate:"18.76%", finishRate5s:"40.42%", bounce2s:"33.64%", like:"289", share:"50" },
+      overview: { playCount:"1.37万", likeCount:"289", commentCount:"20", shareCount:"50", favoriteCount:"183", subscribeCount:"179", avgViewSecond:56, completionRate:7.19, completion5sRate:40.42, bounce2sRate:33.64 }
+    }
+  }
+};
+
+Object.entries(REPUSH_REFRESH_2026_09_08).forEach(([platform, works]) => {
+  const flow = DASHBOARD_DATA.data.tingzhairen.flowAnalysis[platform];
+  Object.entries(works).forEach(([title, patch]) => {
+    const item = flow.itemList.find(work => work.title === title);
+    if(item) Object.assign(item, patch.item);
+    const detail = flow.itemDetails[title];
+    if(detail?.overview) {
+      const previousTrend = detail.overview.trend;
+      const previousFans = detail.overview.fans;
+      Object.assign(detail.overview, patch.overview);
+      if(patch.overview.fans) detail.overview.fans = Object.assign({}, previousFans || {}, patch.overview.fans);
+      if(previousTrend) detail.overview.trend = previousTrend;
+    }
+  });
+});

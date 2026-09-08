@@ -669,6 +669,17 @@ function normalizeDySourceLabel(label){
   };
   return map[label] || label || "其他";
 }
+
+function formatPublishTime(item){
+  const raw = item?.publishedAt || item?.date || "";
+  if(!raw) return "";
+  const match = String(raw).match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}:\d{2}))?/);
+  if(!match) return `${raw} 发布`;
+  const weekday = ["日","一","二","三","四","五","六"];
+  const day = new Date(`${match[1]}-${match[2]}-${match[3]}T12:00:00`).getDay();
+  return `${match[1]}-${match[2]}-${match[3]}（周${weekday[day]}）${match[4] ? ` ${match[4]}` : ""} 发布`;
+}
+
 function deriveDyAccountSource(periodKey){
   const flow = D.data[curAccount]?.flowAnalysis?.dy;
   const itemList = flow?.itemList || [];
@@ -871,7 +882,7 @@ function renderWorksOverview(acc){
     xhsData.itemList.forEach((it, idx)=>{
       const rewardHtml = it.reward ? `<span class="ft-reward" style="margin-left:4px">🎁 ${it.reward}</span>` : "";
       const row = el(`<tr>
-        <td><div class="ft-title">${it.title}${rewardHtml}</div><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${it.date||""}</div></td>
+        <td><div class="ft-title">${it.title}${rewardHtml}</div><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${formatPublishTime(it)}</div></td>
         <td class="ft-val" style="color:${C}">${it.plays}</td>
         <td class="ft-val">${it.avgDur}</td>
         <td class="ft-val" style="color:var(--candy-green)">${it.ctr}</td>
@@ -952,7 +963,7 @@ function renderWorksOverview(acc){
     const detailId = "detail_"+idx;
     const rewardHtml = it.reward ? `<span class="ft-reward" style="margin-left:4px">🎁 ${it.reward}</span>` : "";
     const row = el(`<tr>
-      <td><div class="ft-title">${it.title}${rewardHtml}</div><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${it.date}</div></td>
+      <td><div class="ft-title">${it.title}${rewardHtml}</div><div style="font-size:10px;color:var(--ink-3);margin-top:2px">${formatPublishTime(it)}</div></td>
       <td class="ft-val" style="color:${C}">${it.plays}</td>
       <td class="ft-val">${it.avgDur}</td>
       <td class="ft-val click">${it.clickRate}</td>
@@ -1007,7 +1018,7 @@ function showDetail(itemId, idx){
     : "";
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
-    <span style="font-size:13px;color:var(--ink-3)">${item.date} 发布 · 播放 ${item.plays}</span>
+    <span style="font-size:13px;color:var(--ink-3)">${formatPublishTime(item)} · 播放 ${item.plays}</span>
     ${boostBadgeHtml}${statusNoteHtml}${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
 
   // === 板块1: 单篇作品总览 ===
@@ -1392,7 +1403,7 @@ function showXhsDetail(title){
   const trend = detail.trend || ov.trend;
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
-    <span style="font-size:13px;color:var(--ink-3)">阅读 ${item.plays} · 点赞 ${item.likes}</span>
+    <span style="font-size:13px;color:var(--ink-3)">${formatPublishTime(item)} · 阅读 ${item.plays} · 点赞 ${item.likes}</span>
     ${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
 
   // 作品总览
