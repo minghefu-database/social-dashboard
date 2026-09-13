@@ -663,6 +663,7 @@ function normalizeDySourceLabel(label){
     homepage:"个人主页", personal_homepage:"个人主页", "个人主页":"个人主页",
     follow:"关注", "关注":"关注",
     other:"其他", "其他":"其他",
+    yumme_vv_all:"其他平台", "其他平台":"其他平台",
     compilation:"合集", "合集":"合集",
     message:"消息", "消息":"消息",
     familiar:"熟人", "熟人":"熟人"
@@ -684,11 +685,15 @@ function deriveDyAccountSource(periodKey){
   const flow = D.data[curAccount]?.flowAnalysis?.dy;
   const itemList = flow?.itemList || [];
   const details = flow?.itemDetails || {};
+  const accountData = D.data[curAccount] || {};
+  const range = dyDateRangeForPeriod(periodKey, accountData);
   const totals = new Map();
   let totalWeight = 0;
   let coveredWorks = 0;
 
   itemList.forEach(item=>{
+    const itemDate = String(item.publishedAt || item.date || "").slice(0,10);
+    if(range && (!itemDate || itemDate < range.start || itemDate > range.end)) return;
     const playSource = details[item.title]?.traffic?.playSource || [];
     if(!playSource.length) return;
     const sourceSum = playSource.reduce((sum, src)=>{
@@ -714,7 +719,7 @@ function deriveDyAccountSource(periodKey){
     .sort((a,b)=>b.pct-a.pct)
     .slice(0, 7);
   return {
-    period:`${periodKey === "d7" ? "近7天" : "近30天"}口径 · ${coveredWorks} 篇有效来源作品加权汇总`,
+    period:`${range?.label || (periodKey === "d7" ? "近7天" : "近30天")} · ${coveredWorks} 篇有效来源作品加权汇总`,
     items,
     derived:true
   };
@@ -1083,6 +1088,7 @@ function showDetail(itemId, idx){
   // 跳过率 & 回看率
   (function(){
     const skipMap = {
+      "房屋缺角系列②｜西南缺角，谁在撑起这个家？": { replay: "4:12-4:24", skip: "2:48-3:00" },
       "房屋缺角系列①｜西北缺角，六个维度的连锁反应": { replay: "5:22-5:36", skip: "3:30-3:44" },
       "如何成为一个积福之家": { replay: "1:52-2:00", skip: "1:44-1:52" },
       "客人从家走后必做的两个动作": { replay: "3:45-3:54", skip: "2:24-2:33" },
