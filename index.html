@@ -1021,10 +1021,14 @@ function showDetail(itemId, idx){
   const statusNoteHtml = detail.statusNote
     ? `<span class="ft-reward" style="margin-left:10px">${detail.statusNote}</span>`
     : "";
+  const reflowNoteHtml = detail.reflowUpdatedAt
+    ? `<div style="margin-top:7px;font-size:12px;color:var(--ink-3)">${detail.reflowUpdatedAt}</div>`
+    : "";
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
     <span style="font-size:13px;color:var(--ink-3)">${formatPublishTime(item)} · 播放 ${item.plays}</span>
-    ${boostBadgeHtml}${statusNoteHtml}${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
+    ${boostBadgeHtml}${statusNoteHtml}${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}
+    ${reflowNoteHtml}</div>`;
 
   // === 板块1: 单篇作品总览 ===
   html += `<div class="card"><div class="sub-title">📋 作品总览</div>`;
@@ -1120,7 +1124,12 @@ function showDetail(itemId, idx){
       "3类人的财富布局💰｜中式美学下的器物搭配": { replay: "1:59-2:06", skip: "2:13-2:20" },
       "三伏天养宅三部曲，结尾有彩蛋哦！": { replay: "4:03-4:12", skip: "3:27-3:36" },
     };
-    const sd = skipMap[item.title];
+    const manualReplaySkip = String(tf?.manualReplaySkip || "");
+    const replayMatch = manualReplaySkip.match(/回看率最高[:：]\s*([^\s　]+)/);
+    const skipMatch = manualReplaySkip.match(/跳过率最高[:：]\s*([^\s　]+)/);
+    const sd = (replayMatch || skipMatch)
+      ? { replay: replayMatch?.[1] || "平台数据还未更新", skip: skipMatch?.[1] || "平台数据还未更新" }
+      : skipMap[item.title];
     if(sd){
       html += `<div style="margin-top:12px;display:flex;gap:14px;flex-wrap:wrap">
         <div style="flex:1;min-width:160px;padding:10px 14px;background:var(--candy-green-bg);border-radius:10px">
