@@ -296,7 +296,7 @@
   </main>
 </div>
 
-<script src="data.js?v=20260906-1503"></script>
+<script src="data.js?v=20261024-new-four"></script>
 <script>
 /* ===================== 状态 ===================== */
 const D = DASHBOARD_DATA;
@@ -406,7 +406,7 @@ function renderDiagnosis(diag){
     wrap.appendChild(el(`<div class="diag-card xhs">
       <div class="dc-head"><div class="ttl"><span class="dot xhs"></span>小红书 · 账号诊断</div>
         <div class="period">${diag.xhs.period}</div></div>
-      <div class="note">红线=你的数据，半径为「超过同类百分位」，标签为真实值${diag.xhs.percentileStale?'<span class="stale-tag">百分位未更新最新数据</span>':''}</div>
+      <div class="note">${diag.xhs.note || '红线=你的数据，半径为「超过同类百分位」，标签为真实值'}${diag.xhs.percentileStale?'<span class="stale-tag">百分位未更新最新数据</span>':''}</div>
       <div class="radar-wrap"><canvas id="radarXhs"></canvas></div>
     </div>`));
   } else {
@@ -425,7 +425,7 @@ function drawDiagnosisCharts(diag){
     const xa = diag.xhs.axes;
     charts.push(new Chart(document.getElementById("radarXhs"),{
       type:"radar",
-      data:{ labels:xa.map(a=>`${a.label} ${a.value}`),
+      data:{ labels:xa.map(a=>`${a.label} ${(a.text || String(a.value)).split(' · ')[0]}`),
         datasets:[{ label:"你的数据", data:xa.map(a=>a.percentile),
           borderColor:"#FF4D6D", backgroundColor:"rgba(255,77,109,.15)",
           borderWidth:2, pointBackgroundColor:"#FF4D6D", pointRadius:3 }]},
@@ -1028,7 +1028,7 @@ function showDetail(itemId, idx){
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
     <span style="font-size:13px;color:var(--ink-3)">${formatPublishTime(item)} · 播放 ${item.plays}</span>
     ${boostBadgeHtml}${statusNoteHtml}${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}
-    ${reflowNoteHtml}</div>`;
+    ${reflowNoteHtml}${detail.updatedAt?`<div style="margin-top:7px;font-size:12px;color:var(--ink-3)">数据更新于 ${detail.updatedAt}</div>`:''}</div>`;
 
   // === 板块1: 单篇作品总览 ===
   html += `<div class="card"><div class="sub-title">📋 作品总览</div>`;
@@ -1424,7 +1424,8 @@ function showXhsDetail(title){
 
   let html = `<div style="margin-bottom:14px"><h2 style="font-size:20px;font-weight:700;margin-bottom:4px">${item.title}</h2>
     <span style="font-size:13px;color:var(--ink-3)">${formatPublishTime(item)} · 阅读 ${item.plays} · 点赞 ${item.likes}</span>
-    ${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}</div>`;
+    ${item.reward?`<span class="ft-reward" style="margin-left:10px">🎁 ${item.reward}</span>`:""}
+    ${detail.updatedAt?`<div style="margin-top:7px;font-size:12px;color:var(--ink-3)">数据更新于 ${detail.updatedAt}</div>`:''}</div>`;
 
   // 作品总览
   html += xhsOverviewCards(ov);
